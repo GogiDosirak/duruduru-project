@@ -188,9 +188,20 @@ isValidPassword: function(password) {
 		alert("회원정보 수정 요청됨");
 		let updateUser = {
 			password : $("#password").val(),
+			passwordConfirm : $("#passwordConfirm").val(),
 			nickname : $("#nickname").val(),
 			user_seq : $("#user_seq").val()
 		}
+		 if (!this.isValidPassword(updateUser.password)) {
+			alert("올바른 비밀번호를 입력해주세요(특수문자,대문자 1개 이상 포함)")
+			return;
+		}
+		
+		
+		if(!this.isPasswordMatch(updateUser.password, updateUser.passwordConfirm)){
+	alert("비밀번호가 일치하지 않습니다.")
+	return;
+}
 		
 		$.ajax({
 			type : "PUT",
@@ -209,6 +220,16 @@ isValidPassword: function(password) {
 		});
 		
 		
+	},
+	
+	isValidPassword: function(password) {
+		 const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*-])[A-Za-z\d!@#$%^&*-]{8,}$/;
+		return passwordRegex.test(password);
+	},
+	 
+   
+   isPasswordMatch: function(password, passwordConfirm) {
+		return password === passwordConfirm;
 	},
   
   
