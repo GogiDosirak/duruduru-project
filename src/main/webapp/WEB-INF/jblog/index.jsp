@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/jblog/layout/header.jsp" %>
-
+<h2>나는하하호호재</h2>
 	<section id="billboard" class="overflow-hidden">
 		<div class="swiper main-swiper">
 			<div class="swiper-wrapper">
