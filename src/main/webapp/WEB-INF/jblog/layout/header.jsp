@@ -13,8 +13,7 @@
 <meta name="author" content="">
 <meta name="keywords" content="">
 <meta name="description" content="">
-  
- <script src="/webjars/jquery/3.6.0/dist/jquery.min.js"></script>
+	   <script src="/webjars/jquery/3.6.0/dist/jquery.min.js"></script>
  <!-- summernote 시작 -->
   <link href="/webjars/summernote/0.8.10/summernote-bs4.css" rel="stylesheet">
   <script src="/webjars/summernote/0.8.10/summernote-bs4.min.js"></script>
@@ -43,6 +42,7 @@ body {
 <!-- script
     ================================================== -->
 <script src="js/modernizr.js"></script>
+
 </head>
 <body class="bg-body" data-bs-spy="scroll" data-bs-target="#navbar"
 	data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true"

@@ -70,7 +70,15 @@
 			<version>3.0.3</version>
 			<scope>test</scope>
 		</dependency>
+		<!--
+		https://mvnrepository.com/artifact/jakarta.servlet.jsp.jstl/jakarta.servlet.jsp.jstl-api -->
+		<dependency>
+			<groupId>jakarta.servlet.jsp.jstl</groupId>
+			<artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+			<version>3.0.0</version>
+		</dependency>
 		
+
 
 		<!--
 		https://mvnrepository.com/artifact/org.glassfish.web/jakarta.servlet.jsp.jstl -->
@@ -105,17 +113,16 @@
 			<artifactId>summernote</artifactId>
 			<version>0.8.10</version>
 		</dependency>
-		
+
 		<!--coolsms 디펜던시-->
 
-<dependency>
-<groupId>net.nurigo</groupId>
-<artifactId>sdk</artifactId>
-<version>4.2.7</version>
-</dependency>
+		<dependency>
+			<groupId>net.nurigo</groupId>
+			<artifactId>sdk</artifactId>
+			<version>4.2.7</version>
+		</dependency>
 
-		
-		
+
 	</dependencies>
 
 	<build>
