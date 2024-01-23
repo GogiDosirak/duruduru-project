@@ -1,12 +1,12 @@
 
 let smsObject = {
 	init: function() {
-		
+
 		$("#btn-requestSMS").click(() => this.request());
 		$("#btn-checknumber").click(() => this.check());
-		$("#close-modal1").click(()=>this.modal());
-		$("#close-modal2").click(()=>this.modal());
-		
+		$("#close-modal1").click(() => this.modal());
+		$("#close-modal2").click(() => this.modal());
+
 	},
 
 	request: function() {
@@ -35,9 +35,9 @@ let smsObject = {
 				if (response.status != 200) {
 					phoneNumberInput.value = "";
 				} else {
-					$("#btn-join").disabled = false;
+					
 					document.getElementById("statusText").innerHTML = "인증이 되었습니다";
-                    document.getElementById("statusText").style.color = "green";
+					document.getElementById("statusText").style.color = "green";
 					$('#myModal').modal('hide');
 				}
 			})
@@ -45,8 +45,8 @@ let smsObject = {
 				alert("에러 발생: " + error);
 			});
 	},
-	
-	modal : function(){
+
+	modal: function() {
 		let phoneNumberInput = document.getElementById("phonenumber");
 		phoneNumberInput.value = "";
 	}

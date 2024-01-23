@@ -13,7 +13,7 @@
 <meta name="author" content="">
 <meta name="keywords" content="">
 <meta name="description" content="">
-  
+  <script src="js/jquery-1.11.0.min.js"></script>
  <script src="/webjars/jquery/3.6.0/dist/jquery.min.js"></script>
  <!-- summernote 시작 -->
   <link href="/webjars/summernote/0.8.10/summernote-bs4.css" rel="stylesheet">
