@@ -1,3 +1,4 @@
+
 package com.duru.project.domain;
 
 import java.sql.Date;
@@ -28,18 +29,24 @@ public class Product {
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    private int product_seq;
 
-	    @Column(name = "product_name", length = 40, nullable = false)
+	    @Column(name = "product_name", length = 40)
 	    private String product_name;
 
 	    @Lob
 	    @Column(columnDefinition = "LONGTEXT")
 	    private String product_content;
 
-	    @Column(name = "product_price", nullable = false)
+	    @Column(name = "product_price")
 	    private int product_price;
 
-	    @Column(name = "product_stock", nullable = false)
+	    @Column(name = "product_stock")
 	    private int product_stock;
+	    
+	    @Column
+	    private String filename;
+	    
+	    @Column
+	    private String filepath;
 
 	    @CreationTimestamp
 	    private Timestamp product_createdate;
