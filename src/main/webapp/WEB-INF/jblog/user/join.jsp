@@ -221,8 +221,8 @@
 					name="address" id="address" type="text" readonly="readonly" />
 			</div>
 			<div class="form-group">
-				<input class="form-control" placeholder="상세주소" name="address_detail"
-					id="address_detail" type="text" />
+				<input class="form-control" placeholder="상세주소" name="addressDetail"
+					id="addressDetail" type="text" />
 			</div>
 
 			<br>

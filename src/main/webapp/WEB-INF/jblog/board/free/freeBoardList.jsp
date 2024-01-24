@@ -18,11 +18,11 @@
     <tbody>
     <c:forEach var="freeboard" items="${getFreeBoardList }">
     <tr>
-    <td>${freeboard.frbo_seq }</td>
-    <td><a href="/getfreeboard/${freeboard.frbo_seq }">${freeboard.frbo_title }</a></td>
+    <td>${freeboard.frboSeq }</td>
+    <td><a href="/getfreeboard/${freeboard.frboSeq }">${freeboard.frboTitle }</a></td>
     <td>${freeboard.user.nickname }</td>
-    <td>${freeboard.frbo_cnt }</td>
-    <td>${freeboard.frbo_date }
+    <td>${freeboard.frboCnt }</td>
+    <td>${freeboard.frboDate }
     </c:forEach>
     </tbody>
     

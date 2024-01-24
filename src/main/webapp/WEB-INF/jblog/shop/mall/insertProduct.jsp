@@ -41,24 +41,24 @@ hr {
 					enctype="multipart/form-data">
 					<div class="col-md-8">
 						<div class="mb-3 mt-3">
-							<label for="product_name"></label> <input type="text"
-								class="form-control" id="product_name" placeholder="상품명"
-								name="product_name">
+							<label for="productName"></label> <input type="text"
+								class="form-control" id="productName" placeholder="상품명"
+								name="productName">
 						</div>
 						<div class="mb-3">
-							<label for="product_price"></label> <input type="text"
-								class="form-control" id="product_price" placeholder="상품가격"
-								name="product_price">
+							<label for="productPrice"></label> <input type="text"
+								class="form-control" id="productPrice" placeholder="상품가격"
+								name="productPrice">
 						</div>
 						<div class="mb-3">
-							<label for="product_stock"></label> <input type="text"
-								class="form-control" id="product_stock" placeholder="상품재고"
-								name="product_stock">
+							<label for="productStock"></label> <input type="text"
+								class="form-control" id="productStock" placeholder="상품재고"
+								name="productStock">
 						</div>
 					</div>
 					<div class="col-md-8">
 						<div class="mb-3">
-							<textarea id="product_content" name="product_content"></textarea>
+							<textarea id="productContent" name="productContent"></textarea>
 							<script>
 								// 파일명을 표시하는 함수
 								function displayFileName(input) {
@@ -76,7 +76,7 @@ hr {
 									}
 								}
 								$(document).ready(function() {
-									$("#product_content").summernote({
+									$("#productContent").summernote({
 										height : 500
 									});
 								});
@@ -84,7 +84,7 @@ hr {
 
 						</div>
 						<style>
-#product_content+.note-editor .note-editable {
+#productContent+.note-editor .note-editable {
 	text-align: left;
 }
 

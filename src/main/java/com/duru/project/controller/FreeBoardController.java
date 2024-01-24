@@ -53,10 +53,10 @@ public class FreeBoardController {
 	}
 	
 	
-	@GetMapping("/getfreeboard/{frbo_seq}")
-	public  String getFreeBoard(@PathVariable int frbo_seq, HttpSession session) {
+	@GetMapping("/getfreeboard/{frboSeq}")
+	public  String getFreeBoard(@PathVariable int frboSeq, HttpSession session) {
 		
-		FreeBoard findFreeBoard = freeBoardService.getFreeBoard(frbo_seq);
+		FreeBoard findFreeBoard = freeBoardService.getFreeBoard(frboSeq);
 		session.setAttribute("findFreeBoard", findFreeBoard);
 		
 		return "board/free/getFreeBoard";

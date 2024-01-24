@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jblog/layout/header.jsp" %>
-<title>${getProduct.product_name}- duruduru</title>
+<title>${getProduct.productName}- duruduru</title>
 <style>
-<title>${getProduct.product_name} - duruduru</title>
+<title>${getProduct.productName} - duruduru</title>
     <style>
         body {
             font-family: 'Jua', sans-serif;
@@ -76,12 +76,12 @@ img {
 	<h2 class="center-align">두루두루 쇼핑몰</h2>
 	</center>
 	<div class="container">
-		<h2>${getProduct.product_name}</h2>
+		<h2>${getProduct.productName}</h2>
 		<hr>
 		<div class="details">
-			<label for="product_price">가격: ${getProduct.product_price} 원</label>
-			<label for="product_stock">재고: ${getProduct.product_stock} 개</label>
-			<label for="product_content">${getProduct.product_content}</label>
+			<label for="productPrice">가격: ${getProduct.productPrice} 원</label>
+			<label for="productStock">재고: ${getProduct.productStock} 개</label>
+			<label for="productContent">${getProduct.productContent}</label>
 		</div>
 
 	</div>
@@ -91,11 +91,11 @@ img {
 		</div>
 		<br>
 		<div>
-			<input type="hidden" id="product_seq" name="product_seq"
-				value="${getProduct.product_seq }">
+			<input type="hidden" id="productSeq" name="productSeq"
+				value="${getProduct.productSeq }">
 			<c:if test="${not empty principal and principal.role eq 'ADMIN'}">
 				<button type="button"
-					onclick="location.href='/updateProduct/${getProduct.product_seq}'"
+					onclick="location.href='/updateProduct/${getProduct.productSeq}'"
 					class="btn btn-warning">상품 수정하기</button>
 				<button type="button" id="btn-deleteProduct" class="btn btn-danger">상품
 					삭제하기</button>

@@ -62,7 +62,7 @@ let userObject = {
 			email: $("#email").val(),
 			phonenumber: $("#phonenumber").val(),
 			address: $("#address").val(),
-			address_detail: $("#address_detail").val(),
+			addressDetail: $("#addressDetail").val(),
 			zipcode: $("#zipcode").val()
 		}
 		
@@ -204,7 +204,7 @@ let userObject = {
 			password : $("#password").val(),
 			passwordConfirm : $("#passwordConfirm").val(),
 			nickname : $("#nickname").val(),
-			user_seq : $("#user_seq").val()
+			userSeq : $("#userSeq").val()
 		}
 		 if (!this.isValidPassword(updateUser.password)) {
 			alert("올바른 비밀번호를 입력해주세요(특수문자,대문자 1개 이상 포함)")
@@ -220,7 +220,7 @@ let userObject = {
 
 		$.ajax({
 			type: "PUT",
-			url: "/updateUser/" + updateUser.user_seq,
+			url: "/updateUser/" + updateUser.userSeq,
 			data: JSON.stringify(updateUser),
 			contentType: "application/json; charset=utf-8"
 

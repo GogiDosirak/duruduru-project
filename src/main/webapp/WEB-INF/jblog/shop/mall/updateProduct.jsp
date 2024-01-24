@@ -2,9 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="/WEB-INF/jblog/layout/header.jsp" %>
-<title>${getProduct.product_name}- duruduru</title>
+<title>${getProduct.productName}- duruduru</title>
 <style>
-<title>${getProduct.product_name} - duruduru</title>
+<title>${getProduct.productName} - duruduru</title>
     <style>
         body {
             font-family: 'Jua', sans-serif;
@@ -63,7 +63,7 @@
 img {
 	max-width: 100%;
 	height: auto;
-	#product_content+.note-editor .note-editable {
+	#productContent+.note-editor .note-editable {
 	text-align: left;
 }
 
@@ -85,28 +85,28 @@ img {
 		</center>
 		<br>
 		<center>
-			<form action="/updateProduct/${getProduct.product_seq }" method="post"
+			<form action="/updateProduct/${getProduct.productSeq }" method="post"
 				enctype="multipart/form-data">
 				<div class="col-md-8">
 					<div class="mb-3 mt-3">
-						<label for="product_name"></label> <input type="text"
-								class="form-control" id="product_name" 
-							name="product_name" value="${getProduct.product_name } (상품명)")>
+						<label for="productName"></label> <input type="text"
+								class="form-control" id="productName" 
+							name="productName" value="${getProduct.productName } (상품명)")>
 					</div>
 					<div class="mb-3">
-						<label for="product_price"></label> <input type="text"
-							class="form-control" id="product_price" value="${getProduct.product_price } (가격)"
-							name="product_price">
+						<label for="productPrice"></label> <input type="text"
+							class="form-control" id="productPrice" value="${getProduct.productPrice } (가격)"
+							name="productPrice">
 					</div>
 					<div class="mb-3">
-						<label for="product_stock"></label> <input type="text"
-							class="form-control" id="product_stock" value="${getProduct.product_stock } (재고)"
-							name="product_stock">
+						<label for="productStock"></label> <input type="text"
+							class="form-control" id="productStock" value="${getProduct.productStock } (재고)"
+							name="productStock">
 					</div>
 				</div>
 				<div class="col-md-8">
 					<div class="mb-3">
-						<textarea id="product_content" name="product_content">${getProduct.product_content }</textarea>
+						<textarea id="productContent" name="productContent">${getProduct.productContent }</textarea>
 						<script>
 							// 파일명을 표시하는 함수
 							function displayFileName(input) {
@@ -124,7 +124,7 @@ img {
 								}
 							}
 							$(document).ready(function() {
-								$("#product_content").summernote({
+								$("#productContent").summernote({
 									height : 500
 								});
 							});
@@ -142,7 +142,7 @@ img {
 				</div>
 	</div>
 							<style>
-#product_content+.note-editor .note-editable {
+#productContent+.note-editor .note-editable {
 	text-align: left;
 }
 
