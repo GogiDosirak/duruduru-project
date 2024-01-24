@@ -45,9 +45,10 @@ public class UserController {
 	}
 	
 
-	@PostMapping("/login")
-	public @ResponseBody ResponseDTO<?> login(@RequestBody User user, HttpSession session) {
-		User findUser = userService.getUser(user.getUserid());
+	  @PostMapping("/login")
+	   public @ResponseBody ResponseDTO<?> login(@RequestBody User user, HttpSession session) {
+	      User findUser = userService.getUser(user.getUserid());
+
 
 		if (findUser.getUserid() == null) {
 			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "아이디가 존재하지 않습니다.");
@@ -79,11 +80,16 @@ public class UserController {
 	public String join() {
 		return "user/join";
 	}
+	
 
 	@PostMapping("/join")
 	public @ResponseBody ResponseDTO<?> insertUser(@RequestBody User user) {
 		User findUser = userService.getUser(user.getUserid());
 		if (findUser.getUserid() == null) {
+			if(user.getAddress() == null || user.getAddress().equals("") || user.getAddress_detail() == null || user.getAddress_detail().equals("")) {
+				return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "주소를 기입해주세요");
+			} 
+			
 			userService.insertUser(user);
 			return new ResponseDTO<>(HttpStatus.OK.value(), user.getUserid() + "님 회원가입 완료되었습니다.");
 		} else {
