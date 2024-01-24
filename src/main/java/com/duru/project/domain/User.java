@@ -28,8 +28,8 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_seq")
-    private int user_seq;
+    @Column(name = "userSeq")
+    private int userSeq;
 
     @Column(name = "userid", unique = true, nullable = false, length = 40)
     private String userid;
@@ -49,8 +49,8 @@ public class User {
     @Column(name = "address", nullable = false, length = 200)
     private String address;
 
-    @Column(name = "address_detail", nullable = false, length = 200)
-    private String address_detail;
+    @Column(name = "addressDetail", nullable = false, length = 200)
+    private String addressDetail;
 
     @Column(name = "zipcode", nullable = false, length = 20)
     private String zipcode;

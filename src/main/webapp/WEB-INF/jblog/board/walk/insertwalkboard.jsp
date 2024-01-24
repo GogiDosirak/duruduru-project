@@ -8,16 +8,16 @@
 	<h2>산책게시판 글등록</h2>
 	<div class="col-md-8">
 		<div class="mb-3 mt-3">
-			<label for="title"></label> <input type="text" class="form-control"
-				id="walkBoard_title" placeholder="제목을 입력하세요" name="walkBoard_title">
+			<input type="text" class="form-control" id="walkBoardTitle"
+				placeholder="제목을 입력하세요" name="walkBoardTitle">
 		</div>
 	</div>
 
 
 	<div class="col-md-8">
 		<div class="mb-3">
-			<label for="walkBoard_content"></label>
-			<textarea id="walkBoard_content"></textarea>
+			<label for="walkBoardContent"></label>
+			<textarea id="walkBoardContent"></textarea>
 			<script>
 				// 파일명을 표시하는 함수
 				function displayFileName(input) {
@@ -34,7 +34,7 @@
 				}
 				$(document).ready(
 						function() {
-							$("#walkBoard_content").summernote({
+							$("#walkBoardContent").summernote({
 								height : 500,
 								placeholder : "내용을 입력하세요"
 							}).siblings('.note-editor').find('.note-editable')
@@ -43,7 +43,6 @@
 			</script>
 
 			<style>
-			
 #product_content+.note-editor .note-editable {
 	text-align: left;
 }

@@ -65,7 +65,7 @@ hr {
 </style>
 </head>
 
-<input id="wabo_seq" type="hidden" value="${walkBoard.wabo_seq}">
+<input id="waboSeq" type="hidden" value="${walkBoard.waboSeq}">
 	<div class="logo center-align">
 		<a href="/"> <img src="/images/duruduru.png" alt="로고 이미지">
 		</a>
@@ -73,15 +73,15 @@ hr {
 	<hr>
 	<h2 class="center-align">산책게시판</h2>
 	<div class="container">
-		<h2 id="title" align="center">${walkBoard.wabo_title}</h2>
+		<h2 id="title" align="center">${walkBoard.waboTitle}</h2>
 		<h3 >${walkBoard.user.nickname}</h3>
-		<h6 >날짜 : ${walkBoard.wabo_date} 조회수 :
-			${walkBoard.wabo_cnt}</h6>
+		<h6 >날짜 : ${walkBoard.waboDate} 조회수 :
+			${walkBoard.waboCnt}</h6>
 		<hr>
 
 		<div class="details">
 
-			<h4 id="content">${walkBoard.wabo_content}</h4>
+			<h4 id="content">${walkBoard.waboContent}</h4>
 			<br> <br> <br> <br> <br> <br> <br>
 			<br> <br>
 		</div>

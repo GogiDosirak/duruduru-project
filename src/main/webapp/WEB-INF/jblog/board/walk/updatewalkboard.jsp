@@ -9,16 +9,16 @@
 	<div class="col-md-8">
 		<div class="mb-3 mt-3">
 			<label for="title"></label> <input type="text" class="form-control"
-				id="walkBoard_title" value="${walkBoard.wabo_title}" name="walkBoard_title">
+				id="walkBoardTitle" value="${walkBoard.waboTitle}" name="walkBoardTitle">
 		</div>
 	</div>
 
-<input id="wabo_seq" type="hidden" value="${walkBoard.wabo_seq}">
+<input id="waboSeq" type="hidden" value="${walkBoard.waboSeq}">
 
 	<div class="col-md-8">
 		<div class="mb-3">
-			<label for="walkBoard_content"></label>
-			<textarea id="walkBoard_content" >${walkBoard.wabo_content}</textarea>
+			<label for="walkBoardContent"></label>
+			<textarea id="walkBoardContent" >${walkBoard.waboContent}</textarea>
 			<script>
 				// 파일명을 표시하는 함수
 				function displayFileName(input) {
@@ -35,7 +35,7 @@
 				}
 				$(document).ready(
 						function() {
-							$("#walkBoard_content").summernote({
+							$("#walkBoardContent").summernote({
 								height : 500
 								
 							}).siblings('.note-editor').find('.note-editable')

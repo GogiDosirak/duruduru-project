@@ -15,7 +15,7 @@ let walkBoardObject = {
 			_this.update();
 		}),
 		$("#go-updateWaBoard").on("click",()=>{
-			location = "/updateWalkBoard/" + $("#wabo_seq").val();
+			location = "/updateWalkBoard/" + $("#waboSeq").val();
 		}),
 		$("#btn-deleteWaBoard").on("click",()=>{
 			_this.delete();
@@ -27,8 +27,8 @@ let walkBoardObject = {
 
 	insert: function() {
 		let post = {
-			wabo_title: $("#walkBoard_title").val(),
-			wabo_content: $("#walkBoard_content").val()
+			waboTitle: $("#walkBoardTitle").val(),
+			waboContent: $("#walkBoardContent").val()
 		}
 
 		$.ajax({
@@ -49,19 +49,19 @@ let walkBoardObject = {
 	update: function(){
 		
 		let post = {
-			wabo_seq : $("#wabo_seq").val(),
-			wabo_title: $("#walkBoard_title").val(),
-			wabo_content: $("#walkBoard_content").val()
+			waboSeq : $("#waboSeq").val(),
+			waboTitle: $("#walkBoardTitle").val(),
+			waboContent: $("#walkBoardContent").val()
 		}
 		
 		$.ajax({
 			type: "PUT",
-			url: "/updateWalkBoard/"+post.wabo_seq,
+			url: "/updateWalkBoard/"+post.waboSeq,
 			data: JSON.stringify(post),
 			contentType: "application/json; charset = utf-8"
 		}).done(function() {
 			alert("글 수정 완료");
-			location = "/getWalkBoard/"+post.wabo_seq;
+			location = "/getWalkBoard/"+post.waboSeq;
 		}).fail(function(error){
 			let message = error["data"];
 			alert("에러발생 : " + message)
@@ -71,7 +71,7 @@ let walkBoardObject = {
 	delete: function(){
 		$.ajax({
 			type: "DELETE",
-			url: "/deleteWalkBoard/"+$("#wabo_seq").val()
+			url: "/deleteWalkBoard/"+$("#waboSeq").val()
 		}).done(function() {
 			alert("글 삭제 완료");
 			location = "/walk";

@@ -1,7 +1,7 @@
 
 package com.duru.project.domain;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -28,25 +28,25 @@ public class WalkBoard {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "wabo_seq")
-    private int wabo_seq;
+    @Column(name = "waboSeq")
+    private int waboSeq;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_seq")
+    @JoinColumn(name = "userSeq")
     private User user;
 
-    @Column(name = "wabo_title", length = 200)
-    private String wabo_title;
+    @Column(name = "waboTitle", length = 200)
+    private String waboTitle;
 
     @Lob
-    @Column(name = "wabo_content", columnDefinition = "LONGTEXT")
-    private String wabo_content;
+    @Column(name = "waboContent", columnDefinition = "LONGTEXT")
+    private String waboContent;
 
     @CreationTimestamp
-    @Column(name = "wabo_date")
-    private Date wabo_date;
+    @Column(name = "waboDate")
+    private Timestamp waboDate;
 
-    @Column(name = "wabo_cnt")
-    private int wabo_cnt;
+    @Column(name = "waboCnt")
+    private int waboCnt;
 
 }

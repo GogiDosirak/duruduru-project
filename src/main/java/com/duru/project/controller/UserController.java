@@ -86,7 +86,7 @@ public class UserController {
 	public @ResponseBody ResponseDTO<?> insertUser(@RequestBody User user) {
 		User findUser = userService.getUser(user.getUserid());
 		if (findUser.getUserid() == null) {
-			if(user.getAddress() == null || user.getAddress().equals("") || user.getAddress_detail() == null || user.getAddress_detail().equals("")) {
+			if(user.getAddress() == null || user.getAddress().equals("") || user.getAddressDetail() == null || user.getAddressDetail().equals("")) {
 				return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "주소를 기입해주세요");
 			} 
 			

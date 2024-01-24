@@ -18,8 +18,8 @@ let freeBoardObject =  {
 		alert("글 등록이 요청되었습니다.");
 		
 		let data =  {
-			frbo_title : $("#freeBoard_title").val(),
-			frbo_content : $("#freeBoard_content").val()
+			frboTitle : $("#freeBoardTitle").val(),
+			frboContent : $("#freeBoardContent").val()
 		}
 		
 		$.ajax({

@@ -33,17 +33,24 @@ public class WalkBoardService {
 	}
 	
 	@Transactional(readOnly = true)
-	public WalkBoard getWalkBoard(int wabo_seq) {
-		WalkBoard findWalkBoard = walkBoardRepository.findById(wabo_seq).orElseGet(()->{
+	public WalkBoard getWalkBoard(int waboSeq) {
+		WalkBoard findWalkBoard = walkBoardRepository.findById(waboSeq).orElseGet(()->{
 			return new WalkBoard();
 		});
 		return findWalkBoard;
 	}
 	
 	@Transactional
-	public void deleteWalkBoard(int wabo_seq) {
-		walkBoardRepository.deleteById(wabo_seq);
+	public void deleteWalkBoard(int waboSeq) {
+		walkBoardRepository.deleteById(waboSeq);
 	}
+	
+	@Transactional
+	public void increaseCnt(WalkBoard walkBoard) {
+		walkBoard.setWaboCnt(walkBoard.getWaboCnt()+1);
+		walkBoardRepository.save(walkBoard);
+	}
+	
 	
 
 }

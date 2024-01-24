@@ -115,7 +115,7 @@
             <form>
         <form>
         <br>
-        <input type="hidden" id="user_seq" name="user_seq" value="${principal.user_seq }">
+        <input type="hidden" id="userSeq" name="userSeq" value="${principal.userSeq }">
             <div class="form-group">
                 <label for="userid">아이디</label>
                 <h5>${principal.userid }</h5>
@@ -173,8 +173,8 @@
                 <h5>${principal.address }</h5>
             </div>
                         <div class="form-group">
-                <label for="address_detail">상세주소</label>
-                <h5>${principal.address_detail }</h5>
+                <label for="addressDetail">상세주소</label>
+                <h5>${principal.addressDetail }</h5>
             </div>
             
                        <div class="form-group">

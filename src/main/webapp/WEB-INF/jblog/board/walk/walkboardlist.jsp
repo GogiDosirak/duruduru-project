@@ -18,11 +18,11 @@
 		
 <c:forEach var="walkboard" items="${walkBoardList}">
   <tr>
-    <td>${walkboard.wabo_seq}</td>
-    <td><a href="/getWalkBoard/${walkboard.wabo_seq}"> ${walkboard.wabo_title}</a></td>
+    <td>${walkboard.waboSeq}</td>
+    <td><a href="/getWalkBoard/${walkboard.waboSeq}"> ${walkboard.waboTitle}</a></td>
     <td>${walkboard.user.nickname}</td>
-    <td>${walkboard.wabo_cnt}</td>
-    <td>${walkboard.wabo_date}</td>
+    <td>${walkboard.waboCnt}</td>
+    <td>${walkboard.waboDate}</td>
   </tr>
 </c:forEach>
 
