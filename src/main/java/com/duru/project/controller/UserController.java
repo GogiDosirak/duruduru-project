@@ -38,35 +38,43 @@ public class UserController {
 		return "user/login";
 	}
 	
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "index";
+	}
+	
 
 	  @PostMapping("/login")
 	   public @ResponseBody ResponseDTO<?> login(@RequestBody User user, HttpSession session) {
 	      User findUser = userService.getUser(user.getUserid());
 
-	      if (findUser.getUserid() == null) {
-	         return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "아이디가 존재하지 않습니다.");
-	      } else {
-	         if (user.getPassword().equals(findUser.getPassword())) {
-	            LocalDate today = LocalDate.now();
-	            if (findUser.getLastPointDate() == null || !findUser.getLastPointDate().equals(today)) {
-	               session.setAttribute("principal", findUser);
 
-	               // 포인트 증가 로직 추가
-	               int pointToAdd = 10; // 포인트를 증가시킬 값
-	               findUser.setPoint(findUser.getPoint() + pointToAdd);
-	               findUser.setLastPointDate(today); // 마지막 포인트 쌓은 날짜 업데이트
-	               userService.saveUser(findUser); // 변경된 포인트와 날짜를 저장
+		if (findUser.getUserid() == null) {
+			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "아이디가 존재하지 않습니다.");
+		} else {
+			if (user.getPassword().equals(findUser.getPassword())) {
+				LocalDate today = LocalDate.now();
+				if (findUser.getLastPointDate() == null || !findUser.getLastPointDate().equals(today)) {
+					session.setAttribute("principal", findUser);
 
-	               return new ResponseDTO<>(HttpStatus.OK.value(), findUser.getUserid() + "님이 로그인하였습니다.");
-	            } else {
-	               session.setAttribute("principal", findUser);
-	               return new ResponseDTO<>(HttpStatus.OK.value(), "하루에 한 번만 포인트를 쌓을 수 있습니다.");
-	            }
-	         } else {
-	            return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "비밀번호가 틀렸습니다.");
-	         }
-	      }
-	   }
+					// 포인트 증가 로직 추가
+					int pointToAdd = 10; // 포인트를 증가시킬 값
+					findUser.setPoint(findUser.getPoint() + pointToAdd);
+					findUser.setLastPointDate(today); // 마지막 포인트 쌓은 날짜 업데이트
+					userService.saveUser(findUser); // 변경된 포인트와 날짜를 저장
+
+					return new ResponseDTO<>(HttpStatus.OK.value(), findUser.getUserid() + "님이 로그인하였습니다.");
+				} else {
+					session.setAttribute("principal", findUser);
+					return new ResponseDTO<>(HttpStatus.OK.value(), "하루에 한 번만 포인트를 쌓을 수 있습니다.");
+					
+				}
+			} else {
+				return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "비밀번호가 틀렸습니다.");
+			}
+		}
+	}
 
 	@GetMapping("/join")
 	public String join() {
@@ -110,6 +118,7 @@ public class UserController {
 				return new ResponseDTO<>(HttpStatus.OK.value(), "회원님의 아이디는 " + findUser.getUserid() + " 입니다.");	
 		}
 	}
+	
 	
 	@PostMapping("/findpw")
 	public @ResponseBody ResponseDTO<?> findpw(@RequestBody User user) {

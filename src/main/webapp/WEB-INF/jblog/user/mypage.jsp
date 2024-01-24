@@ -124,7 +124,36 @@
             <div class="form-group">
                 <label for="password">비밀번호</label>
                 <input type="text" id="password" name="password" value="${principal.password }">
+                 <small id="passwordError" class="text-danger"></small>
             </div>
+                 <div class="form-group">
+                <label for="passwordConfirm">비밀번호 확인</label>
+                <input type="text" id="passwordConfirm" name="passwordConfirm">
+                  <small id="passwordConfirmError" class="text-danger"></small>
+            </div>
+            
+            <script>
+    const passwordInput = document.getElementById('password');
+    const passwordError = document.getElementById('passwordError');
+    const passwordConfirmInput = document.getElementById('passwordConfirm');
+    const passwordConfirmError = document.getElementById('passwordConfirmError');
+
+    passwordInput.addEventListener('input', function (event) {
+        if (!passwordInput.checkValidity()) {
+            passwordError.textContent = '비밀번호는 최소 8자 이상이어야 하고 숫자, 영어, 특수문자(!@#$%^&*-)가 포함되어 있어야 합니다.';
+        } else {
+            passwordError.textContent = '';
+        }
+    });
+
+    passwordConfirmInput.addEventListener('input', function (event) {
+        if (passwordConfirmInput.value !== passwordInput.value) {
+            passwordConfirmError.textContent = '비밀번호가 일치하지 않습니다.';
+        } else {
+            passwordConfirmError.textContent = '';
+        }
+    });
+</script>
                         <div class="form-group">
                 <label for="nickname">닉네임</label>
                 <input type="text" id="nickname" name="nickname" value="${principal.nickname }">
