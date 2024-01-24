@@ -40,7 +40,7 @@
 										</h3>
 										<div class="cart-info">
 											<a class="pseudo-text-effect" href="#"
-												data-after="중고거래게시판"> <span>자세히 보기</span>
+												data-after="중고거래게시판"> <span>자세히 보기gggggg</span>
 											</a>
 										</div>
 									</div>
