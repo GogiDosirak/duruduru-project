@@ -38,6 +38,12 @@ public class UserController {
 		return "user/login";
 	}
 	
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "index";
+	}
+	
 
 	@PostMapping("/login")
 	public @ResponseBody ResponseDTO<?> login(@RequestBody User user, HttpSession session) {
@@ -61,6 +67,7 @@ public class UserController {
 				} else {
 					session.setAttribute("principal", findUser);
 					return new ResponseDTO<>(HttpStatus.OK.value(), "하루에 한 번만 포인트를 쌓을 수 있습니다.");
+					
 				}
 			} else {
 				return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "비밀번호가 틀렸습니다.");
@@ -105,6 +112,7 @@ public class UserController {
 				return new ResponseDTO<>(HttpStatus.OK.value(), "회원님의 아이디는 " + findUser.getUserid() + " 입니다.");	
 		}
 	}
+	
 	
 	@PostMapping("/findpw")
 	public @ResponseBody ResponseDTO<?> findpw(@RequestBody User user) {
