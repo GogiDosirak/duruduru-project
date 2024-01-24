@@ -1,3 +1,4 @@
+
 package com.duru.project.controller;
 
 import java.util.ArrayList;
@@ -54,5 +55,4 @@ public class ShopController {
 		return "redirect:/mall"; //mall로 바로 보내줘야 GetMapping /mall이 실행되고 세션에 저장됨
 
 	}
-
 }

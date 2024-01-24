@@ -4,45 +4,36 @@
 
 <div class="container mt-3">
     <h2>두루두루 쇼핑몰</h2>
-<style>
-    .product-image {
-          width: 300px;
-        height: 300px;
-        object-fit: cover;
-    }
-</style>
+
+    <style>
+        .product-image {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+        }
+    </style>
     <div class="container-fluid mt-3">
-        <section id="featured-products" class="product-store position-relative padding-large">
-            <div class="container-fluid">
-                <div class="row">
-                    <div id="featured-swiper" class="product-swiper col-md-12">
-                        <div class="swiper">
-                            <div class="swiper-wrapper">
-                                <c:forEach var="productItem" items="${productList}">
-                                    <div class="swiper-slide">
-                                        <div class="product-card image-zoom-effect link-effect d-flex flex-wrap">
-                                            <div class="image-holder">
-                                                <img src="${productItem.filepath }" alt="product-item" class="product-image img-fluid">
-                                            </div>
-                                            <div class="cart-concern">
-                                                <h3 class="card-title text-uppercase pt-3 text-primary">
-                                                    <a href="single-product.html" class="text-primary">${productItem.product_name}</a>
-                                                </h3>
-                                                <div class="cart-info">
-                                                    <a class="pseudo-text-effect" href="#" data-after="ADD TO CART">
-                                                        <span>${productItem.product_price}</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </c:forEach>
+        <div class="row">
+            <c:forEach var="productItem" items="${productList}">
+                <div class="col-md-3 mb-4">
+                    <div class="product-card image-zoom-effect link-effect d-flex flex-wrap">
+                        <div class="image-holder">
+                            <img src="${productItem.filepath}" alt="product-item" class="product-image img-fluid">
+                        </div>
+                        <div class="cart-concern">
+                            <h3 class="card-title text-uppercase pt-3 text-primary">
+                                <a href="single-product.html" class="text-primary">${productItem.product_name}</a>
+                            </h3>
+                            <div class="cart-info">
+                                <a class="pseudo-text-effect" href="#" data-after="ADD TO CART">
+                                    <span>${productItem.product_price}</span>
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </c:forEach>
+        </div>
     </div>
 
     <c:if test="${not empty principal and principal.role eq 'ADMIN'}">
