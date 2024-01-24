@@ -103,5 +103,6 @@
 	</form>
 	<%@ include file="/WEB-INF/jblog/layout/footer.jsp"%>
 	<script src="/js/shop.js"></script>
+
 </body>
 </html>

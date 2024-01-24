@@ -4,6 +4,7 @@
 
 <div class="container mt-3">
     <h2>두루두루 쇼핑몰</h2>
+
     <style>
         .product-image {
             width: 300px;
@@ -40,6 +41,7 @@
             <div class="row justify-content-end">
                 <div class="col-auto">
                     <button type="button" onclick="location.href='/insertProduct'" id="btn-insertProduct" class="btn btn-danger">상품 등록하기</button>
+                 
                 </div>
             </div>
         </div>
