@@ -1,8 +1,12 @@
-let insertProductObject = {
+let ProductObject = {
 	init : function() {
 		let _this = this;
 		$("#btn-insertProduct").on("click", () => {
 			_this.insertProduct();
+			
+		}),
+			$("#btn-deleteProduct").on("click", () => {
+			_this.deleteProduct();
 			
 		});
 		
@@ -37,7 +41,31 @@ let insertProductObject = {
 		
 	},
 	
+		deleteProduct : function() {
+		alert("글삭제 요청됨");
+		let deleteProductData = {
+			product_seq : $("#product_seq").val()
+			};
+		$.ajax({
+			type : "DELETE",
+			url : "/deleteProduct/" + deleteProductData.product_seq,
+			data : JSON.stringify(deleteProductData),
+			contentType : "application/json; charset=utf-8"
+			
+		}).done(function(response){
+			let message = response["data"];
+			alert(message);
+			location = "/mall"   
+		}).fail(function(error){
+			let message = error["data"];
+			alert(	"에러 발생 : " + message);
+			
+		});
+		
+		
+	},
+	
 	
 	
 }
-insertProductObject.init();
+ProductObject.init();

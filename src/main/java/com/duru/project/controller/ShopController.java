@@ -11,8 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -54,5 +57,32 @@ public class ShopController {
 		productService.insertProduct(product, file); // service에서 매개변수 추가됐으므로 file 해주고
 		return "redirect:/mall"; //mall로 바로 보내줘야 GetMapping /mall이 실행되고 세션에 저장됨
 
+	}
+	
+	@GetMapping("/getProduct/{product_seq}")
+	public String getProduct(@PathVariable int product_seq, Model model) {
+		Product getProduct = productService.getProduct(product_seq);
+		model.addAttribute("getProduct", getProduct);
+		return "shop/mall/getProduct";
+	}
+	
+	@DeleteMapping("/deleteProduct/{product_seq}")
+	public @ResponseBody ResponseDTO<?> deleteProduct(@PathVariable int product_seq) {
+		productService.deleteProduct(product_seq);
+		return new ResponseDTO<>(HttpStatus.OK.value(),"상품 삭제가 완료되었습니다.");
+	}
+	
+	@GetMapping("/updateProduct/{product_seq}") //일단 상품 수정을 누르면 updateProduct.jsp로 보내야하므로 겟매핑 해주고, 누른 상품에 대한 정보를 띄워야 하므로 seq를 기준으로 찾아주고 모델에 저장
+	public String updateProduct(@PathVariable int product_seq, Model model) {
+		Product getProduct = productService.getProduct(product_seq);
+		model.addAttribute("getProduct", getProduct);
+		return "shop/mall/updateProduct";
+	}
+	
+	@PostMapping("/updateProduct/{product_seq}") //file 업로드를 하는 방식으론 form밖에 사용할 줄 몰랐다... js로 하고싶었는데 한계를 느끼고 form 사용
+	public String updateProduct(@PathVariable int product_seq, Product product, MultipartFile file) throws Exception { //form엔 Post,Get 방식밖에 없으므로 PutMapping을 사용 못하고 Postmapping을 사용하였다.
+		productService.updateProduct(product_seq, product, file); //매개변수로 셋을 받아서 그대로 update
+		return "redirect:/mall"; //그 후, mall로 바로 보내줘야 GetMapping 돼서 Session에 수정된 정보가 set됨. 그러므로 redirect 사용 
+		
 	}
 }

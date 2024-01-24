@@ -49,6 +49,6 @@ public class Product {
 	    private String filepath;
 
 	    @CreationTimestamp
-	    private Timestamp product_createdate;
+	    private Date product_createdate;
 
 }
