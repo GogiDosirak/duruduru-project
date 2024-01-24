@@ -53,8 +53,7 @@ let userObject = {
 
 
 	joinUser: function() {
-		alert("회원가입 요청되었습니다");
-
+		
 		let user = {
 			userid: $("#userid").val(),
 			password: $("#password").val(),
@@ -66,6 +65,23 @@ let userObject = {
 			address_detail: $("#address_detail").val(),
 			zipcode: $("#zipcode").val()
 		}
+		
+		if (this.isEmpty(user.userid)) {
+			alert("아이디를 입력해주세요.");
+			return;
+		}
+		
+			if (!this.isValidPassword(user.password)) {
+			alert("올바른 비밀번호를 입력해주세요.")
+			return;
+		}
+
+
+		if (!this.isPasswordMatch(user.password, user.passwordConfirm)) {
+			alert("비밀번호가 일치하지 않습니다.")
+			return;
+		}
+
 
 		if (this.isEmpty(user.phonenumber)) {
 			alert("휴대폰 번호를 입력해주세요.");
@@ -79,17 +95,7 @@ let userObject = {
 			return; // 이메일이 올바르지 않으면 함수 종료
 		}
 
-		if (!this.isValidPassword(user.password)) {
-			alert("올바른 비밀번호를 입력해주세요.")
-			return;
-		}
-
-
-		if (!this.isPasswordMatch(user.password, user.passwordConfirm)) {
-			alert("비밀번호가 일치하지 않습니다.")
-			return;
-		}
-
+	
 
 		$.ajax({
 			type: "POST",
