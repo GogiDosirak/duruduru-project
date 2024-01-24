@@ -59,6 +59,7 @@ public class UserController {
 
 					return new ResponseDTO<>(HttpStatus.OK.value(), findUser.getUserid() + "님이 로그인하였습니다.");
 				} else {
+					session.setAttribute("principal", findUser);
 					return new ResponseDTO<>(HttpStatus.OK.value(), "하루에 한 번만 포인트를 쌓을 수 있습니다.");
 				}
 			} else {
