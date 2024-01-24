@@ -45,6 +45,7 @@
 			</div>
 		</div>
 	</footer>
+
 	
 	<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>

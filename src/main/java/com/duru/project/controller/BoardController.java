@@ -24,5 +24,10 @@ public class BoardController {
 	public String walking() {
 		return "board/walking/walking";
 	}
-
+	
+	
+	@GetMapping("/insertwalkcheckboard")
+	public String insertwalkcheckboard() {
+		return "board/walking/insertwalkcheckboard";
+	}
 }

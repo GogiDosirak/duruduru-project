@@ -15,8 +15,8 @@
 <meta name="description" content="">
 	   <script src="/webjars/jquery/3.6.0/dist/jquery.min.js"></script>
  <!-- summernote 시작 -->
-  <link href="/webjars/summernote/0.8.10/summernote-bs4.css" rel="stylesheet">
   <script src="/webjars/summernote/0.8.10/summernote-bs4.min.js"></script>
+  <link href="/webjars/summernote/0.8.10/summernote-bs4.css" rel="stylesheet">
   <!-- summernate  종료 --> 
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -197,6 +197,7 @@ body {
 									</a></li>
 									<li><a href="/sns" class="dropdown-item item-anchor">SNS</a></li>
 									<li><a href="/walking" class="dropdown-item item-anchor">산책게시판</a></li>
+									<li><a href="/walkcheckboard" class="dropdown-item item-anchor">산책인증게시판</a></li>
 								</ul></li>
 							<li class="nav-item dropdown"><a
 								class="nav-link dropdown-toggle" href="#" id="dropdownPages"
