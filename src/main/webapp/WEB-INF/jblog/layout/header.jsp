@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,14 +14,17 @@
 <meta name="author" content="">
 <meta name="keywords" content="">
 <meta name="description" content="">
-  <script src="js/jquery-1.11.0.min.js"></script>
- <script src="/webjars/jquery/3.6.0/dist/jquery.min.js"></script>
+
+
+	   <script src="/webjars/jquery/3.6.0/dist/jquery.min.js"></script>
+
+
  <!-- summernote 시작 -->
-  <link href="/webjars/summernote/0.8.10/summernote-bs4.css" rel="stylesheet">
   <script src="/webjars/summernote/0.8.10/summernote-bs4.min.js"></script>
+  <link href="/webjars/summernote/0.8.10/summernote-bs4.css" rel="stylesheet">
   <!-- summernate  종료 --> 
-<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/style.css" >
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -43,6 +47,7 @@ body {
 <!-- script
     ================================================== -->
 <script src="js/modernizr.js"></script>
+
 </head>
 <body class="bg-body" data-bs-spy="scroll" data-bs-target="#navbar"
 	data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true"
@@ -197,6 +202,7 @@ body {
 									</a></li>
 									<li><a href="/sns" class="dropdown-item item-anchor">SNS</a></li>
 									<li><a href="/walking" class="dropdown-item item-anchor">산책게시판</a></li>
+									<li><a href="/walkcheckboard" class="dropdown-item item-anchor">산책인증게시판</a></li>
 								</ul></li>
 							<li class="nav-item dropdown"><a
 								class="nav-link dropdown-toggle" href="#" id="dropdownPages"
