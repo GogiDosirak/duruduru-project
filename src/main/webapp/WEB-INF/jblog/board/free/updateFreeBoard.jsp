@@ -5,12 +5,13 @@
   
       <br>
       <center>
-  <h2>자유게시판 글등록</h2>
+  <h2>자유게시판 글수정</h2>
         
+         <input type="hidden" id="frboSeq" value="${findFreeBoard.frboSeq }">
          <div class="col-md-8">
             <div class="mb-3 mt-3">
                <label for="product_stock"></label> <input type="text"
-                  class="form-control" id="freeBoardTitle" placeholder="제목을 입력하세요"
+                  class="form-control" id="freeBoardTitle" value="${findFreeBoard.frboTitle }"
                   name="freeboardTitle">
             </div>
          </div>
@@ -18,7 +19,7 @@
 <div class="col-md-8">
     <div class="mb-3">
         <label for="freeBoardContent"></label>
-        <textarea id="freeBoardContent"></textarea>
+        <textarea id="freeBoardContent">${findFreeBoard.frboContent }</textarea>
         <script>
         // 파일명을 표시하는 함수
 		function displayFileName(input) {
@@ -75,7 +76,7 @@
 
       </center>
       <center>
-         <button id="btn-insertFreeBoard" class="btn btn-warning">글등록</button>
+         <button id="btn-updateFreeBoard" class="btn btn-warning">글수정</button>
       </center>
       
       <script src="/js/commuboard.js"></script>

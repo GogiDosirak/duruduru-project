@@ -149,8 +149,8 @@
 				});
 			</script>
 
-
-			<!-- 전화인증 시작 -->
+ 
+		<%-- 	<!-- 전화인증 시작 -->
 
 			<div class="form-group">
 				<div class="container mt-3">
@@ -204,8 +204,10 @@
 					</div>
 				</div>
 			</div>
-
+ --%>
+ 
 			<!-- 전화인증 끝 -->
+			 
 
 			<div class="form-group">
 				<input class="form-control" style="width: 40%; display: inline;"
@@ -221,8 +223,8 @@
 					name="address" id="address" type="text" readonly="readonly" />
 			</div>
 			<div class="form-group">
-				<input class="form-control" placeholder="상세주소" name="address_detail"
-					id="address_detail" type="text" />
+				<input class="form-control" placeholder="상세주소" name="addressDetail"
+					id="addressDetail" type="text" />
 			</div>
 
 			<br>

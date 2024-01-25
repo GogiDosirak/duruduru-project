@@ -30,15 +30,15 @@
 
 
 	<div class="container mt-3">
-  <h2>자유게시판</h2>
+  <h2>자유게시판</h2>     
   
-  
- <!-- 검색버튼 form -->
-   <form action="/freeboard" method="GET" class="form-inline p-2 bd-highlight" role="search">        
+ <!--  검색버튼 form -->
+   <form action="/freeboard/search" method="GET" class="form-inline p-2 bd-highlight" role="search">        
 <input type="text" name="searchKeyword" class="form-control" id="searchKeyword" placeholder="검색">        
 <button class="btn btn-success bi bi-search"></button>    
 </form>
-  <input type="hidden" id="searchKeyword" value="${searchKeyword }">     
+      
+        <input type="hidden" id="searchKeyword" value="${searchKeyword }">     
       
   <table class="table">
     <thead>
@@ -52,7 +52,7 @@
     </thead>
     
     <tbody>
-    <c:forEach var="freeboard" items="${getFreeBoardList.content }">
+    <c:forEach var="freeboard" items="${getFreeSearchList.content }">
     <tr>
     <td>${freeboard.frboSeq }</td>
     <td><a href="/getfreeboard/${freeboard.frboSeq }">${freeboard.frboTitle }</a></td>
@@ -67,12 +67,12 @@
 </div>
 <div class="container mt-3 text-center">
     <ul class="pagination">
-<li class="page-item <c:if test="${getFreeBoardList.first }">disabled</c:if>"><a class="page-link" href="?page=${getFreeBoardList.number-1 }">Previous</a></li>
+<li class="page-item <c:if test="${getFreeSearchList.first }">disabled</c:if>"><a class="page-link" href="?page=${getFreeSearchList.number-1 }">Previous</a></li>
 
-<c:forEach var="page" begin="1" end="${getFreeBoardList.totalPages }">
-<li class="page-item"><a class="page-link" href="?page=${page -1}">${page }</a></li>
+<c:forEach var="page" begin="1" end="${getFreeSearchList.totalPages }">
+<li class="page-item"><a class="page-link" href="?searchKeyword=${searchKeyword }&page=${page -1}">${page }</a></li>
 </c:forEach>
-<li class="page-item <c:if test="${getFreeBoardList.last }">disabled</c:if>"><a class="page-link" href="?page=${getFreeBoardList.number+1 }">Next</a></li>
+<li class="page-item <c:if test="${getFreeSearchList.last }">disabled</c:if>"><a class="page-link" href="?page=${getFreeSearchList.number+1 }">Next</a></li>
 </ul>
 </div>
 
