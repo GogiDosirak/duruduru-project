@@ -60,22 +60,22 @@ public class FreeBoardController {
 
 	}
 	
-	
-	@GetMapping("/freeboard/search")
-	public String freeBoardSearchList(Model model, @PageableDefault(size = 4, sort = "frboSeq", direction = Direction.DESC) Pageable pageable, String searchKeyword) {
-		Page<FreeBoard> list = null;
-
-		if (searchKeyword == null) {
-			list = freeBoardService.freeBoardList(pageable); // 기존의 리스트보여줌
-		} else {
-			list = freeBoardService.boardTitleSearchList(searchKeyword, pageable); // 검색리스트반환
-		}
-
-	    model.addAttribute("searchKeyword", searchKeyword);
-		model.addAttribute("getFreeSearchList", list);
-		return "board/free/freeBoardSearchList";
-
-	}
+//	
+//	@GetMapping("/freeboard/search")
+//	public String freeBoardSearchList(Model model, @PageableDefault(size = 4, sort = "frboSeq", direction = Direction.DESC) Pageable pageable, String searchKeyword) {
+//		Page<FreeBoard> list = null;
+//
+//		if (searchKeyword == null) {
+//			list = freeBoardService.freeBoardList(pageable); // 기존의 리스트보여줌
+//		} else {
+//			list = freeBoardService.boardTitleSearchList(searchKeyword, pageable); // 검색리스트반환
+//		}
+//
+//	    model.addAttribute("searchKeyword", searchKeyword);
+//		model.addAttribute("getFreeSearchList", list);
+//		return "board/free/freeBoardSearchList";
+//
+//	}
 	
 	
 	
@@ -161,12 +161,12 @@ public class FreeBoardController {
 	//댓글
 	
 	
-	@PostMapping("/insertFreeComent")
-	public @ResponseBody ResponseDTO<?> insertFreeComment(HttpSession session, @RequestBody FreeComment freeComment) {
+	@PostMapping("/insertFreeComent/{frboSeq}")
+	public @ResponseBody ResponseDTO<?> insertFreeComment(HttpSession session, @RequestBody FreeComment freeComment, @PathVariable int frboSeq) {
 		User user = (User) session.getAttribute("principal");
-		FreeBoard freeBoard = (FreeBoard) session.getAttribute("findFreeBoard");
+		FreeBoard findFreeBoard = freeBoardService.getFreeBoard(frboSeq);
 		freeComment.setUser(user);
-		freeComment.setFreeBoard(freeBoard);
+		freeComment.setFreeBoard(findFreeBoard);
 		
 		freeBoardService.insertFreeComment(freeComment);
 		
@@ -177,7 +177,8 @@ public class FreeBoardController {
 	
 	@DeleteMapping("/deleteFreeComment/{frboCoSeq}")
 	public @ResponseBody ResponseDTO<?> deleteFreeComment(@PathVariable int frboCoSeq) {
-		freeBoardService.deleteFreeBoard(frboCoSeq);
+		System.out.println("컨트롤라에서 딜리트가 되는"+frboCoSeq);
+		freeBoardService.deleteFreeComment(frboCoSeq);
 	
 		return new ResponseDTO<>(HttpStatus.OK.value(), "삭제가 완료되었습니다."); 
 	}

@@ -27,9 +27,14 @@ let freeBoardObject =  {
 			_this.insertComment();
 		}),
 		
-		$("#btn-deletefreeComment").on("click", () => {
-			_this.deleteComment();
-		})
+		  $(document).on("click", ".btn-delete-comment", function() {
+            // 클릭된 버튼의 데이터 속성에서 댓글 번호(co-seq)를 가져옴
+            let co_seq = $(this).data("co-seq");
+
+            // 댓글 삭제 함수 호출
+            _this.deleteComment(co_seq);
+         });
+
 	},
 	
 	
@@ -129,7 +134,6 @@ let freeBoardObject =  {
 	
 	
 	insertComment : function() {
-		alert("댓글 등록이 요청되었습니다.");
 		
 		let data =  {
 			frboCoContent : $("#frboCoContent").val()
@@ -137,7 +141,7 @@ let freeBoardObject =  {
 		
 		$.ajax({
 		type: "POST",
-		url: "/insertFreeComent",
+		url: "/insertFreeComent/" + $("#frboSeq").val(),
 		data:JSON.stringify(data),
 		contentType: "application/json; charset=utf-8"
 		
@@ -159,13 +163,13 @@ let freeBoardObject =  {
 	},
 	
 	
-	deleteComment: function() {
-		alert("댓글 삭제가 요청되었습니다.");
+	deleteComment: function(co_seq) {
+		alert("댓글 삭제가 요청되었습니다." )
 		
 		
 		$.ajax({
 		type: "DELETE",
-		url: "/deleteFreeComment/" + $("#frboCoSeq").val()
+		url: "/deleteFreeComment/" + co_seq
 
 		
 	}).done(function(response) {

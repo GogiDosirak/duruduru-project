@@ -30,15 +30,17 @@
 
 
 	<div class="container mt-3">
-  <h2>자유게시판</h2>
+  <a href="/freeboard"><h2>자유게시판</h2></a>
   
   
  <!-- 검색버튼 form -->
-   <form action="/freeboard" method="GET" class="form-inline p-2 bd-highlight" role="search">        
-<input type="text" name="searchKeyword" class="form-control" id="searchKeyword" placeholder="검색">        
-<button class="btn btn-success bi bi-search"></button>    
-</form>
-  <input type="hidden" id="searchKeyword" value="${searchKeyword }">     
+<div id="searchForm">
+    <form action="/freeboard" method="GET" class="form-inline">
+        <input type="text" name="searchKeyword" class="form-control-sm" id="searchKeyword" placeholder="제목으로 검색하기">
+        <button class="btn btn-warning bi bi-search" id="searchButton">검색</button>
+    </form>
+</div>
+<br>
       
   <table class="table">
     <thead>

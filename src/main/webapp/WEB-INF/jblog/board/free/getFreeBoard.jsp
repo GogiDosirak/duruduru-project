@@ -113,22 +113,21 @@
     <hr>
     
     <div class="container mt-3">
-<h2>댓글 등록</h2>
- <table class="table">
- <thead>
- <tr>
- <td>
- 
-<textarea rows="1" cols="110" id="frboCoContent"></textarea>
-
-<br>
-<button id="btn-FreeInsertComment" class="btn btn-warning">댓글 등록</button>
-</td>
-</tr>
-</thead>
-</table>
+<h2> &nbsp; 댓글 등록</h2> 
+<div class="comment-container">
+    <table class="table">
+        <thead>
+            <tr>
+                <td align="right">
+                    <div class="comment-input-container">
+                        <textarea rows="1" cols="99" id="frboCoContent" placeholder="댓글을 입력하세요"></textarea>
+                        <button id="btn-FreeInsertComment" class="btn btn-warning">댓글 등록</button>
+                    </div>
+                </td>
+            </tr>
+        </thead>
+    </table>
 </div>
-
 
 <div class="container mt-3">
 <h2>댓글 보기</h2>
@@ -138,21 +137,23 @@
  <tr>
  <td>작성자</td>
  <td>내용</td>
- <td>작성일</td>
+ <td>작성일</td><td>
+ </td>
  </tr>
  
  <c:forEach var="freeComment" items="${freeCommentList }">
- <input type="hidden" id="frboCoSeq" value="${freeComment.frboCoSeq }">
+ 
  <c:if test="${ findFreeBoard.frboSeq == freeComment.freeBoard.frboSeq}">
  
  <tr>
  <td>${freeComment.user.nickname }</td>
  <td>${freeComment.frboCoContent }</td>
  <td>${freeComment.frboCoDate }</td>
+  <td>
  <c:if test="${principal.userid eq freeComment.user.userid }">
- <td><button type="button" id="btn-deletefreeComment" class="btn btn-danger btn-sm" style="padding: 1px 1px;">삭제하기</button>
- </td>
+<button type="button"  class="btn btn-danger btn-sm btn-delete-comment" data-co-seq="${freeComment.frboCoSeq }" style="padding: 1px 1px;">삭제하기</button> 
 </c:if>
+ </td>
  </tr>
  </c:if>
  </c:forEach>
@@ -164,9 +165,9 @@
 </div>
     
     
-    
+ </div>   
    <script src="/js/commuboard.js"></script>
-    <script src="/js/walkboard.js"></script>
 </body>
 </html>
+
 <%@include file = "/WEB-INF/jblog/layout/footer.jsp"%>

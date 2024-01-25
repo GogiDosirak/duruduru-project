@@ -98,13 +98,13 @@ public class FreeBoardService {
 	
 	@Transactional
 	public void deleteFreeComment(int frboCoSeq) {
-		freeBoardRepository.deleteById(frboCoSeq);
+		freeCommentRepository.deleteById(frboCoSeq);
 	}
 	
 	
 	@Transactional
 	public void deleteAllFreeComment(int frboSeq) {
-		freeBoardRepository.deleteAll();
+		freeCommentRepository.deleteByFreeBoard_frboSeq(frboSeq);
 	}
 	
  }
