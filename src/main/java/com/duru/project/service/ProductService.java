@@ -4,9 +4,12 @@ package com.duru.project.service;
 
 import java.io.File;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -36,8 +39,8 @@ public class ProductService {
 	}
 
 	@Transactional(readOnly = true)
-	public List<Product> getProductList() {
-		return productRepository.findAll();
+	public Page<Product> getProductList(Pageable pageable) {
+		return productRepository.findAll(pageable);
 	}
 	
 	@Transactional(readOnly = true)
@@ -72,6 +75,12 @@ public class ProductService {
 		
 		productRepository.save(findProduct); //최종적으로 Repository에 저장
 
+	}
+	
+	@Transactional
+	public Page<Product> search(String keyword, Pageable pageable) {
+		Page<Product> productSearchList = productRepository.findByProductNameContaining(keyword, pageable);
+		return productSearchList;
 	}
 
 }

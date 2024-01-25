@@ -4,7 +4,7 @@
 <%@ include file="/WEB-INF/jblog/layout/header.jsp"%>
 
 <div class="container mt-3">
-	<a href="/mall"><h2>두루두루 쇼핑몰</h2></a>
+		<a href="/mall"><h2>두루두루 쇼핑몰</h2></a>
 
 	<style>
 .product-image {
@@ -13,7 +13,7 @@
 	object-fit: cover;
 }
 </style>
-
+	   
 <div id="searchForm">
     <form action="/mall/search" method="GET" class="form-inline">
         <input type="text" name="keyword" class="form-control-sm" id="search" placeholder="상품명">
@@ -23,7 +23,7 @@
 <br>
 	<div class="container-fluid mt-3">
 		<div class="row">
-			<c:forEach var="productItem" items="${productList.content}">
+			<c:forEach var="productItem" items="${productSearchList.content}">
 				<div class="col-md-3 mb-4">
 					<div
 						class="product-card image-zoom-effect link-effect d-flex flex-wrap">
@@ -49,20 +49,23 @@
 		</div>
 	</div>
 	<ul class="pagination">
+		<input type="hidden" id="keyword" name="keyword" value=${keyword }>
 		<li
-			class="page-item <c:if test="${productList.first }">disabled</c:if>"><a
-			class="page-link" href="?page=${productList.number-1 }">Previous</a></li>
+			class="page-item <c:if test="${productSearchList.first }">disabled</c:if>"><a
+			class="page-link"
+			href="?keyword=${keyword }&page=${productSearchList.number-1 }">Previous</a></li>
 
-		<c:forEach var="page" begin="1" end="${productList.totalPages }">
+		<c:forEach var="page" begin="1" end="${productSearchList.totalPages }">
 			<li class="page-item"><a class="page-link"
-				href="?page=${page-1 }">${page }</a></li>
+				href="?keyword=${keyword }&page=${page-1 }">${page }</a></li>
 		</c:forEach>
 		<li
-			class="page-item <c:if test="${productList.last }">disabled</c:if>"><a
-			class="page-link" href="?page=${productList.number+1 }">Next</a></li>
+			class="page-item <c:if test="${productSearchList.last }">disabled</c:if>"><a
+			class="page-link"
+			href="?keyword=${keyword }&page=${productSearchList.number+1 }">Next</a></li>
 	</ul>
 	<c:if test="${not empty principal and principal.role eq 'ADMIN'}">
-		<div class="container mt0-3">
+		<div class="container mt-3">
 			<div class="row justify-content-end">
 				<div class="col-auto">
 					<button type="button" onclick="location.href='/insertProduct'"

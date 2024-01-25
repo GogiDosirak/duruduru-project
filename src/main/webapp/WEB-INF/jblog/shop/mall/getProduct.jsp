@@ -60,6 +60,14 @@ img {
 	max-width: 100%;
 	height: auto;
 } 
+  .quantity-input {
+        width: 50px; /* 수량 입력창 너비 조정 */
+        padding: 8px; /* 수량 입력창 안의 텍스트 여백 조정 */
+        font-size: 14px;
+        border: 1px solid #ced4da; /* 수량 입력창 윤곽선 스타일 */
+        border-radius: 10px; /* 수량 입력창 둥글게 만들기 */
+        outline: none; /* 포커스 효과 제거 */
+    }
 </style>
 </head>
 <body>
@@ -71,7 +79,8 @@ img {
 	<div class="logo center-align">
 	</div>
 	<center>
-	
+					 	 	 <input type="hidden" id="userSeq" name="userSeq" value="${principal.userSeq }">
+				 	 	 <input type="hidden" id="productSeq" name="productSeq" value="${getProduct.productSeq }">
 	<hr>
 	<h2 class="center-align">두루두루 쇼핑몰</h2>
 	</center>
@@ -87,10 +96,6 @@ img {
 	</div>
 	<center>
 		<div>
-			<a href="/mall"><h5>뒤로가기</h5></a>
-		</div>
-		<br>
-		<div>
 			<input type="hidden" id="productSeq" name="productSeq"
 				value="${getProduct.productSeq }">
 			<c:if test="${not empty principal and principal.role eq 'ADMIN'}">
@@ -101,6 +106,21 @@ img {
 					삭제하기</button>
 				<script src="/js/shop.js"></script>
 			</c:if>
+				<c:if test="${not empty principal and principal.role eq 'USER'}">
+				<div>
+				 <h5>수량 : <input type="text" id="productAmount" name="productAmount" class="quantity-input">  </h5>
+				</div>
+				<button type="button"	
+					id="btn-insertBasket"
+					class="btn btn-warning">장바구니 추가</button>
+				<button type="button" id="btn-buyProduct" class="btn btn-danger">구매하기</button>
+				<script src="/js/shop.js"></script>
+			</c:if>
+					<div>
+					<br>
+			
+			<a href="/mall"><h5>뒤로가기</h5></a>
+		</div>
 	</center>
 	</div>
 	</body>

@@ -8,6 +8,9 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,16 +36,12 @@ public class ShopController {
 	private ProductService productService;
 
 	@GetMapping("/mall")
-	public String getProductList(HttpSession session) {
-		List<Product> productList = productService.getProductList();
+	public String getProductList(HttpSession session, @PageableDefault(size=8, sort="productSeq", direction = org.springframework.data.domain.Sort.Direction.DESC) Pageable pageable) {
+		Page<Product> productList = productService.getProductList(pageable);
 		session.setAttribute("productList", productList);
 		return "shop/mall/mall";
 	}
 
-	@GetMapping("/basket")
-	public String basket() {
-		return "shop/basket/basket";
-	}
 
 	@GetMapping("/insertProduct")
 	public String insertProduct() {
@@ -82,5 +81,15 @@ public class ShopController {
 		productService.updateProduct(productSeq, product, file); //매개변수로 셋을 받아서 그대로 update
 		return "redirect:/mall"; //그 후, mall로 바로 보내줘야 GetMapping 돼서 Session에 수정된 정보가 set됨. 그러므로 redirect 사용 
 		
+	}
+	
+	@GetMapping("/mall/search")
+	public String search(String keyword, Model model,  @PageableDefault(size=8, sort="productSeq", direction = org.springframework.data.domain.Sort.Direction.DESC) Pageable pageable) {
+		Page<Product> productSearchList = productService.search(keyword, pageable);
+		
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("productSearchList", productSearchList);
+		
+		return "shop/mall/searchProduct";
 	}
 }
