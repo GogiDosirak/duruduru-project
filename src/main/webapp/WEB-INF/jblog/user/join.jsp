@@ -149,7 +149,7 @@
 				});
 			</script>
 
-
+<%-- 
 			<!-- 전화인증 시작 -->
 
 			<div class="form-group">
@@ -205,7 +205,7 @@
 				</div>
 			</div>
 
-			<!-- 전화인증 끝 -->
+			<!-- 전화인증 끝 --> --%>
 
 			<div class="form-group">
 				<input class="form-control" style="width: 40%; display: inline;"

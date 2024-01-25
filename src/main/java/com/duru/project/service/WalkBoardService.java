@@ -51,6 +51,14 @@ public class WalkBoardService {
 		walkBoardRepository.save(walkBoard);
 	}
 	
+	@Transactional(readOnly = true)
+	public Page<WalkBoard> boardTitleSearchList(String searchKeyword, Pageable pageable){
+		return walkBoardRepository.findBywaboTitleContaining(searchKeyword, pageable);
+	}
 	
+	@Transactional(readOnly = true)
+	public Page<WalkBoard> boardContentSearchList(String searchKeyword, Pageable pageable){
+		return walkBoardRepository.findBywaboContentContaining(searchKeyword, pageable);
+	}
 
 }

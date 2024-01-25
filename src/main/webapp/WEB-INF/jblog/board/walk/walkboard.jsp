@@ -9,9 +9,10 @@
 <title>duruduru</title>
 <style>
 img {
-  max-width: 100%;
-  height: auto;
+	max-width: 100%;
+	height: auto;
 }
+
 body {
 	font-family: 'Jua', sans-serif;
 	background-color: #f6f5f2;
@@ -66,41 +67,97 @@ hr {
 </head>
 
 <input id="waboSeq" type="hidden" value="${walkBoard.waboSeq}">
-	<div class="logo center-align">
-		<a href="/"> <img src="/images/duruduru.png" alt="로고 이미지">
-		</a>
-	</div>
+<div class="logo center-align">
+	<a href="/"> <img src="/images/duruduru.png" alt="로고 이미지">
+	</a>
+</div>
+<hr>
+<h2 class="center-align">산책게시판</h2>
+<div class="container">
+	<h2 id="title" align="center">${walkBoard.waboTitle}</h2>
+	<h3>${walkBoard.user.nickname}</h3>
+	<h6>날짜 : ${walkBoard.waboDate} 조회수 : ${walkBoard.waboCnt}</h6>
 	<hr>
-	<h2 class="center-align">산책게시판</h2>
-	<div class="container">
-		<h2 id="title" align="center">${walkBoard.waboTitle}</h2>
-		<h3 >${walkBoard.user.nickname}</h3>
-		<h6 >날짜 : ${walkBoard.waboDate} 조회수 :
-			${walkBoard.waboCnt}</h6>
-		<hr>
 
-		<div class="details">
+	<div class="details">
 
-			<h4 id="content">${walkBoard.waboContent}</h4>
-			<br> <br> <br> <br> <br> <br> <br>
-			<br> <br>
-		</div>
-
+		<h4 id="content">${walkBoard.waboContent}</h4>
+		<br> <br> <br> <br> <br> <br> <br>
+		<br> <br>
 	</div>
 
-	<div align="center">
-		<a href="/walk"><h5>뒤로가기</h5></a>
-	</div>
-	<br>
+</div>
 
-	<div align="center">
-		<c:if test="${principal.userid eq walkBoard.user.userid}">
-			<button type="button" id="go-updateWaBoard" class="btn btn-warning">글
-				수정하기</button>
-			<button type="button" id="btn-deleteWaBoard" class="btn btn-danger">글
-				삭제하기</button>
-		</c:if>
+<div align="center">
+	<a href="/walk"><h5>뒤로가기</h5></a>
+</div>
+
+<br>
+
+<div align="center">
+	<c:if test="${principal.userid eq walkBoard.user.userid}">
+		<button type="button" id="go-updateWaBoard" class="btn btn-warning">글
+			수정하기</button>
+		<button type="button" id="btn-deleteWaBoard" class="btn btn-danger">글
+			삭제하기</button>
+	</c:if>
+</div>
+
+<hr>
+
+<div class="container mt-3">
+	<h2>&nbsp; 댓글 등록</h2>
+	<div class="comment-container">
+		<table class="table">
+			<thead>
+				<tr>
+					<td align="right">
+						<div class="comment-input-container">
+							<textarea rows="1" cols="99" id="waboCoContent"
+								placeholder="댓글을 입력하세요"></textarea>
+							<button id="btn-WalkBoardInsertComment" class="btn btn-warning">댓글
+								등록</button>
+						</div>
+					</td>
+				</tr>
+			</thead>
+		</table>
 	</div>
-	
+
+
+	<div class="container mt-3">
+		<h2>댓글 보기</h2>
+		<table class="table">
+			<thead>
+
+				<tr>
+					<td>작성자</td>
+					<td>내용</td>
+					<td>작성일</td>
+					<td></td>
+				</tr>
+
+				<c:forEach var="walkBoardComment" items="${walkBoardCommentList}">
+					<c:if
+						test="${walkBoard.waboSeq == walkBoardComment.walkBoard.waboSeq}">
+						<tr>
+							<td>${walkBoardComment.user.nickname}</td>
+							<td>${walkBoardComment.waboCoContent}</td>
+							<td>${walkBoardComment.waboCoDate}</td>
+							<td><c:if
+									test="${principal.userid eq walkBoardComment.user.userid}">
+									<button type="button"
+										class="btn btn-danger btn-sm btn-delete-comment"
+										data-co-seq="${walkBoardComment.waboCoSeq}"
+										style="padding: 1px 1px;">삭제하기</button>
+								</c:if></td>
+						</tr>
+					</c:if>
+				</c:forEach>
+			</thead>
+		</table>
+	</div>
+</div>
+</html>
 <script src="/js/walkboard.js"></script>
 <%@include file="/WEB-INF/jblog/layout/footer.jsp"%>

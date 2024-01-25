@@ -8,8 +8,8 @@ import com.duru.project.domain.WalkBoard;
 
 public interface WalkBoardRepository extends JpaRepository<WalkBoard, Integer>{
 	
-	   Page<WalkBoard> findBywaboTitleContaining(String searchTitle, Pageable pageable);
+	   Page<WalkBoard> findBywaboTitleContaining(String searchKeyword, Pageable pageable);
 	   
-	   Page<WalkBoard> findBywaboContentContaining(String searchContent, Pageable pageable);
+	   Page<WalkBoard> findBywaboContentContaining(String searchKeyword, Pageable pageable);
 
 }

@@ -1,4 +1,3 @@
-
 package com.duru.project.domain;
 
 import java.sql.Date;
@@ -12,8 +11,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,29 +23,27 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Entity
-public class WalkBoard {
+@Table(name = "WalkBoard_Comment")
+public class WalkBoardComment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "waboSeq")
-    private int waboSeq;
+    @Column(name = "waboCoSeq")
+    private int waboCoSeq;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "userSeq")
     private User user;
 
-    @Column(name = "waboTitle", length = 200)
-    private String waboTitle;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "waboSeq")
+    private WalkBoard walkBoard;
 
-    @Lob
-    @Column(name = "waboContent", columnDefinition = "LONGTEXT")
-    private String waboContent;
+    @Column(name = "waboCoContent", length = 400)
+    private String waboCoContent;
 
     @CreationTimestamp
-    @Column(name = "waboDate")
-    private Date waboDate;
-
-    @Column(name = "waboCnt")
-    private int waboCnt;
+    @Column(name = "waboCoDate")
+    private Date waboCoDate;
 
 }
