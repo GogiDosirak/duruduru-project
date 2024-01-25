@@ -1,5 +1,7 @@
 package com.duru.project.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,9 +21,15 @@ public class BasketService {
 	
 	
 	@Transactional
-	public void insertBasket(Basket basket) { //basket에 대한 정보는 다 product와 user로부터 받아와서 총액 구하고 총 구매개수 구하는거라 여기서 불러서 set해줄 것
-		basketRepository.save(basket);
+	public void insertBasket(Basket basket) { 
+		basketRepository.save(basket); // set해줄 필요없음. basket에 필요한 정보들은 Controller에서 다 set해줄 것. 여기선 그냥 저장만!!
 
+		
+	}
+	
+	@Transactional(readOnly = true) 
+	public List<Basket> getBasketList(int userSeq) {
+		return basketRepository.findByUser_UserSeq(userSeq);
 		
 	}
 

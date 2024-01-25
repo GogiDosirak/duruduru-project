@@ -15,7 +15,6 @@
 <meta name="keywords" content="">
 <meta name="description" content="">
 
-
       <script src="/webjars/jquery/3.6.0/dist/jquery.min.js"></script>
 
 
