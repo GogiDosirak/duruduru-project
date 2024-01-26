@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -28,6 +27,12 @@ public class PetController {
 
 	@Autowired
 	PetService petService;
+	
+	@GetMapping("/petInfo")
+	public String petInfo(Model model, @RequestParam("userSeq") int userSeq){
+		model.addAttribute("myPetList", petService.myPetList(userSeq));
+		return "/pet/petInfo";
+	}
 
 	//insert11
 	@GetMapping("/insertPet")
@@ -55,7 +60,7 @@ public class PetController {
 		User findUser = (User)session.getAttribute("principal");
 		pet.setUser(findUser);
 		petService.insertPet(pet, file); // service에서 매개변수 추가됐으므로 file 해주고
-		return "redirect:/";
+		return "/user/mypage";
 	}
 	
 	//getPet
@@ -75,7 +80,7 @@ public class PetController {
 	
 	//updatePet22
 	@PostMapping("/updatePet/{petSeq}")
-	public void updatePet(@PathVariable int petSeq, Pet pet, MultipartFile file) throws Exception{
+	public String updatePet(@PathVariable int petSeq, Pet pet, MultipartFile file) throws Exception{
 		Pet findPet = petService.getPet(petSeq);
 		findPet.setPetName(pet.getPetName());
 		findPet.setPetBirthday(pet.getPetBirthday());
@@ -90,6 +95,7 @@ public class PetController {
 			findPet.setFilepath("/files/" + fileName);
 		}
 		petService.insertPet(findPet, file);
+		return "/user/mypage";
 	}
 	
 	//deletePet

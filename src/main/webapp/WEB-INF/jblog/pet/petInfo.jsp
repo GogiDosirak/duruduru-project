@@ -103,7 +103,7 @@
     <div class="container col-md-8 col-sm-8 col-xs-8">
         <div class="sidebar">
             <a href="#" onclick="loadPage('profile')">내 정보</a>
-            <a href="/petInfo?userSeq=${principal.userSeq}" >반려동물 정보</a>
+             <a href="/petInfo?userSeq=${principal.userSeq}" >반려동물 정보</a>
             <a href="#" onclick="loadPage('myPosts')">내가 쓴 글</a>
             <a href="#" onclick="loadPage('myPosts')">주문내역</a>
             <a href="#" onclick="loadPage('exchangeRefund')">교환 및 환불</a>
@@ -120,7 +120,12 @@
                 <label for="userid">아이디</label>
                 <h5>${principal.userid }</h5>
             </div>
-
+            <c:forEach var="pet" items="${myPetList }">
+            
+<div class="image-holder">
+<img alt="pet-item" src="${pet.filepath }" class="product-image img-fluid">
+</div>
+            </c:forEach>
             <div class="form-group">
                 <label for="password">비밀번호</label>
                 <input type="text" id="password" name="password" value="${principal.password }">
@@ -131,29 +136,7 @@
                 <input type="text" id="passwordConfirm" name="passwordConfirm">
                   <small id="passwordConfirmError" class="text-danger"></small>
             </div>
-            
-            <script>
-    const passwordInput = document.getElementById('password');
-    const passwordError = document.getElementById('passwordError');
-    const passwordConfirmInput = document.getElementById('passwordConfirm');
-    const passwordConfirmError = document.getElementById('passwordConfirmError');
 
-    passwordInput.addEventListener('input', function (event) {
-        if (!passwordInput.checkValidity()) {
-            passwordError.textContent = '비밀번호는 최소 8자 이상이어야 하고 숫자, 영어, 특수문자(!@#$%^&*-)가 포함되어 있어야 합니다.';
-        } else {
-            passwordError.textContent = '';
-        }
-    });
-
-    passwordConfirmInput.addEventListener('input', function (event) {
-        if (passwordConfirmInput.value !== passwordInput.value) {
-            passwordConfirmError.textContent = '비밀번호가 일치하지 않습니다.';
-        } else {
-            passwordConfirmError.textContent = '';
-        }
-    });
-</script>
                         <div class="form-group">
                 <label for="nickname">닉네임</label>
                 <input type="text" id="nickname" name="nickname" value="${principal.nickname }">

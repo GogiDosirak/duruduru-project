@@ -90,60 +90,56 @@
 <body>
 	<br>
 	<br>
-	<form id="petForm" action="/insertPet" method="post" enctype="multipart/form-data">
 	<div class="container">
 		<div class="login-container">
 			<img id="duruduru-image" src="images/duruduru.png"
 				alt="Duruduru Logo">
 
-			<div class="form-group">
-				<label for="petName">동물 이름</label> <input type="text" id="petName"
-					name="petName" required>
-			</div>
-			<div class="form-group">
-				<label for="petType">동물 종류</label> <input type="text" id="petType"
-					name="petType" required>
-			</div>
-			<div class="form-group">
-				<label for="petBirthday">생일 입력:</label> <input type="date"
-					id="petBirthday" name="petBirthday" required>
-			</div>
-			<!-- 사진등록 -->
-			<div align="center">
-			<label for="file">
-						<div class="btn-upload">동물사진 업로드하기</div>
-						<br>
+			<form id="petForm" action="/insertPet" method="post"
+				enctype="multipart/form-data">
+				<div class="form-group">
+					<label for="petName">동물 이름</label> <input type="text" id="petName"
+						name="petName" required>
+				</div>
+				<div class="form-group">
+					<label for="petType">동물 종류</label> <input type="text" id="petType"
+						name="petType" required>
+				</div>
+				<div class="form-group">
+					<label for="petBirthday">생일 입력:</label> <input type="date"
+						id="petBirthday" name="petBirthday" required>
+				</div>
+				<!-- 사진등록 -->
+				<div align="center">
+					<label for="file">
+						<div class="btn-upload">동물사진 업로드하기</div> <br>
 						<div id="file-name-display"></div>
 					</label> <input type="file" name="file" id="file"
 						onchange="displayFileName(this)">
-			</div>
-			<script>
-							// 파일명을 표시하는 함수
-							function displayFileName(input) {
-								// 선택된 파일이 있는지 확인
-								if (input.files.length > 0) {
-									// 파일명을 가져와서 표시
-									var fileName = input.files[0].name;
-									document
-											.getElementById('file-name-display').innerText = '선택된 파일: '
-											+ fileName;
-								} else {
-									// 파일이 선택되지 않았을 경우 메시지 지우기
-									document
-											.getElementById('file-name-display').innerText = '';
-								}
-							}
-							
-						</script>
-			<!-- 사진등록 끝 -->
-			<br>
-			<div class="form-group">
-				<button id="btn-petJoin">동물 회원가입</button>
-			</div>
-
+				</div>
+				<script>
+					// 파일명을 표시하는 함수
+					function displayFileName(input) {
+						// 선택된 파일이 있는지 확인
+						if (input.files.length > 0) {
+							// 파일명을 가져와서 표시
+							var fileName = input.files[0].name;
+							document.getElementById('file-name-display').innerText = '선택된 파일: '
+									+ fileName;
+						} else {
+							// 파일이 선택되지 않았을 경우 메시지 지우기
+							document.getElementById('file-name-display').innerText = '';
+						}
+					}
+				</script>
+				<!-- 사진등록 끝 -->
+				<br>
+				<div class="form-group">
+					<button id="btn-petJoin">동물 회원가입</button>
+				</div>
+			</form>
 		</div>
 	</div>
-</form>
 </body>
 <%@include file="/WEB-INF/jblog/layout/footer.jsp"%>
 </html>

@@ -98,15 +98,15 @@
 
 			<div class="form-group">
 				<label for="petName">동물 이름</label> <input type="text" id="petName"
-					name="petName" required>
+					name="petName" value="${pet.petName }" required>
 			</div>
 			<div class="form-group">
 				<label for="petType">동물 종류</label> <input type="text" id="petType"
-					name="petType" required>
+					name="petType" value="${pet.petType }" required>
 			</div>
 			<div class="form-group">
 				<label for="petBirthday">생일 입력:</label> <input type="date"
-					id="petBirthday" name="petBirthday" required>
+					id="petBirthday" name="petBirthday" value="${pet.petBirthday }" required>
 			</div>
 			<!-- 사진등록 -->
 			<div align="center">
@@ -138,7 +138,7 @@
 			<!-- 사진등록 끝 -->
 			<br>
 			<div class="form-group">
-				<button id="btn-petJoin">동물 회원가입</button>
+				<button id="btn-petJoin">동물 정보수정</button>
 			</div>
 
 		</div>
