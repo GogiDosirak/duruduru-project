@@ -84,7 +84,7 @@ let ProductObject = {
 
 		$.ajax({
 			type: "POST",
-			url: "/insertBasket/" + insertBasketData.userSeq,
+			url: "/insertBasket",
 			data: formData, // 직렬화한 데이터를 전송
 			contentType: "application/x-www-form-urlencoded; charset=UTF-8" // 폼 데이터 전송을 위한 contentType
 		}).done(function(response) {

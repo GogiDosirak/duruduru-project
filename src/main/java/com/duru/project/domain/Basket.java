@@ -38,8 +38,8 @@ public class Basket {
     @Column(name = "basketProductAmount")
     private int basketProductAmount;
 
-    @Column(name = "basketPrice")
-    private int basketPrice;
-
+    @Column(name = "basketProductPrice")
+    private int basketProductPrice;
+    
 
 }
