@@ -35,6 +35,10 @@ public class WalkBoardController {
 	@Autowired
 	private WalkBoardCommentService walkBoardCommentService;
 	
+	@GetMapping("/wichi")
+	public String getwichi() {
+		return "wichi";
+	}
 	
 	//boardPage
 	@GetMapping("/walk")

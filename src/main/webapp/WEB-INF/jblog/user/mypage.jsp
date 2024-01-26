@@ -193,5 +193,4 @@
 </body>
 <%@include file="/WEB-INF/jblog/layout/footer.jsp" %>
 <script src="/js/user.js"></script>
-
 </html>

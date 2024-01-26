@@ -17,9 +17,6 @@ public class BoardController {
 		return "board/sns/sns";
 	}
 	
-
-	
-	
 	@GetMapping("/insertwalkcheckboard")
 	public String insertwalkcheckboard() {
 		return "board/walking/insertwalkcheckboard";
