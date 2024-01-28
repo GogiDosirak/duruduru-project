@@ -60,7 +60,7 @@ public class FreeBoardController {
 
 	}
 	
-//	
+	
 //	@GetMapping("/freeboard/search")
 //	public String freeBoardSearchList(Model model, @PageableDefault(size = 4, sort = "frboSeq", direction = Direction.DESC) Pageable pageable, String searchKeyword) {
 //		Page<FreeBoard> list = null;
@@ -100,16 +100,17 @@ public class FreeBoardController {
 	
 	
 	@GetMapping("/getfreeboard/{frboSeq}")
-	public  String getFreeBoard(@PathVariable int frboSeq, HttpSession session) {
+	public  String getFreeBoard(@PathVariable int frboSeq, Model model) {
 		
 		FreeBoard findFreeBoard = freeBoardService.getFreeBoard(frboSeq);
-		session.setAttribute("findFreeBoard", findFreeBoard);
+		model.addAttribute("findFreeBoard", findFreeBoard);
+		//조회수
 		freeBoardService.increaceCnt(findFreeBoard);
 		
 		
 		//댓글
 		List<FreeComment> freeCommentList = freeBoardService.FreeCommentList();
-		session.setAttribute("freeCommentList", freeCommentList);
+		model.addAttribute("freeCommentList", freeCommentList);
 		
 		
 		return "board/free/getFreeBoard";
@@ -180,7 +181,7 @@ public class FreeBoardController {
 		System.out.println("컨트롤라에서 딜리트가 되는"+frboCoSeq);
 		freeBoardService.deleteFreeComment(frboCoSeq);
 	
-		return new ResponseDTO<>(HttpStatus.OK.value(), "삭제가 완료되었습니다."); 
+		return new ResponseDTO<>(HttpStatus.OK.value(), "댓글이 삭제되었습니다."); 
 	}
 	
 	

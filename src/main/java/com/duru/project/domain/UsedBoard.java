@@ -2,9 +2,13 @@ package com.duru.project.domain;
 
 import java.sql.Date;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
@@ -25,6 +29,7 @@ public class UsedBoard {
 
 	
 	    @Id
+	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    @Column(name = "usboSeq", nullable = false)
 	    private int usboSeq;
 
@@ -42,6 +47,7 @@ public class UsedBoard {
 	    @Column(name = "usboContent", columnDefinition = "LONGTEXT")
 	    private String usboContent;
 
+	    @CreationTimestamp
 	    @Column(name = "usboDate")
 	    private Date usboDate;
 
@@ -50,10 +56,10 @@ public class UsedBoard {
 	    
 	    
 	    @Column
-	    private String UsedFilename;
+	    private String usedFilename;
 	    
 	    @Column
-	    private String UsedFilepath;
+	    private String usedFilepath;
 	    
 	    
 	    

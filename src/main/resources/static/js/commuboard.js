@@ -164,8 +164,6 @@ let freeBoardObject =  {
 	
 	
 	deleteComment: function(co_seq) {
-		alert("댓글 삭제가 요청되었습니다." )
-		
 		
 		$.ajax({
 		type: "DELETE",

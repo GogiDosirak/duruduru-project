@@ -62,6 +62,7 @@ public class FreeBoardService {
 	}
 	
 	
+	//조회수
 	@Transactional
 	public void increaceCnt(FreeBoard freeBoard) {
 		freeBoard.setFrboCnt(freeBoard.getFrboCnt() + 1);

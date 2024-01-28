@@ -41,7 +41,7 @@
 </div>
 <br>
       
-        <input type="hidden" id="searchKeyword" value="${searchKeyword }">     
+            
       
   <table class="table">
     <thead>
@@ -70,12 +70,13 @@
 </div>
 <div class="container mt-3 text-center">
     <ul class="pagination">
-<li class="page-item <c:if test="${getFreeSearchList.first }">disabled</c:if>"><a class="page-link" href="?page=${getFreeSearchList.number-1 }">Previous</a></li>
+    <input type="hidden" id="searchKeyword" value="${searchKeyword }"> 
+<li class="page-item <c:if test="${getFreeSearchList.first }">disabled</c:if>"><a class="page-link" href="?searchKeyword=${searchKeyword }&page=${getFreeSearchList.number-1 }">Previous</a></li>
 
 <c:forEach var="page" begin="1" end="${getFreeSearchList.totalPages }">
 <li class="page-item"><a class="page-link" href="?searchKeyword=${searchKeyword }&page=${page -1}">${page }</a></li>
 </c:forEach>
-<li class="page-item <c:if test="${getFreeSearchList.last }">disabled</c:if>"><a class="page-link" href="?page=${getFreeSearchList.number+1 }">Next</a></li>
+<li class="page-item <c:if test="${getFreeSearchList.last }">disabled</c:if>"><a class="page-link" href="??searchKeyword=${searchKeyword }&page=${getFreeSearchList.number+1 }">Next</a></li>
 </ul>
 </div>
 

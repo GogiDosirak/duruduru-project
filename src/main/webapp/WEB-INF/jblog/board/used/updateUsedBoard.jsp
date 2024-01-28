@@ -54,19 +54,19 @@ hr {
 			<h2>중고물품거래 등록</h2>
 			<br>
 			<center>
-				<form action="/insertUsedBoard" method="post"
+				<form action="/updateUsedBoard?usboSeq=${findUsedBoard.usboSeq }" method="post"
 					enctype="multipart/form-data">
 					<div class="col-md-8">
 						<div class="mb-3 mt-3">
 							<label for="usboTitle"></label> <input type="text"
-								class="form-control" id="usboTitle" placeholder="제목을 입력하세요 "
+								class="form-control" id="usboTitle" value="${findUsedBoard.usboTitle }"
 								name="usboTitle">
 						</div>
 						
 					</div>
 					<div class="col-md-8">
     <div class="mb-3">
-        <textarea id="usboContent" name="usboContent"></textarea>
+        <textarea id="usboContent" name="usboContent">${findUsedBoard.usboContent}</textarea>
         <script>
             // 파일명을 표시하는 함수
             function displayFileName(input) {
@@ -126,7 +126,7 @@ hr {
 	<br>
 	</center>
 	<center>
-		<button type="submit" class="btn btn-warning">글등록</button>
+		<button type="submit" class="btn btn-warning">글수정</button>
 
 	</center>
 	</form>
