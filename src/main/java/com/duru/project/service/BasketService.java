@@ -34,11 +34,16 @@ public class BasketService {
 	}
 	
 	@Transactional 
-	public void updatebasket(int productSeq, int basketProductAmount) {
+	public void updateBasket(int productSeq, int basketProductAmount) {
 		Basket basket = basketRepository.findByProduct_ProductSeq(productSeq);
 		basket.setBasketProductAmount(basketProductAmount);
 		basket.setBasketProductPrice(basketProductAmount * basket.getProduct().getProductPrice());
 		basketRepository.save(basket);
+	}
+	
+	@Transactional
+	public void deleteBasket(int basketSeq) {
+		basketRepository.deleteById(basketSeq);
 	}
 
 }

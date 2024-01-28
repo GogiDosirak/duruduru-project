@@ -8,12 +8,9 @@ let ProductObject = {
 			$("#btn-deleteProduct").on("click", () => {
 				_this.deleteProduct();
 
-			}),
-
-			$("#btn-insertBasket").on("click", () => {
-				_this.insertBasket();
-
 			});
+
+
 
 
 	},
@@ -70,31 +67,6 @@ let ProductObject = {
 
 	},
 
-	insertBasket: function() {
-		alert("장바구니 추가 완료");
-
-
-		let insertBasketData = {
-			productAmount: $("#productAmount").val(),
-			productSeq: $("#productSeq").val(),
-			userSeq: $("#userSeq").val()
-		}
-		// 객체를 폼 데이터 형태로 직렬화
-		let formData = $.param(insertBasketData);
-
-		$.ajax({
-			type: "POST",
-			url: "/insertBasket",
-			data: formData, // 직렬화한 데이터를 전송
-			contentType: "application/x-www-form-urlencoded; charset=UTF-8" // 폼 데이터 전송을 위한 contentType
-		}).done(function(response) {
-			alert("완료");
-			location = "/basket";	
-		}).fail(function() {
-			alert("에러 발생");
-			location = "/basket";
-		});
-	},
 
 }
 ProductObject.init();

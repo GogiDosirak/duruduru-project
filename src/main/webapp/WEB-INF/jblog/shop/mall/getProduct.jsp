@@ -115,6 +115,7 @@ img {
 					class="btn btn-warning">장바구니 추가</button>
 				<button type="button" id="btn-buyProduct" class="btn btn-danger">구매하기</button>
 				<script src="/js/shop.js"></script>
+				<script src="/js/basket.js"></script>
 			</c:if>
 					<div>
 					<br>

@@ -9,9 +9,46 @@ let BasketObject = {
         $(document).on("click", ".btn-updateBasket", function() {
             let basketSeq = $(this).closest("tr").find(".basketSeq").val();
             _this.updateBasket(basketSeq);
-        });
+        }),
+        			$("#btn-insertBasket").on("click", () => {
+				_this.insertBasket();
+
+			}),
+			
+			$(document).on("click",".btn-deleteBasket", function() {
+				let basketSeq = $(this).closest("tr").find(".basketSeq").val();
+				_this.deleteBasket(basketSeq);
+				
+			});
+			
 
     },
+    
+    	insertBasket: function() {
+		alert("장바구니 추가 완료");
+
+
+		let insertBasketData = {
+			productAmount: $("#productAmount").val(),
+			productSeq: $("#productSeq").val(),
+			userSeq: $("#userSeq").val()
+		}
+		// 객체를 폼 데이터 형태로 직렬화
+		let formData = $.param(insertBasketData);
+
+		$.ajax({
+			type: "POST",
+			url: "/insertBasket",
+			data: formData, // 직렬화한 데이터를 전송
+			contentType: "application/x-www-form-urlencoded; charset=UTF-8" // 폼 데이터 전송을 위한 contentType
+		}).done(function(response) {
+			alert("완료");
+			location = "/basket";	
+		}).fail(function() {
+			alert("에러 발생");
+			location = "/basket";
+		});
+	},
 
     updateBasket: function(basketSeq) {
         alert("상품 개수 수정");
@@ -40,6 +77,32 @@ let BasketObject = {
             location = "/basket";
         });
     },
+    
+    	deleteBasket: function(basketSeq) {
+		alert("장바구니 삭제 요청됨");
+		let deleteBasketData = {
+			basketSeq: basketSeq
+		};
+		$.ajax({
+			type: "DELETE",
+			url: "/deleteBasket/" + deleteBasketData.basketSeq,
+			data: JSON.stringify(deleteBasketData),
+			contentType: "application/json; charset=utf-8"
+
+		}).done(function(response) {
+			let message = response["data"];
+			alert(message);
+			location = "/basket"
+		}).fail(function(error) {
+			let message = error["data"];
+			alert("에러 발생 : " + message);
+
+		});
+
+
+	},
+    
+    
 }
 
 BasketObject.init();

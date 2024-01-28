@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.duru.project.domain.Product;
+import com.duru.project.persistence.BasketRepository;
 import com.duru.project.persistence.ProductRepository;
 
 @Service
@@ -22,6 +23,8 @@ public class ProductService {
 
 	@Autowired
 	private ProductRepository productRepository;
+	@Autowired
+	private BasketRepository basketRepository;
 
 	@Transactional
 	public void insertProduct(Product product, MultipartFile file) throws Exception { // 파일을 매개변수로 받기
@@ -51,7 +54,10 @@ public class ProductService {
 	
 	@Transactional
 	public void deleteProduct(int productSeq) {
+		basketRepository.deleteByProduct_ProductSeq(productSeq);
 		productRepository.deleteById(productSeq);
+		
+		
 	}
 	
 	@Transactional
