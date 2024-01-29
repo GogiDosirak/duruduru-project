@@ -18,7 +18,7 @@ import jakarta.servlet.http.HttpSession;
 public class BasketService {
 	@Autowired
 	private BasketRepository basketRepository;
-	
+
 	
 	@Transactional
 	public void insertBasket(Basket basket) { 
@@ -39,7 +39,8 @@ public class BasketService {
 		basket.setBasketProductAmount(basketProductAmount);
 		basket.setBasketProductPrice(basketProductAmount * basket.getProduct().getProductPrice());
 		basketRepository.save(basket);
-	}
+		}
+	
 	
 	@Transactional
 	public void deleteBasket(int basketSeq) {

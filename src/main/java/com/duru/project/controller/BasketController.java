@@ -48,10 +48,11 @@ public class BasketController {
 	}
 	
 	@PostMapping("/insertBasket")
-	public String insertBasket(int userSeq,int productSeq, int productAmount, HttpSession session) {
+	public @ResponseBody ResponseDTO<?> insertBasket(int userSeq,int productSeq, int productAmount, HttpSession session) {
 		List<Basket> basketList = basketService.getBasketList(userSeq);
 		boolean presentProduct = false; 
 		Basket presentBasket =  null;
+		Product product = productService.getProduct(productSeq); //jsp와 js를 통해 받은 productSeq로 상품 찾아서 세팅해주기
 		for (Basket basket : basketList) {
 			if(basket.getProduct().getProductSeq() == productSeq) {
 				presentProduct = true;
@@ -63,29 +64,44 @@ public class BasketController {
 		if(presentProduct == true) { //그 후 수정된 값만 더해서 저장해주면, 이미 있는 상품이라면 수량과 총액만 바뀜
 			presentBasket.setBasketProductAmount(presentBasket.getBasketProductAmount() + productAmount);
 			presentBasket.setBasketProductPrice(presentBasket.getBasketProductAmount() * presentBasket.getProduct().getProductPrice());
+			if(presentBasket.getBasketProductAmount() > product.getProductStock()) { //재고보다 수량이 많다면
+				//저장 안하고
+				return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(),"재고가 부족합니다.");
+			} else {
+			// 재고보다 수량이 적거나 같으면 저장
 			basketService.insertBasket(presentBasket);
-			return "redirect:/basket"; 
+			return new ResponseDTO<>(HttpStatus.OK.value(),"장바구니 추가 완료");
+			}
 			//장바구니에 해당 품목이 없는 경우
 		} else { // 없는 경우엔 새로운 basket 항목을 만들어서 저장해주고 insert
 		
 		Basket basket = new Basket();
 		User user = (User)session.getAttribute("principal"); 
-		Product product = productService.getProduct(productSeq); //jsp와 js를 통해 받은 productSeq로 상품 찾아서 세팅해주기
 		basket.setUser(user);
 		basket.setProduct(product);
 		basket.setBasketProductPrice(productAmount * basket.getProduct().getProductPrice());
 		basket.setBasketProductAmount(productAmount);
+		if(basket.getBasketProductAmount() > product.getProductStock()) {
+			//재고보다 수량이 많다면 저장안하고
+			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(),"재고가 부족합니다.");
+		} else {
 	
 		basketService.insertBasket(basket);
-		return "redirect:/basket"; // redirect로 basket으로 보내줘야 session에 들어가서 현재값이 적용됨
+		return new ResponseDTO<>(HttpStatus.OK.value(),"장바구니 추가 완료");
+		}
 		}
 	}
 	
 	@PutMapping("/updateBasket") 
 	public @ResponseBody ResponseDTO<?> updateBasket(int productSeq, int basketProductAmount) {
+		Product product = productService.getProduct(productSeq);
+		if(basketProductAmount > product.getProductStock() ) {
+			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "재고가 부족합니다.");
+		} 
+		else {
 		basketService.updateBasket(productSeq, basketProductAmount);
 		return new ResponseDTO<>(HttpStatus.OK.value(),"수정 완료");
-		
+		}
 	}
 	
 	@DeleteMapping("/deleteBasket/{basketSeq}")

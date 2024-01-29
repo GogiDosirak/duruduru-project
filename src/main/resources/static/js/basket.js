@@ -25,7 +25,6 @@ let BasketObject = {
     },
     
     	insertBasket: function() {
-		alert("장바구니 추가 완료");
 
 
 		let insertBasketData = {
@@ -42,8 +41,13 @@ let BasketObject = {
 			data: formData, // 직렬화한 데이터를 전송
 			contentType: "application/x-www-form-urlencoded; charset=UTF-8" // 폼 데이터 전송을 위한 contentType
 		}).done(function(response) {
-			alert("완료");
-			location = "/basket";	
+			let message = response["data"];
+			alert(message);
+			if (response.status === 200){
+			location = "/basket";	}
+			else {
+				location = "/mall";
+			}
 		}).fail(function() {
 			alert("에러 발생");
 			location = "/basket";
@@ -70,7 +74,8 @@ let BasketObject = {
             data: formData,
             contentType: "application/x-www-form-urlencoded; charset=UTF-8"
         }).done(function(response) {
-            alert("수정 완료");
+			let message = response["data"];
+            alert(message);
             location = "/basket";
         }).fail(function(error) {
             alert("에러 발생");
