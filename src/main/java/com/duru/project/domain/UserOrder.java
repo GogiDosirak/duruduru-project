@@ -57,7 +57,7 @@ public class UserOrder {
 	    private String orderRequest;
 
 	    @CreationTimestamp
-	    private Timestamp orderDate;
+	    private Date orderDate;
 	    
 	    @ManyToOne(fetch = FetchType.EAGER)
 	    @JoinColumn(name = "userSeq")

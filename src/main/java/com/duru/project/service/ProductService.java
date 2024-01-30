@@ -84,6 +84,12 @@ public class ProductService {
 	}
 	
 	@Transactional
+	public void updateProductStock(Product product, int basketProductAmount) {
+		product.setProductStock(product.getProductStock()-basketProductAmount);
+		productRepository.save(product);
+	}
+	
+	@Transactional
 	public Page<Product> search(String keyword, Pageable pageable) {
 		Page<Product> productSearchList = productRepository.findByProductNameContaining(keyword, pageable);
 		return productSearchList;

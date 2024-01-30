@@ -102,10 +102,10 @@
     <br>
     <div class="container col-md-8 col-sm-8 col-xs-8">
         <div class="sidebar">
-            <a href="#" onclick="loadPage('profile')">내 정보</a>
+            <a href="/mypage" onclick="loadPage('profile')">내 정보</a>
             <a href="#" onclick="loadPage('petInfo')">반려동물 정보</a>
             <a href="#" onclick="loadPage('myPosts')">내가 쓴 글</a>
-            <a href="#" onclick="loadPage('myPosts')">주문내역</a>
+            <a href="/orderHistory" onclick="loadPage('myPosts')">주문내역</a>
             <a href="#" onclick="loadPage('exchangeRefund')">교환 및 환불</a>
         </div>
         <div class="login-container ">

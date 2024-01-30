@@ -96,7 +96,7 @@ public class BasketController {
 	public @ResponseBody ResponseDTO<?> updateBasket(int productSeq, int basketProductAmount) {
 		Product product = productService.getProduct(productSeq);
 		if(basketProductAmount > product.getProductStock() ) {
-			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "재고가 부족합니다.");
+			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "재고가 부족합니다."); 
 		} 
 		else {
 		basketService.updateBasket(productSeq, basketProductAmount);

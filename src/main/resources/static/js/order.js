@@ -4,6 +4,10 @@ let OrderObject = {
 		$("#btn-insertOrder").on("click", () => {
 			_this.insertOrder();
 
+		}),
+				$("#btn-deleteOrder").on("click", () => {
+			_this.deleteOrder();
+
 		});
 			
 
@@ -33,7 +37,31 @@ let OrderObject = {
 		}).done(function(response) {
 			let message = response["data"];
 			alert(message);
-			location = "/pay/" + insertOrderData.orderSeq    // /auth/getBoardList
+			location = "/goPay";  
+		}).fail(function(error) {
+			let message = error["data"];
+			alert("에러 발생 : " + message);
+
+		});
+
+
+	},
+	deleteOrder: function() {
+		let deleteOrderData = {
+			orderSeq: $("#orderSeq").val()
+
+		}
+
+		$.ajax({
+			type: "DELETE",
+			url: "/deleteOrder/" + deleteOrderData.orderSeq ,
+			data: JSON.stringify(deleteOrderData),
+			contentType: "application/json; charset=utf-8"
+
+		}).done(function(response) {
+			let message = response["data"];
+			alert(message);
+			location = "/basket"  
 		}).fail(function(error) {
 			let message = error["data"];
 			alert("에러 발생 : " + message);

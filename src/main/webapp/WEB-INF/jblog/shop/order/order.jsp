@@ -73,7 +73,7 @@
 </style>
 </head>
 <body>
-
+<input type="hidden" name="orderSeq" id="orderSeq" value=${userOrder.orderSeq }>
 	<div class="container">
 	
 		<div class="login-container">
@@ -97,7 +97,7 @@
             <tr>	
                 <td style="vertical-align: middle; text-align: center;"><img src="${basket.product.productFilepath}" style="width: 100px; "></td>
                 <td style="vertical-align: middle; text-align: center;">${basket.product.productName}</td>
-                <td style="vertical-align: middle; text-align: center;">${basket.basket}</td>
+                <td style="vertical-align: middle; text-align: center;">${basket.basketProductAmount}</td>
                 <td style="vertical-align: middle; text-align: center;">${basket.product.productPrice}</td>	
                 <td style="vertical-align: middle; text-align: center;">${basket.basketProductPrice}</td>
                 <input type="hidden" id="productSeq_${basket.basketSeq}" name="productSeq" value="${basket.product.productSeq}"> 
@@ -147,7 +147,7 @@
 			</div>
 
 			<div class="form-group">
-				<label for="nickname">주문 요청사항</label> <textarea id="orderRequest" name="orderRequest" style="width: 650px; height: 150px;"></textarea>
+				<label for="orderRequest">주문 요청사항</label> <textarea id="orderRequest" name="orderRequest" style="width: 650px; height: 150px;"></textarea>
 			</div>
 
 			
@@ -168,9 +168,10 @@
 
 			<br>
 			<div class="form-group">
-			<input type="hidden" name="orderSeq" id="orderSeq" value=${userOrder.orderSeq }>
-				<button id="btn-insertOrder" onclick="location.href='/pay/${userOrder.orderSeq}'">결제하기</button>
-			</div>
+			
+	
+				<button id="btn-insertOrder" onclick="location.href='/goPay'">주문 제출</button>
+			</div> 
 
 		</div>
 	</div>

@@ -14,5 +14,6 @@ public interface BasketRepository extends JpaRepository<Basket, Integer> {
 	List<Basket> findByUser_UserSeq(int userSeq); // 연결된 User테이블의 UserSeq로 검색
 	Basket findByProduct_ProductSeq(int productSeq);
 	void deleteByProduct_ProductSeq(int productSeq);
+	void deleteByUser_UserSeq(int userSeq);
 
 }

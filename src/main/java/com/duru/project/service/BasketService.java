@@ -46,5 +46,10 @@ public class BasketService {
 	public void deleteBasket(int basketSeq) {
 		basketRepository.deleteById(basketSeq);
 	}
+	
+	@Transactional
+	public void deleteUserBasket(int userSeq) {
+		basketRepository.deleteByUser_UserSeq(userSeq);
+	}
 
 }
