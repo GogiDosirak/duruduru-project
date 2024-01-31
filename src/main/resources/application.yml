@@ -1,11 +1,13 @@
 #서버설정
 server:
-  port: 8089
+  port: 8087
   servlet:
     context-path: /
     encoding:
       charset: UTF-8
       
+
+
 #뷰리졸버
 spring:
   mvc:

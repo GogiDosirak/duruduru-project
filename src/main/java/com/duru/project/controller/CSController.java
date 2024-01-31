@@ -7,10 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class CSController {
 	
 	
-	@GetMapping("/notice")
-	public String notice() {
-		return "cs/notice/notice";
-	}
+
 	
 	@GetMapping("/onetoone")
 	public String onetoone() {

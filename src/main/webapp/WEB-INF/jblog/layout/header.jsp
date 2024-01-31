@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<script src="/webjars/jquery/3.6.0/dist/jquery.min.js"></script>
 
 <!DOCTYPE html>
 <html>
@@ -15,7 +16,7 @@
 <meta name="keywords" content="">
 <meta name="description" content="">
 
-      <script src="/webjars/jquery/3.6.0/dist/jquery.min.js"></script>
+      
 
 
  <!-- summernote 시작 -->

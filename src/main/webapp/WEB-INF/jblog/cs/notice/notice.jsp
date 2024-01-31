@@ -13,15 +13,24 @@
         <th>조회수</th>
       </tr>
     </thead>
+    <c:forEach var="notice" items="${noticeList }">
     <tr>
-    <td>필독 바랍니다</td>
+    <td>${notice.noticeTitle }</td>
     <td>운영자</td>
-    <td>2023/05/12</td>
-    <td>1</td>
+    <td>${notice.noticeDate }</td>
+    <td>${notice.noticeCnt }</td>
     </tr>	
+    </c:forEach>
     
 
   </table>
 </div>
+<br>
+<br>
+<c:if test="${principal.role eq 'ADMIN'}">
+      <center>
+         <button onclick="location.href='/insertNotice'" class="btn btn-warning">글등록</button>
+      </center>
+      </c:if>
 
 <%@include file = "/WEB-INF/jblog/layout/footer.jsp"%>
