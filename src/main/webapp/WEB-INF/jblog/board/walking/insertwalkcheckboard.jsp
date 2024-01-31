@@ -1,110 +1,98 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@include file="/WEB-INF/jblog/layout/header.jsp" %>
+
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <style>
-        .container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
- 
-        .login-container {
-            background-color: #FFFAF0;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            width: 700px;
-        }
-
-        .login-container h2 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 8px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        .form-group button {
-            width: 100%; /* 버튼의 넓이를 100%로 설정 */
-            padding: 10px;
-            box-sizing: border-box;
-            background-color: #F5DEB3;
-            color: #000000;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 14px;
-        }
-
-        .form-group button:hover {
-            background-color: #F5DEB3;
-        }
-
-        #duruduru-image {
-            width: 270px; /* 원하는 크기로 조절하세요 */
-            height: auto;
-        }
-
-    </style>
+<meta charset="UTF-8">
+<title>duruduru</title>
 </head>
 <body>
-<br>
-<br>
-<div class="container">
-    <div class="login-container">
-            <div class="form-group">
-                <label for="wachbo_title">제목</label>
-                <input type="text" id="wachbo_title" name="wachbo_title" required>
-            </div>
+	<%@ include file="/WEB-INF/jblog/layout/header.jsp"%>
+	<div class="container mt-3">
 
-            <div class="form-group">
-           <label for="wachbo_content">내용</label>
-                    <div class="mb-3">
-    <textarea class="form-control" id="wachbo_content" rows="5"></textarea>
-    </div>
-    
-     <script>
-	$(document).ready(function () {
-  	 $("#wachbo_content").summernote({
-      height:300
-   });
-	});
-	</script>
-            </div>
+		<h2>산책 인증</h2>
+		<br>
+		<center>
+			<form action="/insertwachbo" method="post"
+				enctype="multipart/form-data">
+				<div class="col-md-8">
+					<div class="mb-3 mt-3">
+						<label for="wachboTitle"></label> <input type="text"
+							class="form-control" id="wachboTitle" placeholder="제목"
+							name="wachboTitle">
+					</div>
+				</div>
+				<div class="col-md-8">
+					<div class="mb-3">
+						<textarea id="wachboContent" name="wachboContent"></textarea>
+						<script>
+							// 파일명을 표시하는 함수
+							function displayFileName(input) {
+								// 선택된 파일이 있는지 확인
+								if (input.files.length > 0) {
+									// 파일명을 가져와서 표시
+									var fileName = input.files[0].name;
+									document
+											.getElementById('file-name-display').innerText = '선택된 파일: '
+											+ fileName;
+								} else {
+									// 파일이 선택되지 않았을 경우 메시지 지우기
+									document
+											.getElementById('file-name-display').innerText = '';
+								}
+							}
+							$(document).ready(function() {
+								$("#wachboContent").summernote({
+									height : 500
+								});
+							});
+						</script>
 
-            <div class="form-group">
-               <button id="btn-insertwach" type="submit" class="btn btn-primary">등록하기</button>
-            </div>
-        
-    </div>
-</div>
-<br>
-<center>
-    <button type="button" class="btn btn-warning" onclick="location.href='/walkcheckboard'">뒤로가기</button>
-    </center>
-</div>
+					</div>
+					<style>
+#product_content+.note-editor .note-editable {
+	text-align: left;
+}
+
+.btn-upload {
+	width: 150px;
+	height: 30px;
+	background: #fff;
+	border: 1px solid rgb(77, 77, 77);
+	border-radius: 10px;
+	font-weight: 500;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center; &: hover { background : rgb( 77, 77, 77);
+	color: #fff;
+}
+
+}
+#file {
+	display: none;
+}
+</style>
+					<label for="file">
+						<div class="btn-upload">썸네일 업로드하기</div>
+						<br>
+						<div id="file-name-display"></div>
+					</label> <input type="file" name="file" id="file"
+						onchange="displayFileName(this)">
+					<!-- 여기서의 name과 매개변수의 MultipartFile 이름은 일치시켜줘야함  -->
+				</div>
+	</div>
+	<br>
+	</center>
+	<center>
+		<button type="submit" class="btn btn-warning" id=btn-insertwach">글 등록</button>
+		 <button type="button" class="btn btn-warning" onclick="location.href='/walkcheckboard'">뒤로가기</button>
+	</center>
+	</form>
+	<%@ include file="/WEB-INF/jblog/layout/footer.jsp"%>
+	<script src="/js/walkcheckboard.js"></script>
 
 </body>
-<script src="/js/walkcheckboard.js"></script>
-<%@include file="/WEB-INF/jblog/layout/footer.jsp" %>
 </html>

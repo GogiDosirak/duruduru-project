@@ -86,7 +86,7 @@ public class UserController {
 	public @ResponseBody ResponseDTO<?> insertUser(@RequestBody User user) {
 		User findUser = userService.getUser(user.getUserid());
 		if (findUser.getUserid() == null) {
-			if(user.getAddress() == null || user.getAddress().equals("") || user.getAddress_detail() == null || user.getAddress_detail().equals("")) {
+			if(user.getAddress() == null || user.getAddress().equals("") || user.getAddressDetail() == null || user.getAddressDetail().equals("")) {
 				return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "주소를 기입해주세요");
 			} 
 			
@@ -164,6 +164,17 @@ public class UserController {
 			myUser.setNickname(user.getNickname());
 			userService.updateUser(myUser, session);
 			return new ResponseDTO<>(HttpStatus.OK.value(),"회원 수정이 성공했습니다.");
+			
+		}
+		
+		@PutMapping("/pluspoint/{userSeq}")
+		public @ResponseBody ResponseDTO<?> pluspoint(@PathVariable int userSeq) {
+			User myUser = userService.getCheckUser(userSeq);
+			// 포인트 증가 로직 추가
+			int pointToAdd = 30; // 포인트를 증가시킬 값
+			myUser.setPoint(myUser.getPoint() + pointToAdd);
+			userService.updateCheckUser(myUser);
+			return new ResponseDTO<>(HttpStatus.OK.value(), 1);
 			
 		}
 }

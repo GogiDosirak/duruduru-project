@@ -27,20 +27,20 @@ import lombok.NoArgsConstructor;
 public class Product {
 	    @Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	    private int product_seq;
+	    private int productSeq;
 
-	    @Column(name = "product_name", length = 40)
-	    private String product_name;
+	    @Column(name = "productName", length = 40)
+	    private String productName;
 
 	    @Lob
 	    @Column(columnDefinition = "LONGTEXT")
-	    private String product_content;
+	    private String productContent;
 
-	    @Column(name = "product_price")
-	    private int product_price;
+	    @Column(name = "productPrice")
+	    private int productPrice;
 
-	    @Column(name = "product_stock")
-	    private int product_stock;
+	    @Column(name = "productStock")
+	    private int productStock;
 	    
 	    @Column
 	    private String filename;
@@ -49,6 +49,6 @@ public class Product {
 	    private String filepath;
 
 	    @CreationTimestamp
-	    private Timestamp product_createdate;
+	    private Timestamp productCreatedate;
 
 }

@@ -1,6 +1,7 @@
 package com.duru.project.domain;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -13,6 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,25 +31,44 @@ public class WalkCheckBoard {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "wachbo_seq")
+    @Column(name = "wachboSeq")
     private int wachboSeq;
 
     @ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "user_seq")
+	@JoinColumn(name = "userSeq")
 	private User user;
 
-    @Column(name = "wachbo_title", length = 100)
-    private String wachbo_title;
+    @Column(name = "wachboTitle", length = 100)
+    private String wachboTitle;
 
     @Lob
-    @Column(name = "wachbo_content", columnDefinition = "LONGTEXT")
-    private String wachbo_content;
+    @Column(name = "wachboContent", columnDefinition = "LONGTEXT")
+    private String wachboContent;
     
     @CreationTimestamp
-    @Column(name = "wachbo_date")
-    private Timestamp wachbo_date;
+    @Column(name = "wachboDate")
+    private Timestamp wachboDate;
+    
+    @Column(name = "wachboCheck")
+    private int wachboCheck;
+    
+    @PrePersist
+    public void prePersist() {
+        if (this.wachboCheck == 0) {
+            this.wachboCheck = 1;
+        }
+    }
+    
+    @Column
+    private String wachFilename;
+    
+    @Column
+    private String wachFilepath;
 
-    @Column(name = "wachbo_cnt")
-    private int wachbo_cnt;
+    @Column(name = "wachboCnt")
+    private int wachboCnt;
+    
+    @Column(name = "lastPointDate")
+    private LocalDate lastPointDate;
     
 }

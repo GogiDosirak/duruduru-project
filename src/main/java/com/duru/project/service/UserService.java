@@ -68,5 +68,20 @@ public class UserService {
 		
 		
 	}
+	
+	@Transactional(readOnly = true)
+	public User getCheckUser (int userSeq) {
+		User findUser = userRepository.findById(userSeq).get();
+		return findUser;
+		
+	}
+	
+	@Transactional
+	public void updateCheckUser(User user) {
+		userRepository.save(user);
+		
+		
+	}
+	
 
 }

@@ -18,11 +18,11 @@
                 <div class="col-md-3 mb-4">
                     <div class="product-card image-zoom-effect link-effect d-flex flex-wrap">
                         <div class="image-holder">
-                            <img src="${productItem.filepath}" alt="product-item" class="product-image img-fluid">
+      <img src="${productItem.filepath}" alt="product-item" class="product-image img-fluid" onclick="location.href='/getProduct/1'"></a>
                         </div>
                         <div class="cart-concern">
                             <h3 class="card-title text-uppercase pt-3 text-primary">
-                                <a href="single-product.html" class="text-primary">${productItem.product_name}</a>
+                                <a href="/getProduct/${productItem.product_seq}" class="text-primary">${productItem.product_name}</a>
                             </h3>
                             <div class="cart-info">
                                 <a class="pseudo-text-effect" href="#" data-after="ADD TO CART">
@@ -33,10 +33,11 @@
                     </div>
                 </div>
             </c:forEach>
+            
         </div>
     </div>
 
-    <c:if test="${not empty principal and principal.role eq 'ADMIN'}">
+   
         <div class="container mt-3">
             <div class="row justify-content-end">
                 <div class="col-auto">
@@ -45,7 +46,7 @@
                 </div>
             </div>
         </div>
-    </c:if>
+    
 </div>
 
 <%@include file="/WEB-INF/jblog/layout/footer.jsp"%>

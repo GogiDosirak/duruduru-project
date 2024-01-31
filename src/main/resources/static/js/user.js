@@ -23,6 +23,10 @@ let userObject = {
 			$("#btn-updateUser").on("click", () => {
 				_this.updateUser();
 
+			}),
+			$("#btn-pluspoint").on("click", () => {
+				_this.pluspoint();
+
 			});
 	},
 
@@ -62,7 +66,7 @@ let userObject = {
 			email: $("#email").val(),
 			phonenumber: $("#phonenumber").val(),
 			address: $("#address").val(),
-			address_detail: $("#address_detail").val(),
+			addressDetail: $("#addressDetail").val(),
 			zipcode: $("#zipcode").val()
 		}
 		
@@ -245,6 +249,41 @@ let userObject = {
    
    isPasswordMatch: function(password, passwordConfirm) {
 		return password === passwordConfirm;
+	},
+	
+	pluspoint: async function() {
+    try {
+        alert("산책 인증 완료");
+        let pluspoint = {
+            userSeq: $("#userSeq").val(),
+            wachboSeq: $("#wachboSeq").val()
+        }
+
+        // 첫 번째 요청
+        await $.ajax({
+            type: "PUT",
+            url: "/pluspoint/" + pluspoint.userSeq,
+            data: JSON.stringify(pluspoint),
+            contentType: "application/json; charset=utf-8"
+        });
+
+        // 두 번째 요청
+        let response = await $.ajax({
+            type: "PUT",
+            url: "/consumepoint/" + pluspoint.wachboSeq,
+            data: JSON.stringify(pluspoint),
+            contentType: "application/json; charset=utf-8"
+        });
+
+        let message = response["data"];
+        alert(message);
+        location = "/walkcheckboard";
+    } catch (error) {
+        let message = error["data"];
+        alert("에러 발생: " + message);
+    }
+
+
 	},
   
   

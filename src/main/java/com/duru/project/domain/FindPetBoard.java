@@ -1,11 +1,8 @@
 package com.duru.project.domain;
 
 import java.sql.Date;
-import java.sql.Timestamp;
 
 import org.hibernate.annotations.CreationTimestamp;
-
-
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -18,41 +15,46 @@ import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
-@Table(name = "FreeBoard")
-public class FreeBoard {
-	
-	
-	
-	@Id
+@Table(name = "FindPetBoard")
+public class FindPetBoard {
+
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "frboSeq")
-    private int frboSeq;
+    @Column(name = "fPetSeq")
+    private int fPetSeq;
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "userSeq")
-	private User user;
+    @ManyToOne(fetch = FetchType.EAGER)
+  	@JoinColumn(name = "userSeq")
+  	private User user;
 
-	
-    @Column(name = "frboTitle", length = 200)
-    private String frboTitle;
+    @Column(name = "fPetTitle", length = 50)
+    private String fPetTitle;
 
     @Lob
-    @Column(name = "frboContent", columnDefinition = "LONGTEXT")
-    private String frboContent;
+    @Column(name = "fPetContent")
+    private String fPetContent;
 
-    @Column(name = "frboDate")
+    @Column(name = "fPetDate")
     @CreationTimestamp
-    private Timestamp frboDate;
+    private Date fPetDate;
+    
+    @Column
+    private String fPetFilename;
+    
+    @Column
+    private String fPetFilepath;
 
-    @Column(name = "frboCnt")
-    private int frboCnt;
-	
+    @Column(name = "fPetCnt")
+    private Integer fPetCnt;
 
+  
 }

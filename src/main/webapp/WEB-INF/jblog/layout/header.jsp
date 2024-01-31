@@ -24,7 +24,7 @@
   <link href="/webjars/summernote/0.8.10/summernote-bs4.css" rel="stylesheet">
   <!-- summernate  종료 --> 
 <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="css/style.css" >
+<link rel="stylesheet" type="text/css" href="/css/style.css" >
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -46,7 +46,7 @@ body {
 
 <!-- script
     ================================================== -->
-<script src="js/modernizr.js"></script>
+<script src="/js/modernizr.js"></script>
 
 </head>
 <body class="bg-body" data-bs-spy="scroll" data-bs-target="#navbar"
@@ -146,7 +146,7 @@ body {
 		<nav id="header-nav" class="navbar navbar-expand-lg px-3 mb-3">
 			<div class="container-fluid">
 				<a class="navbar-brand" href="/"> <img
-					src="images/main-logo.png" class="logo">
+					src="/images/main-logo.png" class="logo">
 				</a>
 				<button class="navbar-toggler d-flex d-lg-none order-3 p-2"
 					type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar"
@@ -160,7 +160,7 @@ body {
 					aria-labelledby="bdNavbarOffcanvasLabel">
 					<div class="offcanvas-header px-4 pb-0">
 						<a class="navbar-brand" href="/"> <img
-							src="images/main-logo.png" class="logo">
+							src="/images/main-logo.png" class="logo">
 						</a>
 						<button type="button" class="btn-close btn-close-black"
 							data-bs-dismiss="offcanvas" aria-label="Close"
@@ -203,6 +203,8 @@ body {
 									<li><a href="/sns" class="dropdown-item item-anchor">SNS</a></li>
 									<li><a href="/walking" class="dropdown-item item-anchor">산책게시판</a></li>
 									<li><a href="/walkcheckboard" class="dropdown-item item-anchor">산책인증게시판</a></li>
+									<li><a href="/walkcheckboard" class="dropdown-item item-anchor">산책모임게시판</a></li>
+									<li><a href="/findpet" class="dropdown-item item-anchor">동물 찾기 게시판</a></li>
 								</ul></li>
 							<li class="nav-item dropdown"><a
 								class="nav-link dropdown-toggle" href="#" id="dropdownPages"
