@@ -9,6 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PetInfo</title>
 <style>
+
 .container {
 	display: flex;
 	align-items: flex-start; /* 수정: 세로 상단 정렬 */
@@ -115,6 +116,7 @@
 	flex: 1 1 auto; /* 나머지 공간을 차지하도록 설정 */
 }
 /* 수정된 스타일 끝 */
+
 </style>
 
 </head>
@@ -125,14 +127,14 @@
 	<div class="container col-md-8 col-sm-8 col-xs-8">
 		<div class="sidebar">
 			<a href="#" onclick="loadPage('profile')">내 정보</a> <a
-				href="/petInfo?userSeq=${principal.userSeq}">반려동물 정보</a> <a href="#"
+				href="/petInfo/${principal.userSeq}">반려동물 정보</a> <a href="#"
 				onclick="loadPage('myPosts')">내가 쓴 글</a> <a href="#"
 				onclick="loadPage('myPosts')">주문내역</a> <a href="#"
 				onclick="loadPage('exchangeRefund')">교환 및 환불</a>
 		</div>
 		<div class="login-container ">
 			<center>
-				<img id="duruduru-image" src="images/duruduru.png"
+				<img id="duruduru-image" src="/images/duruduru.png"
 					alt="Duruduru Logo">
 			</center>
 
@@ -141,9 +143,9 @@
 				<br> <input type="hidden" id="userSeq" name="userSeq"
 					value="${principal.userSeq }">
 				<div class="form-group">
-					<h5>${principal.nickname }님의귀여운동물친구</h5>
+					<h5>${principal.nickname }님의 귀여운 동물친구</h5>
 				</div>
-
+<br>
 				<c:forEach var="pet" items="${myPetList}">
 					<div class="content-wrapper">
 						<div class="image-holder">
@@ -158,7 +160,7 @@
 							<!-- 동물정보 수정 버튼 추가 -->
 							<br> <br>
 							<div class="form-group">
-								<button type="button" class="btn-updatePet" >동물정보 수정</button>
+								<button type="button" class="btn-updatePet" data-pet-seq="${pet.petSeq}">동물정보 수정</button>
 							</div>
 						</div>
 						<div class="form-group">
@@ -166,23 +168,22 @@
 							<br>
 
 							<div class="form-group">
-								<button type="button" class="btn-deletePet" data-petSeq="${pet.petSeq}">동물정보 삭제</button>
+								<button type="button" class="btn-deletePet" data-pet-seq="${pet.petSeq}">동물정보 삭제</button>
 							</div>
 						</div>
 					</div>
 					<br>
-					
+					<hr>
+					<br>
 				</c:forEach>
 			</form>
 			<br>
-			<div class="form-group">
-				<button type="button" id="btn-updatePet">동물정보 수정</button>
-			</div>
 			<div class="form-group">
 				<button type="button" id="btn-insertPet">동물정보 입력</button>
 			</div>
 		</div>
 	</div>
+	
 
 	<br>
 </body>

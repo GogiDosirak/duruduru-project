@@ -103,7 +103,7 @@
     <div class="container col-md-8 col-sm-8 col-xs-8">
         <div class="sidebar">
             <a href="#" onclick="loadPage('profile')">내 정보</a>
-            <a href="/petInfo?userSeq=${principal.userSeq}" >반려동물 정보</a>
+            <a href="/petInfo/${principal.userSeq}" >반려동물 정보</a>
             <a href="#" onclick="loadPage('myPosts')">내가 쓴 글</a>
             <a href="#" onclick="loadPage('myPosts')">주문내역</a>
             <a href="#" onclick="loadPage('exchangeRefund')">교환 및 환불</a>
@@ -113,7 +113,7 @@
             <img id="duruduru-image" src="images/duruduru.png" alt="Duruduru Logo"> <!-- 프로필 사진 -->
             </center>
             <form>
-        <form>
+
         <br>
         <input type="hidden" id="userSeq" name="userSeq" value="${principal.userSeq }">
             <div class="form-group">

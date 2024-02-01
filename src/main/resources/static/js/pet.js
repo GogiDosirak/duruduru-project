@@ -1,20 +1,32 @@
 
 let petObject = {
 	init: function() {
+		
 		let _this = this;
 
+		//insert
 		$("#btn-insertPet").on("click", () => {
 			location = "/insertPet";
 		});
 		
-		$(document).on("click", ".btn-deletePet",function(){
-			let petSeq = $(this).data("petSeq");
-			 console.log(petSeq); // 값을 출력해보세요
+		//update
+		$(document).on("click", ".btn-updatePet", function() {
+			let petSeq = $(this).data("pet-seq");
+			location = "/updatePet/"+petSeq;
+		})
+
+
+		//delete11
+		$(document).on("click", ".btn-deletePet", function() {
+			let petSeq = $(this).data("pet-seq");
 			_this.deletePet(petSeq);
 		})
+		
+		
 	},
 	
-		deletePet: function(petSeq) {
+
+	deletePet: function(petSeq) {
 		$.ajax({
 			type: "DELETE",
 			url: "/deletePet/" + petSeq

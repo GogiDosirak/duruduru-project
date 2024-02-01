@@ -105,7 +105,7 @@ public class WalkBoardController {
 	}
 	
 	
-	// 여기부턴~~~~! comment 전문가~~~~~~~
+	// 댓글
 	
 	
 	@PostMapping("/insertWalkBoardComment/{waboSeq}")
