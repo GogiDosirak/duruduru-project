@@ -9,10 +9,6 @@ public class CSController {
 	
 
 	
-	@GetMapping("/onetoone")
-	public String onetoone() {
-		return "cs/onetoone/onetoone";
-	}
 	
 	@GetMapping("/event")
 	public String event() {

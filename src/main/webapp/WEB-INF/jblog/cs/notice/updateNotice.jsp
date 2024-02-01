@@ -5,25 +5,24 @@
   
       <br>
       <center>
-  <h2>공지사항 등록</h2>
-         
+  <h2>공지사항 수정</h2>
+         <input type="hidden" id="noticeSeq" name="noticeSeq" value="${getNotice.noticeSeq }">
          <div class="col-md-8">
             <div class="mb-3 mt-3">
                <label for="noticeTitle"></label> <input type="text"
-                  class="form-control" id="noticeTitle" placeholder="제목을 입력하세요"
-                  name="noticeTitle">
+                  class="form-control" id="noticeTitle" 
+                  name="noticeTitle" value="${getNotice.noticeTitle }">
             </div>
          </div>
 
 <div class="col-md-8">
     <div class="mb-3">
         <label for="noticeContent"></label>
-        <textarea id="noticeContent"></textarea>
+        <textarea id="noticeContent" >${getNotice.noticeContent}</textarea>
         <script>
             $(document).ready(function() {
                 $("#noticeContent").summernote({
                     height: 500,
-                    placeholder: "내용을 입력하세요"
                 }).siblings('.note-editor').find('.note-editable').css('text-align', 'left');
             });
         </script>
@@ -33,7 +32,7 @@
 
       </center>
       <center>
-         <button id="btn-insertNotice" class="btn btn-warning">글등록</button>
+         <button id="btn-updateNotice" class="btn btn-warning">수정</button>
       </center>
 
       <script src="/js/notice.js"></script>

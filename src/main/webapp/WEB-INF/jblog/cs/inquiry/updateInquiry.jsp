@@ -5,23 +5,23 @@
   
       <br>
       <center>
-  <h2>공지사항 등록</h2>
-         
+  <h2>1:1문의 수정</h2>
+         <input type="hidden" id="inquirySeq" name="inquirySeq" value="${getInquiry.inquirySeq }">
          <div class="col-md-8">
             <div class="mb-3 mt-3">
-               <label for="noticeTitle"></label> <input type="text"
-                  class="form-control" id="noticeTitle" placeholder="제목을 입력하세요"
-                  name="noticeTitle">
+               <label for="inquiryTitle"></label> <input type="text"
+                  class="form-control" id="inquiryTitle" 
+                  name="inquiryTitle" value="${getInquiry.inquiryTitle }">
             </div>
          </div>
 
 <div class="col-md-8">
     <div class="mb-3">
-        <label for="noticeContent"></label>
-        <textarea id="noticeContent"></textarea>
+        <label for="inquiryContent"></label>
+        <textarea id="inquiryContent">${getInquiry.inquiryContent }</textarea>
         <script>
             $(document).ready(function() {
-                $("#noticeContent").summernote({
+                $("#inquiryContent").summernote({
                     height: 500,
                     placeholder: "내용을 입력하세요"
                 }).siblings('.note-editor').find('.note-editable').css('text-align', 'left');
@@ -33,8 +33,8 @@
 
       </center>
       <center>
-         <button id="btn-insertNotice" class="btn btn-warning">글등록</button>
+         <button id="btn-updateInquiry" class="btn btn-warning">수정</button>
       </center>
 
-      <script src="/js/notice.js"></script>
+      <script src="/js/inquiry.js"></script>
 <%@include file="/WEB-INF/jblog/layout/footer.jsp" %>

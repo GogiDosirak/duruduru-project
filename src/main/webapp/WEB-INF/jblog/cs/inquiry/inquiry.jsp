@@ -3,7 +3,7 @@
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file = "/WEB-INF/jblog/layout/header.jsp"%>
 	<div class="container mt-3">
-  <h2>공지사항</h2>         
+  <h2>1:1문의</h2>         
   <table class="table">
     <thead>
       <tr>
@@ -13,12 +13,12 @@
         <th>조회수</th>
       </tr>
     </thead>
-    <c:forEach var="notice" items="${noticeList }">
+    <c:forEach var="inquiry" items="${inquiryList }">
     <tr>
-    <td><a href="/getNotice/${notice.noticeSeq }">${notice.noticeTitle }</a> </td>
-    <td>운영자</td>
-    <td>${notice.noticeDate }</td>
-    <td>${notice.noticeCnt }</td>
+    <td><a href="/getInquiry/${inquiry.inquirySeq }">${inquiry.inquiryTitle }</a> </td>
+    <td>${inquiry.user.nickname }</td>
+    <td>${inquiry.inquiryDate }</td>
+    <td>${inquiry.inquiryCnt }</td>
     </tr>	
     </c:forEach>
     
@@ -27,10 +27,8 @@
 </div>
 <br>
 <br>
-<c:if test="${principal.role eq 'ADMIN'}">
       <center>
-         <button onclick="location.href='/insertNotice'" class="btn btn-warning">글등록</button>
+         <button onclick="location.href='/insertInquiry'" class="btn btn-warning">글등록</button>
       </center>
-      </c:if>
 
 <%@include file = "/WEB-INF/jblog/layout/footer.jsp"%>
