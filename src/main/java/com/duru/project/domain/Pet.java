@@ -41,9 +41,9 @@ public class Pet {
 	private Date petBirthday;
 
 	@Column
-	private String filename;
+	private String petFilename;
 
 	@Column
-	private String filepath;
+	private String petFilepath;
 
 }

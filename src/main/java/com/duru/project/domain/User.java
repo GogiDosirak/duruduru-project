@@ -57,6 +57,12 @@ public class User {
 
     @Column(name = "localcode", length = 20)
     private String localcode;
+    
+    @Column(name = "latitude")
+    private double latitude;
+
+    @Column(name = "longitude")
+    private double longitude;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "role")

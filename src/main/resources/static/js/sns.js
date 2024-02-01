@@ -29,7 +29,7 @@ let snsBoardObject = {
 			$(document).on("click", ".btn-deleteLike", function() {
 				let unlike_seq = $(this).data("unlike-seq");
 				let snsbo_seq = $(this).data("unlike-snsbo-seq");
-				_this.deleteLike(unlike_seq);
+				_this.deleteLike(unlike_seq, snsbo_seq);
 			})
 	},
 
@@ -113,7 +113,6 @@ let snsBoardObject = {
 		}).done(function() {
 			location = "/sns"
 		}).fail(function(error) {
-			alert(unlike_seq +"언라이크seq" + snsbo_seq + "sns보드seq")
 			let message = error["data"];
 			alert("에러발생 : " + message)
 			location = "/sns"

@@ -27,7 +27,6 @@ let userObject = {
 	},
 
 	login: function() {
-		alert("로그인이 요청되었습니다.");
 
 		let data = {
 			userid: $("#userid").val(),
@@ -63,7 +62,9 @@ let userObject = {
 			phonenumber: $("#phonenumber").val(),
 			address: $("#address").val(),
 			addressDetail: $("#addressDetail").val(),
-			zipcode: $("#zipcode").val()
+			zipcode: $("#zipcode").val(),
+			latitude : $("#latitude").val(),
+			longitude : $("#longitude").val()
 		}
 		
 		if (this.isEmpty(user.userid)) {

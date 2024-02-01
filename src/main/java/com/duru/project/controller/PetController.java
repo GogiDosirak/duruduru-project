@@ -56,8 +56,8 @@ public class PetController {
 
 		file.transferTo(saveFile); // Exception 해줘야 밑줄 사라짐
 		
-		pet.setFilename(fileName); //저장된 파일의 이름
-		pet.setFilepath("/files/" + fileName);  //저장된 파일의 경로와 이름 set
+		pet.setPetFilename(fileName); //저장된 파일의 이름
+		pet.setPetFilepath("/files/" + fileName);  //저장된 파일의 경로와 이름 set
 
 		User findUser = (User)session.getAttribute("principal");
 		pet.setUser(findUser);
@@ -93,8 +93,8 @@ public class PetController {
 			String fileName = uuid + "_" + file.getOriginalFilename(); 
 			File saveFile = new File(projectPath, fileName); 
 			file.transferTo(saveFile);
-			findPet.setFilename(fileName);
-			findPet.setFilepath("/files/" + fileName);
+			findPet.setPetFilename(fileName);
+			findPet.setPetFilepath("/files/" + fileName);
 		}
 		petService.insertPet(findPet, file);
 		return "redirect:/petInfo/"+findPet.getUser().getUserSeq();

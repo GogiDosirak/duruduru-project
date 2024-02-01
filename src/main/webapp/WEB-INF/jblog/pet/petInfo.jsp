@@ -149,7 +149,7 @@
 				<c:forEach var="pet" items="${myPetList}">
 					<div class="content-wrapper">
 						<div class="image-holder">
-							<img alt="pet-item" src="${pet.filepath }"
+							<img alt="pet-item" src="${pet.petFilepath }"
 								class="pet-image img-fluid">
 						</div>
 						<div class="form-group">

@@ -41,9 +41,6 @@ public class SNSBoard {
 	@CreationTimestamp
 	@Column(name = "snsboDate")
 	private Date snsboDate;
-
-	@Column(name = "snsboCnt")
-	private int snsboCnt;
 	
 	@Column(name = "likeCnt")
 	private int likeCnt;

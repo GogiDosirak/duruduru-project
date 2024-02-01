@@ -85,7 +85,7 @@ public class SNSController {
 
 	// updatePet11
 	@GetMapping("/updateSns/{snsboSeq}")
-	public String updatePet(@PathVariable int snsboSeq, Model model) {
+	public String updateSns(@PathVariable int snsboSeq, Model model) {
 
 		model.addAttribute("sns", snsBoardService.getSNSBaord(snsboSeq));
 		return "/board/sns/updateSns";
@@ -97,7 +97,7 @@ public class SNSController {
 
 	// updatePet22
 	@PostMapping("/updateSns/{snsboSeq}")
-	public String updatePet(@PathVariable int snsboSeq, SNSBoard snsBoard, MultipartFile file) throws Exception {
+	public String updateSns(@PathVariable int snsboSeq, SNSBoard snsBoard, MultipartFile file) throws Exception {
 		System.out.println(snsBoard.getSnsboContent());
 		SNSBoard findSns = snsBoardService.getSNSBaord(snsboSeq);
 		System.out.println(snsboSeq);

@@ -35,11 +35,7 @@ public class WalkBoardController {
 	@Autowired
 	private WalkBoardCommentService walkBoardCommentService;
 	
-	@GetMapping("/wichi")
-	public String getwichi() {
-		return "wichi";
-	}
-	
+
 	//boardPage
 	@GetMapping("/walk")
 	public String getWalkBoardListPage(Model model, @PageableDefault(size = 4, sort ="waboSeq" , direction = Sort.Direction.DESC) Pageable pageable,  String searchKeyword) {

@@ -70,6 +70,20 @@
 	height: auto;
 }
 </style>
+<script>
+	$(function() {
+		// Geolocation API에 액세스할 수 있는지 확인
+		if (navigator.geolocation) {
+			// 위치 정보를 얻기
+			navigator.geolocation.getCurrentPosition(function(pos) {
+				$('#latitude').val(pos.coords.latitude); // 위도를 hidden input에 저장
+				$('#longitude').val(pos.coords.longitude); // 경도를 hidden input에 저장
+			});
+		} else {
+			alert("이 브라우저에서는 Geolocation이 지원되지 않습니다.")
+		}
+	});
+</script>
 </head>
 <body>
 	<br>
@@ -77,8 +91,9 @@
 	<div class="container">
 		<div class="login-container">
 			<img id="duruduru-image" src="images/duruduru.png"
-				alt="Duruduru Logo">
-
+				alt="Duruduru Logo"> <input type="hidden" id="latitude"
+				name="latitude"> <input type="hidden" id="longitude"
+				name="longitude">
 			<div class="form-group">
 				<label for="userid">아이디</label> <input type="text" id="userid"
 					name="userid" required>
@@ -149,7 +164,7 @@
 				});
 			</script>
 
-<%-- 
+			<%-- 
 			<!-- 전화인증 시작 -->
 
 			<div class="form-group">
