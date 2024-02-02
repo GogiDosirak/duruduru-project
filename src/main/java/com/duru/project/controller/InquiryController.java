@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.duru.project.domain.Inquiry;
+import com.duru.project.domain.InquiryComment;
 import com.duru.project.domain.User;
 import com.duru.project.dto.ResponseDTO;
+import com.duru.project.service.InquiryCommentService;
 import com.duru.project.service.InquiryService;
 
 
@@ -26,6 +28,8 @@ import jakarta.servlet.http.HttpSession;
 public class InquiryController {
 	@Autowired
 	private InquiryService inquiryService;
+	@Autowired
+	private InquiryCommentService inquiryCommentService;
 	
 	@GetMapping("/inquiry")
 	public String inquiry(HttpSession session) {
@@ -50,7 +54,9 @@ public class InquiryController {
 	@GetMapping("/getInquiry/{inquirySeq}")
 	public String getInquiry(@PathVariable int inquirySeq, Model model) {
 		Inquiry getInquiry = inquiryService.getInquiry(inquirySeq);
+		List<InquiryComment> inquiryCommentList = inquiryCommentService.getInquiryCommentList(inquirySeq);
 		model.addAttribute("getInquiry", getInquiry);
+		model.addAttribute("inquiryCommentList", inquiryCommentList);
 		return "cs/inquiry/getInquiry";
 		
 	}

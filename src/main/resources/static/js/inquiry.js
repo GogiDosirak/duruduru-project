@@ -12,6 +12,10 @@ let InquiryObject = {
 		$("#btn-updateInquiry").on("click", () => {
 			_this.updateInquiry();
 
+		}),
+			$("#btn-insertInquiryComment").on("click", () => {
+			_this.insertInquiryComment();
+
 		});
 
 
@@ -93,6 +97,32 @@ let InquiryObject = {
 			alert("에러 발생 : " + message);
 
 		});
+
+	},
+	
+		insertInquiryComment: function() {
+		let insertInquiryCommentData = {
+			inquirySeq : $("#inquirySeq").val(),
+			inquiryCoContent : $("#inquiryCoContent").val()
+	
+		}
+
+		$.ajax({
+			type: "POST",
+			url: "/insertInquiryComment/" + insertInquiryCommentData.inquirySeq,
+			data: JSON.stringify(insertInquiryCommentData),
+			contentType: "application/json; charset=utf-8"
+
+		}).done(function(response) {
+			let message = response["data"];
+			alert(message);
+			location = "/getInquiry/" + insertInquiryCommentData.inquirySeq    // /auth/getBoardList
+		}).fail(function(error) {
+			let message = error["data"];
+			alert("에러 발생 : " + message);
+
+		});
+
 
 	},
 	

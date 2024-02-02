@@ -112,7 +112,7 @@ textarea {
                 <td align="right">
                     <div class="comment-input-container">
                         <textarea rows="1" cols="99" id="inquiryCoContent" placeholder="댓글을 입력하세요"></textarea>
-                        <button id="btn-inquiryInsertComment" class="btn btn-warning">댓글 등록</button>
+                        <button id="btn-insertInquiryComment" class="btn btn-warning">댓글 등록</button>
                     </div>
                 </td>
             </tr>
@@ -131,24 +131,20 @@ textarea {
  <td>작성일</td><td>
  </td>
  </tr>
- <!--  
- <c:forEach var="freeComment" items="${freeCommentList }">
- 
- <c:if test="${ findFreeBoard.frboSeq == freeComment.freeBoard.frboSeq}">
- 
+  
+ <c:forEach var="inquiryCommentList" items="${inquiryCommentList }">
  <tr>
- <td>${freeComment.user.nickname }</td>
- <td>${freeComment.frboCoContent }</td>
- <td>${freeComment.frboCoDate }</td>
+ <td>${inquiryCommentList.user.nickname }</td>
+ <td>${inquiryCommentList.inquiryCoContent }</td>
+ <td>${inquiryCommentList.inquiryCoDate }</td>
   <td>
- <c:if test="${principal.userid eq freeComment.user.userid }">
+ <c:if test="${principal.userSeq eq inquiryCommentList.user.userSeq }">
 <button type="button"  class="btn btn-danger btn-sm btn-delete-comment" data-co-seq="${freeComment.frboCoSeq }" style="padding: 1px 1px;">삭제하기</button> 
 </c:if>
  </td>
  </tr>
- </c:if>
  </c:forEach>
- -->
+
  
  
 </thead>
@@ -175,5 +171,6 @@ textarea {
 	</center>
 	</div>
 	</body>
+	<script src="/js/inquiry.js"></script>
 <%@ include file="/WEB-INF/jblog/layout/footer.jsp" %>
 </html>
