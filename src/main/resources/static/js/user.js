@@ -67,6 +67,8 @@ let userObject = {
 			longitude : $("#longitude").val()
 		}
 		
+		let checkbox = document.getElementById("myCheck");
+		
 		if (this.isEmpty(user.userid)) {
 			alert("아이디를 입력해주세요.");
 			return;
@@ -96,7 +98,10 @@ let userObject = {
 			return; // 이메일이 올바르지 않으면 함수 종료
 		}
 
-	
+		if(!checkbox.checked){
+			alert("이용약관 개인정보 수집 및 정보이용에 동의해주세요.")
+			return;
+		}
 
 		$.ajax({
 			type: "POST",

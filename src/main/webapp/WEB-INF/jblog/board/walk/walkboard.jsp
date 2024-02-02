@@ -72,7 +72,7 @@ hr {
 	</a>
 </div>
 <hr>
-<h2 class="center-align">산책게시판</h2>
+<h2 class="center-align"> 산책게시판</h2>
 <div class="container">
 	<h2 id="title" align="center">${walkBoard.waboTitle}</h2>
 	<h3>${walkBoard.user.nickname}</h3>

@@ -12,8 +12,8 @@ let snsBoardObject = {
 			$(document).on("click", ".btn-snsBoardInsertComment", function() {
 
 				let co_seq = $(this).data("co-seq");
-
-				_this.insertComment(co_seq);
+ let snsboCoContent = $(this).closest('.comment-input-container').find('textarea').val();
+				_this.insertComment(co_seq, snsboCoContent);
 			}),
 
 			$(document).on("click", ".btn-delete-comment", function() {
@@ -51,9 +51,9 @@ let snsBoardObject = {
 
 
 
-	insertComment: function(co_seq) {
+	insertComment: function(co_seq, snsboCoContent) {
 		let post = {
-			snsboCoContent: $("#snsboCoContent").val(),
+			snsboCoContent: snsboCoContent
 		}
 
 		$.ajax({

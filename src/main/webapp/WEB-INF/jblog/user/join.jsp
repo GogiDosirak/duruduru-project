@@ -239,7 +239,11 @@
 				<input class="form-control" placeholder="상세주소" name="addressDetail"
 					id="addressDetail" type="text" />
 			</div>
-
+    <div class="form-check mb-3">
+      <input class="form-check-input" type="checkbox" id="myCheck"  name="myCheck" required>
+      <label class="form-check-label" for="myCheck">이용약관 개인정보 수집 및 정보이용에 동의합니다.</label>
+    </div>
+ 
 			<br>
 			<div class="form-group">
 				<button id="btn-join">회원가입</button>

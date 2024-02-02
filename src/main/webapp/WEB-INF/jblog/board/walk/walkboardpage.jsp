@@ -31,9 +31,7 @@
 
 <div class="container mt-3">
 
-
-
-	<h2>산책게시판</h2>
+	<h2><a href="/walk"> 산책게시판</a></h2>
 
 <div id="searchForm">
     <form action="/walk" method="GET" class="form-inline">

@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="/WEB-INF/jblog/layout/header.jsp"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <style>
@@ -41,7 +40,7 @@
 }
 </style>
 <div class="container mt-3">
-	<h2>두루두루 SNS</h2>
+	<h2><a href="/sns"> 두루두루 SNS</a></h2>
 	<br>
 
 	<h5>
@@ -64,25 +63,17 @@
 			</div>
 
 			<!-- The slideshow/carousel -->
+
 			<div class="carousel-inner" align="center">
 				<c:forEach var="sns" items="${likeCntList}" varStatus="loop" end="2">
 					<div class="carousel-item${loop.first ? ' active' : ''}">
-						<!-- 등수 숨기기 -->
 						<h5>${sns.user.nickname }님네귀요미</h5>
 						<img alt="pet-item" src="${sns.filepath}"
-							class="pet-image img-fluid">
-						<!-- 게시글 내용 또는 필요한 속성 -->
+							class="pet-image img-fluid" >
 					</div>
-
 				</c:forEach>
 			</div>
 
-			<div class="carousel-item">
-				<img src="/images/duruduru.png" alt="Chicago" class="d-block">
-			</div>
-			<div class="carousel-item">
-				<img src="/images/author-item.jpg" alt="New York" class="d-block">
-			</div>
 
 			<!-- Left and right controls/icons -->
 			<button class="carousel-control-prev" type="button"
@@ -94,15 +85,16 @@
 				<span class="carousel-control-next-icon"></span>
 			</button>
 		</div>
+
 		<!-- 상단 랭킹 슬라이드 끝 -->
+
 		<br>
 		<br>
 		<br>
 		<hr>
-
+		<!-- sns 게시글 리스트 시작 -->
 		<c:forEach var="sns" items="${SNSList}">
-		<input type="hidden" id="snsboSeq" value="${sns.snsboSeq }">
-			<!-- 다른 이미지들도 동일하게 처리 -->
+			<input type="hidden" id="snsboSeq" value="${sns.snsboSeq }">
 			<div
 				class="container d-flex align-items-center justify-content-center"
 				style="min-height: 100vh;">
@@ -134,8 +126,9 @@
 							<c:otherwise>
 								<button type="button"
 									class="btn btn-warning btn-sm btn-deleteLike"
-									data-unlike-seq="${isLike }" data-unlike-snsbo-seq="${sns.snsboSeq }">좋아요취소</button>
-									
+									data-unlike-seq="${isLike }"
+									data-unlike-snsbo-seq="${sns.snsboSeq }">좋아요취소</button>
+
 							</c:otherwise>
 						</c:choose>
 
@@ -145,19 +138,17 @@
 						<c:if
 							test="${fn:trim(principal.userid) == fn:trim(sns.user.userid)}">
 							<a href="/updateSns/${sns.snsboSeq} " class="btn btn-warning">수정하기</a> &nbsp;&nbsp;&nbsp;
-    			<button type="button" 
-								class="btn btn-danger btn-delete-snsbo"
+    			<button type="button" class="btn btn-danger btn-delete-snsbo"
 								data-sns-seq="${sns.snsboSeq}">삭제하기</button>
 						</c:if>
 
 						<br> <br>
-
+						<!-- 댓글 시작 -->
 						<div class="container mt-3">
 							<button type="button" class="btn btn-outline-secondary"
-								data-bs-toggle="collapse" data-bs-target="#demo">댓글열기</button>
-							<div id="demo" class="collapse">
-
-
+								data-bs-toggle="collapse" data-bs-target="#demo${sns.snsboSeq}">댓글열기</button>
+							
+							<div id="demo${sns.snsboSeq}" class="collapse">
 								<div class="container mt-3">
 									<h2>&nbsp; 댓글 등록</h2>
 									<div class="comment-container">
@@ -166,7 +157,7 @@
 												<tr>
 													<td align="right">
 														<div class="comment-input-container">
-															<textarea rows="1" cols="99" id="snsboCoContent"
+															<textarea rows="1" cols="99"
 																placeholder="댓글을 입력하세요"></textarea>
 															<button type="button"
 																class="btn btn-warning btn-sm btn-snsBoardInsertComment"
@@ -177,8 +168,6 @@
 											</thead>
 										</table>
 									</div>
-
-
 
 
 									<div class="container mt-3">
@@ -216,13 +205,13 @@
 								</div>
 							</div>
 						</div>
+						<!-- 댓글 끝 -->
 					</div>
 				</div>
 			</div>
 			<hr>
 		</c:forEach>
-
-
+		<!-- sns 게시글 리스트 끝 -->
 
 
 

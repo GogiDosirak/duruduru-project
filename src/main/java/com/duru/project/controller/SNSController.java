@@ -36,10 +36,20 @@ public class SNSController {
 	
 	
 	@GetMapping("/sns")
-	public String sns(Model model) {
-		List<SNSBoard> SNSList = snsBoardService.SNSList();
-		Collections.sort(SNSList, Comparator.comparingInt(SNSBoard::getSnsboSeq).reversed());
-		model.addAttribute("SNSList", SNSList);
+	public String getSNSBoardsOrderByDistanceAndRecent(Model model, HttpSession session) {
+		// 세션에서 유저 정보 가져오기 (로그인한 사용자의 위치 정보를 사용)
+        User user = (User) session.getAttribute("principal");
+        if (user == null) {
+            // 로그인되어 있지 않으면 로그인 페이지로 리다이렉트 또는 다른 처리 수행
+            return "redirect:/login";
+        }
+
+        // 서비스에서 거리와 최근성에 따라 정렬된 게시글 리스트 가져오기
+        List<SNSBoard> snsBoards = snsBoardService.getSNSBoardsOrderByDistanceAndRecent(
+                user.getLatitude(), user.getLongitude());
+
+        // 모델에 정렬된 게시글 리스트 추가
+		model.addAttribute("SNSList", snsBoards);
 		
 		//댓글
 		model.addAttribute("snsCommentList", snsBoardService.getSnsCommentList());
@@ -128,8 +138,6 @@ public class SNSController {
 	
 	
 	//댓글
-	
-	
 	@PostMapping("/insertSnsComment/{snsboSeq}")
 	public @ResponseBody ResponseDTO<?> insertSnsComment(@PathVariable int snsboSeq, @RequestBody SNSBoardComment snsBoardComment, HttpSession session ){
 		User findUser = (User) session.getAttribute("principal");
