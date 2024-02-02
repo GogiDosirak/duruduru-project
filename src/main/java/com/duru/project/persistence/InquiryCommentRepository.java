@@ -11,5 +11,5 @@ import com.duru.project.domain.InquiryComment;
 public interface InquiryCommentRepository extends JpaRepository<InquiryComment, Integer> {
 	
 	List<InquiryComment> findByInquiry_InquirySeq(int inquirySeq);
-
+	void deleteByInquiry_InquirySeq(int inquirySeq);
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,6 +37,12 @@ public class InquiryCommentController {
 		inquiryComment.setUser(user);
 		inquiryCommentService.insertInquiryComment(inquiryComment);
 		return new ResponseDTO<>(HttpStatus.OK.value(), "댓글 등록 완료");
+	}
+	
+	@DeleteMapping("/deleteInquiryComment/{inquiryCoSeq}")
+	public @ResponseBody ResponseDTO<?> deleteInquiryComment(@PathVariable int inquiryCoSeq) {
+		inquiryCommentService.deleteInquiryComment(inquiryCoSeq);
+		return new ResponseDTO<>(HttpStatus.OK.value(),"댓글 삭제 완료");
 	}
 	
 	

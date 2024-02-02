@@ -7,12 +7,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.duru.project.domain.Inquiry;
+import com.duru.project.persistence.InquiryCommentRepository;
 import com.duru.project.persistence.InquiryRepository;
 
 @Service
 public class InquiryService {
 	@Autowired
 	private InquiryRepository inquiryRepository;
+	@Autowired
+	private InquiryCommentRepository inquiryCommentRepository;
 	
 	@Transactional(readOnly = true)
 	public List<Inquiry> getInquiryList() {
@@ -37,7 +40,9 @@ public class InquiryService {
 	
 	@Transactional
 	public void deleteInquiry(int inquirySeq) {
+		inquiryCommentRepository.deleteByInquiry_InquirySeq(inquirySeq);
 		inquiryRepository.deleteById(inquirySeq);
+		
 	}
 
 }

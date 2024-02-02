@@ -138,8 +138,9 @@ textarea {
  <td>${inquiryCommentList.inquiryCoContent }</td>
  <td>${inquiryCommentList.inquiryCoDate }</td>
   <td>
+  <input type="hidden" class="inquiryCoSeq" name="inquiryCoSeq" value="${inquiryCommentList.inquiryCoSeq}">
  <c:if test="${principal.userSeq eq inquiryCommentList.user.userSeq }">
-<button type="button"  class="btn btn-danger btn-sm btn-delete-comment" data-co-seq="${freeComment.frboCoSeq }" style="padding: 1px 1px;">삭제하기</button> 
+<button type="button"  class="btn btn-danger btn-sm btn-deleteInquirycomment" style="padding: 1px 1px;">삭제하기</button> 
 </c:if>
  </td>
  </tr>

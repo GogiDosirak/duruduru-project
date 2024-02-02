@@ -27,5 +27,11 @@ public class InquiryCommentService {
 		inquiryCommentRepository.save(inquiryComment);
 	}
 	
+	@Transactional
+	public void deleteInquiryComment(int inquiryCoSeq) {
+		inquiryCommentRepository.deleteById(inquiryCoSeq);
+	}
+	
+	
 
 }

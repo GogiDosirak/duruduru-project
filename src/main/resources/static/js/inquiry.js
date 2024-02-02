@@ -16,7 +16,12 @@ let InquiryObject = {
 			$("#btn-insertInquiryComment").on("click", () => {
 			_this.insertInquiryComment();
 
+		}),
+		$(".btn-deleteInquiryComment").on("click",function(){
+			let inquiryCoSeq = $(this).closest("tr").find(".inquiryCoSeq").val();
+			_this.deleteInquiryComment(inquiryCoSeq);
 		});
+		
 
 
 
@@ -125,6 +130,28 @@ let InquiryObject = {
 
 
 	},
+	
+	deleteInquiryComment : function(inquiryCoSeq) {
+		let deleteInquiryData = {
+			inquiryCoSeq : inquiryCoSeq,
+			inquirySeq : $("#inquirySeq").val()
+		};
+		
+		$.ajax({
+			type: "DELETE",
+			url: "/deleteInquiryComment/" + deleteInquiryData.inquiryCoSeq,
+			data: JSON.stringify(deleteInquiryData),
+			contentType: "application/json; charset=utf-8"
+		}).done(function(response){
+			let message = response["data"];
+			alert(message);
+			location = "/getInquiry/"+ deleteInquiryData.inquirySeq
+		}).fail(function(error){
+			let message = error["data"];
+			alert("에러발생 : " + message);
+		});
+	},
+	
 	
 	}
 	InquiryObject.init();
