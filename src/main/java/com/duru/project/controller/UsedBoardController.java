@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
@@ -27,13 +28,16 @@ import com.duru.project.service.UsedBoardService;
 
 import jakarta.servlet.http.HttpSession;
 
+
+
+
 @Controller
 public class UsedBoardController {
 	
 	@Autowired
 	UsedBoardService usedBoardService;
 	
-	
+	//검색 기능 없이 페이징 
 //	@GetMapping("/usedboard")
 //	public String getProdctList(HttpSession session, @PageableDefault(size=8, sort="usboSeq", direction = Direction.DESC) Pageable pageable) {
 //		Page<UsedBoard> usedBoardList = usedBoardService.usedBoardList(pageable);
@@ -43,21 +47,28 @@ public class UsedBoardController {
 
 	
 	
-	@GetMapping("/usedboard")
-	public String usedBoardList(Model model, @PageableDefault(size =4, sort = "usboSeq", direction = Direction.DESC) Pageable pageable, String searchKeyword) {
-		Page<UsedBoard> list = null;
-
-		if (searchKeyword == null) {
-			list = usedBoardService.usedBoardList(pageable); // 기존의 리스트보여줌
-		} else {
-			list = usedBoardService.boardTitleSearchList(searchKeyword, pageable);  // 검색리스트반환
-		}
-
-	    model.addAttribute("searchKeyword", searchKeyword);
-		model.addAttribute("usedBoardList", list);
-		return "board/used/usedBoardList";
-
-	}
+	@GetMapping("/wichi")
+	   public String getwichi() {
+	      return "wichi";
+	   }
+	
+	
+	//검색 + 페이징
+//	@GetMapping("/usedboard")
+//	public String usedBoardList(Model model, @PageableDefault(size =4, sort = "usboSeq", direction = Direction.DESC) Pageable pageable, String searchKeyword) {
+//		Page<UsedBoard> list = null;
+//
+//		if (searchKeyword == null) {
+//			list = usedBoardService.usedBoardList(pageable); // 기존의 리스트보여줌
+//		} else {
+//			list = usedBoardService.boardTitleSearchList(searchKeyword, pageable);  // 검색리스트반환
+//		}
+//
+//	    model.addAttribute("searchKeyword", searchKeyword);
+//		model.addAttribute("usedBoardList", list);
+//		return "board/used/usedBoardList";
+//
+//	}
 	
 	
 	
@@ -72,10 +83,19 @@ public class UsedBoardController {
 	
 	@PostMapping("/insertUsedBoard")
 	public String insertUsedBoard(UsedBoard usedBoard, MultipartFile file, HttpSession session) throws Exception {
-		User user = (User)session.getAttribute("principal");
-		usedBoard.setUser(user);
-		usedBoardService.insertUsedBoard(usedBoard, file);
-		return "redirect:/usedboard";
+		
+		if(file.isEmpty()) {
+			return "redirect:/usedboard";
+			
+		} else {
+			User user = (User)session.getAttribute("principal");
+			usedBoard.setUser(user);
+			usedBoardService.insertUsedBoard(usedBoard, file);
+			
+		}
+		
+		return  "redirect:/usedboard";
+		
 	}
 
 	
@@ -161,5 +181,43 @@ public class UsedBoardController {
 	
 	
 	
+	
+	
+	//위도, 경도 가까운순으로 검색, 페이징 되게
+
+
+	    @GetMapping("/usedboard")
+	    public String getUsedBoardList(Model model,
+	                                   @PageableDefault(size = 4)Pageable pageable,
+	                                    String searchKeyword,
+	                                   HttpSession session) {
+	        User user = (User) session.getAttribute("principal");
+	        
+	        if (user == null) {
+	            // 로그인되어 있지 않으면 로그인 페이지로 리다이렉트 또는 다른 처리 수행
+	            return "redirect:/login";
+	        }
+
+	        
+	        
+	        Page<UsedBoard> usedboardpage = null;
+	        
+	        if (searchKeyword != null && !searchKeyword.isEmpty()) {
+	            // 검색어가 있는 경우
+	            
+	        	usedboardpage = usedBoardService.searchUsedBoardByKeywordAndOrderByDistance(searchKeyword, user.getLatitude(), user.getLongitude(), pageable);
+
+	        } else {
+	            // 검색어가 없는 경우
+	        	usedboardpage = usedBoardService.getUsedBoardOrderByDistance(user.getLatitude(), user.getLongitude(), pageable);
+
+	        }
+
+	        model.addAttribute("searchKeyword", searchKeyword);
+	        model.addAttribute("usedboardpage", usedboardpage);
+	        
+	        return "board/used/usedBoardList";
+	    
+	}
 	
 }

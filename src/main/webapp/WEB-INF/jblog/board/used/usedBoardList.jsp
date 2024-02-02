@@ -6,6 +6,48 @@
 <div class="container mt-3">
 	<a href="/usedboard"><h2>중고물품거래</h2></a>
 
+
+
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Location</title>
+</head>
+<body>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    getLocation();
+});
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        alert("Geolocation is not supported by this browser.");
+    }
+}
+
+function showPosition(position) {
+    var latitude = position.coords.&{principal.latitude};
+    var longitude = position.coords.&{principal.longitude};
+
+    // 서버로 위도와 경도 전송
+    window.location.href = "/used-boards?latitude=" + latitude + "&longitude=" + longitude;
+}
+</script>
+
+</body> 
+
+
+
+
+
+
+
 	<style>
 .product-image {
 	width: 300px;
@@ -23,7 +65,7 @@
 <br> 
 	<div class="container-fluid mt-3">
 		<div class="row">
-			<c:forEach var="used" items="${usedBoardList.content}">
+			<c:forEach var="used" items="${usedboardpage.content}">
 				<div class="col-md-3 mb-4">
 					<div
 						class="product-card image-zoom-effect link-effect d-flex flex-wrap">
@@ -55,12 +97,12 @@
 	<div class="container mt-3 mx-auto d-flex justify-content-center">
     <ul class="pagination">
     <input type="hidden" id="searchKeyword" value="${searchKeyword }"> 
-<li class="page-item <c:if test="${usedBoardList.first }">disabled</c:if>"><a class="page-link" href="?searchKeyword=${searchKeyword }&page=${usedBoardList.number-1 }">Previous</a></li>
+<li class="page-item <c:if test="${usedboardpage.first }">disabled</c:if>"><a class="page-link" href="?searchKeyword=${searchKeyword }&page=${usedboardpage.number-1 }">Previous</a></li>
 
-<c:forEach var="page" begin="1" end="${usedBoardList.totalPages }">
+<c:forEach var="page" begin="1" end="${usedboardpage.totalPages }">
 <li class="page-item"><a class="page-link" href="?searchKeyword=${searchKeyword }&page=${page -1}">${page }</a></li>
 </c:forEach>
-<li class="page-item <c:if test="${usedBoardList.last }">disabled</c:if>"><a class="page-link" href="??searchKeyword=${searchKeyword }&page=${usedBoardList.number+1 }">Next</a></li>
+<li class="page-item <c:if test="${usedboardpage.last }">disabled</c:if>"><a class="page-link" href="??searchKeyword=${searchKeyword }&page=${usedboardpage.number+1 }">Next</a></li>
 </ul>
 </div>
 <br>

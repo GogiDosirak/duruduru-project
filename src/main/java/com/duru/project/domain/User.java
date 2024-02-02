@@ -30,7 +30,15 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "userSeq")
     private int userSeq;
-
+    
+    @Column(name = "latitude")
+    private Double latitude;
+    
+    @Column(name = "longitude")
+    private Double longitude;
+    
+    
+    
     @Column(name = "userid", unique = true, nullable = false, length = 40)
     private String userid;
 

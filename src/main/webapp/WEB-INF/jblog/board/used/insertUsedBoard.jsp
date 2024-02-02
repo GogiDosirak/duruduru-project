@@ -115,7 +115,7 @@ hr {
 }
 </style>
 
-						<label for="file">
+						<label for="file">(썸네일이 없으면 게시물이 등록되지 않습니다.)
 							<div class="btn-upload">썸네일 업로드하기</div> <br>
 							<div id="file-name-display"></div>
 						</label> <input type="file" name="file" id="file"

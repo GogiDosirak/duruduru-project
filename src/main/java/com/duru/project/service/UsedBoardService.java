@@ -46,10 +46,11 @@ public class UsedBoardService {
 	}
 	
 	
-	@Transactional(readOnly = true)
-	public Page<UsedBoard> usedBoardList (Pageable pageable) {
-		return usedBoardRepository.findAll(pageable);
-	}
+	//페이징
+//	@Transactional(readOnly = true)
+//	public Page<UsedBoard> usedBoardList (Pageable pageable) {
+//		return usedBoardRepository.findAll(pageable);
+//	}
 
 	
 	
@@ -91,10 +92,11 @@ public class UsedBoardService {
 	}
 	
 	
-	@Transactional(readOnly = true)
-	public Page<UsedBoard> boardTitleSearchList(String searchKeyword, Pageable pageable) {
-		return usedBoardRepository.findByUsboTitleContaining(searchKeyword, pageable);
-	}
+	//검색기능
+//	@Transactional(readOnly = true)
+//	public Page<UsedBoard> boardTitleSearchList(String searchKeyword, Pageable pageable) {
+//		return usedBoardRepository.findByUsboTitleContaining(searchKeyword, pageable);
+//	}
 	
 	
 	
@@ -143,6 +145,23 @@ public class UsedBoardService {
 		usedBoardRepository.save(usedBoard);
 	}
 	
+	
+	//위도 경도 가까운 순 
+	
+	
+	//검색어 없는 경우
+	@Transactional
+	 public Page<UsedBoard> getUsedBoardOrderByDistance(Double userLatitude, Double userLongitude, Pageable pageable) {
+	        return usedBoardRepository.getUsedBoardOrderByDistance(userLatitude, userLongitude, pageable);
+	    }
+
+	
+	
+	//검색어 있는 경우 
+	@Transactional
+	    public Page<UsedBoard> searchUsedBoardByKeywordAndOrderByDistance(String searchKeyword, Double userLatitude, Double userLongitude, Pageable pageable) {
+	        return usedBoardRepository.searchUsedBoardByKeywordAndOrderByDistance(searchKeyword, userLatitude, userLongitude, pageable);
+	    }
 	
 	
 }

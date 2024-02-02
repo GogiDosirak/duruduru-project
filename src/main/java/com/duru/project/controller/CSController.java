@@ -17,9 +17,5 @@ public class CSController {
 		return "cs/onetoone/onetoone";
 	}
 	
-	@GetMapping("/event")
-	public String event() {
-		return "cs/event/event";
-	}
 
 }
