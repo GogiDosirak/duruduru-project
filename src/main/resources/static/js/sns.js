@@ -30,7 +30,29 @@ let snsBoardObject = {
 				let unlike_seq = $(this).data("unlike-seq");
 				let snsbo_seq = $(this).data("unlike-snsbo-seq");
 				_this.deleteLike(unlike_seq, snsbo_seq);
-			})
+			}),
+
+/*랭킹 사진 클릭시 게시글로 스크롤 시작*/
+			document.addEventListener("DOMContentLoaded", function() {
+				const snsImages = document.querySelectorAll('.sns-pet-image');
+
+				snsImages.forEach(function(image) {
+					image.addEventListener('click',
+							function() {
+								const snsboSeq = this
+										.getAttribute('data-snsbo-seq');
+								const targetElement = document
+										.getElementById(snsboSeq);
+
+								if (targetElement) {
+									targetElement.scrollIntoView({
+										behavior : 'smooth'
+									});
+								}
+							});
+				});
+			});
+/*스크롤 끝*/
 	},
 
 

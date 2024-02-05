@@ -89,5 +89,7 @@
 	<button id="btn-writeWalkBoard" class="btn btn-warning">글등록</button>
 </center>
 
+
 <script src="/js/walkBoard.js"></script>
 <%@include file="/WEB-INF/jblog/layout/footer.jsp"%>
+

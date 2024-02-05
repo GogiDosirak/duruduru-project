@@ -38,15 +38,35 @@
 	width: auto;
 	height: auto;
 }
+#scrollToTop {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: none;
+    cursor: pointer;
+    width: 40px; /* 이미지의 가로 크기 */
+    height: 40px; /* 이미지의 세로 크기 */
+    background-image: url('images/pointingup.png'); /* 이미지 경로 */
+    background-size: cover; /* 이미지를 요소에 맞게 조절 */
+    background-color: transparent;
+    border: none;
+    transition: background-color 0.3s;
+    
+}#scrollToTop.visible {
+    display: block;
+}
 </style>
+
 <div class="container mt-3">
-	<h2><a href="/sns"> 두루두루 SNS</a></h2>
+	<h2>
+		<a href="/sns"> 두루두루 SNS</a>
+	</h2>
 	<br>
 
 	<h5>
 		<a href="/insertSNS" class="btn btn-warning">글등록 하기</a>
 	</h5>
-	<body class="text-center">
+
 
 		<!-- 상단 랭킹 슬라이드 -->
 		<!-- Carousel -->
@@ -69,11 +89,10 @@
 					<div class="carousel-item${loop.first ? ' active' : ''}">
 						<h5>${sns.user.nickname }님네귀요미</h5>
 						<img alt="pet-item" src="${sns.filepath}"
-							class="pet-image img-fluid" >
+							class="img-fluid sns-pet-image" data-snsbo-seq="${sns.snsboSeq}">
 					</div>
 				</c:forEach>
 			</div>
-
 
 			<!-- Left and right controls/icons -->
 			<button class="carousel-control-prev" type="button"
@@ -94,21 +113,15 @@
 		<hr>
 		<!-- sns 게시글 리스트 시작 -->
 		<c:forEach var="sns" items="${SNSList}">
-			<input type="hidden" id="snsboSeq" value="${sns.snsboSeq }">
-			<div
-				class="container d-flex align-items-center justify-content-center"
-				style="min-height: 100vh;">
+			<div class="container d-flex align-items-center justify-content-center"
+				style="min-height: 100vh;" id="${sns.snsboSeq}">
 				<div class="text-center">
 					<div class="image-container mx-auto">
-						<img src="${sns.filepath }" class="pet-image img-fluid">
-
+						<img src="${sns.filepath}">
 					</div>
 					<br>
 					<div class="text-container">
 						<h3>${sns.snsboContent }</h3>
-
-
-
 						<c:set var="isLike" value="-1" />
 						<c:forEach var="like" items="${likeList}">
 							<c:if test="${like.snsBoard.snsboSeq eq sns.snsboSeq}">
@@ -131,7 +144,6 @@
 
 							</c:otherwise>
 						</c:choose>
-
 						좋아요 : ${sns.likeCnt} <br> <br>
 						<p>작성자: ${sns.user.nickname }</p>
 						<br> <br> <br>
@@ -147,7 +159,7 @@
 						<div class="container mt-3">
 							<button type="button" class="btn btn-outline-secondary"
 								data-bs-toggle="collapse" data-bs-target="#demo${sns.snsboSeq}">댓글열기</button>
-							
+
 							<div id="demo${sns.snsboSeq}" class="collapse">
 								<div class="container mt-3">
 									<h2>&nbsp; 댓글 등록</h2>
@@ -157,8 +169,7 @@
 												<tr>
 													<td align="right">
 														<div class="comment-input-container">
-															<textarea rows="1" cols="99"
-																placeholder="댓글을 입력하세요"></textarea>
+															<textarea rows="1" cols="99" placeholder="댓글을 입력하세요"></textarea>
 															<button type="button"
 																class="btn btn-warning btn-sm btn-snsBoardInsertComment"
 																data-co-seq="${sns.snsboSeq }">댓글등록</button>
@@ -213,10 +224,53 @@
 		</c:forEach>
 		<!-- sns 게시글 리스트 끝 -->
 
+<!-- 스크롤 시작 -->
+ <div id="scrollToTop" onclick="scrollToTop()">
+    <script>
+    /* 우하단 스크롤 화살표 시작*/
+        // Show/hide scroll-to-top button based on scroll position
+        window.onscroll = function() {
+            showScrollToTopButton();
+        };
 
+        // Function to show/hide scroll-to-top button
+        function showScrollToTopButton() {
+            var scrollToTopButton = document.getElementById("scrollToTop");
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                scrollToTopButton.style.display = "block";
+            } else {
+                scrollToTopButton.style.display = "none";
+            }
+        }
 
+        // Function to scroll to the top
+        function scrollToTop() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+        /* 우하단 스크롤 화살표 끝*/
+        
+        /* 좋아요 눌렀을 때 그 화면에서 로딩되기 시작 */
+        document.addEventListener("DOMContentLoaded", function() {
+            // 페이지 로드 시 저장된 스크롤 위치가 있다면 저장된 위치로 스크롤 위치 설정
+            var storedScrollTop = localStorage.getItem('scrollTop');
+            if (storedScrollTop) {
+                document.documentElement.style.scrollBehavior = 'auto'; // 스크롤 부드러움 제거
+                window.scrollTo(0, storedScrollTop);
+                document.documentElement.style.scrollBehavior = 'smooth'; // 원래 스크롤 부드러움으로 복원
+            }
+        });
 
-
+        // 특정 이벤트(예: 페이지 언로드) 발생 시 스크롤 위치 저장
+        window.onbeforeunload = function() {
+            // 페이지 언로드 시 현재 스크롤 위치를 저장
+            localStorage.setItem('scrollTop', window.scrollY);
+            /* 좋아요 눌렀을 때 그 화면에서 로딩되기 끝 */
+        };
+    </script>
+</div>
+<!-- 스크롤 끝 -->
+</div>
 	</body>
 	</html>
 	<script src="/js/sns.js"></script>
