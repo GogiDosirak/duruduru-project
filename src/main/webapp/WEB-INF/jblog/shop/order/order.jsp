@@ -139,6 +139,11 @@
     else if (point > orderPrice) {
       alert('물건 가격보다 낮게 입력해주세요.');
     } 
+    else if (point < 1) {
+        alert('0보다 큰 값을 입력해주세요.');
+      }     else if (point % 10 != 0) {
+          alert('10원 단위로 입력해주세요.');
+      } 
     // 유효한 경우
     else {
       // 폼 전송
