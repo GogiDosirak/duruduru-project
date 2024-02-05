@@ -3,10 +3,13 @@ package com.duru.project.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.duru.project.domain.Inquiry;
+import com.duru.project.domain.Product;
 import com.duru.project.persistence.InquiryCommentRepository;
 import com.duru.project.persistence.InquiryRepository;
 
@@ -18,8 +21,13 @@ public class InquiryService {
 	private InquiryCommentRepository inquiryCommentRepository;
 	
 	@Transactional(readOnly = true)
-	public List<Inquiry> getInquiryList() {
-		return inquiryRepository.findAll();
+	public Page<Inquiry> searchInquiry(String keyword, Pageable pageable) {
+		Page<Inquiry> inquirySearchList = inquiryRepository.findByInquiryTitleContaining(keyword, pageable);
+		return inquirySearchList;
+	}
+	@Transactional(readOnly = true)
+	public Page<Inquiry> getInquiryList(Pageable pageable) {
+		return inquiryRepository.findAll(pageable);
 	}
 	
 	@Transactional
@@ -27,9 +35,10 @@ public class InquiryService {
 		inquiryRepository.save(inquiry);
 	}
 	
-	@Transactional(readOnly = true)
+	@Transactional
 	public Inquiry getInquiry(int inquirySeq) {
 		Inquiry inquiry = inquiryRepository.findById(inquirySeq).get();
+		inquiry.setInquiryCnt(inquiry.getInquiryCnt()+1);
 		return inquiry;
 	}
 	

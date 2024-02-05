@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.duru.project.domain.Basket;
@@ -21,6 +22,7 @@ import com.duru.project.dto.ResponseDTO;
 import com.duru.project.service.BasketService;
 import com.duru.project.service.OrderService;
 import com.duru.project.service.ProductService;
+import com.duru.project.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -32,6 +34,8 @@ public class OrderController {
 	private BasketService basketService;
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private UserService userService;
 	
 	
 	@GetMapping("/order/{userSeq}")
@@ -53,7 +57,7 @@ public class OrderController {
 	
 	
 	@GetMapping("/goPay")
-	public String pay() {
+	public String pay(Model model) {
 		return "/shop/order/goPay";
 	}
 	
@@ -74,10 +78,13 @@ public class OrderController {
 			
 		}
 		// 그 후, 
-		User user = (User)session.getAttribute("principal");;
+		User user = (User)session.getAttribute("principal");
+		int point = (int) session.getAttribute("point");
+		user.setPoint(user.getPoint()-point); // 사용한 만큼 포인트 깎아줌
+		userService.insertUser(user); // 저장
+		session.removeAttribute("point"); //저장해뒀던 포인트 정보 remove
 		basketService.deleteUserBasket(user.getUserSeq()); //해당 유저의 basket을 삭제
 	
-		
 		return "/index";
 		
 		
@@ -91,5 +98,12 @@ public class OrderController {
 		return "shop/order/orderHistory";
 	}
 	
+
+	
+	@GetMapping("/usePoint/{userSeq}")
+	public String usePoint(@PathVariable int userSeq,int point, HttpSession session) {
+		session.setAttribute("point", point);
+		return "shop/order/usePoint";
+	}
 
 }

@@ -3,6 +3,10 @@ package com.duru.project.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,10 +36,18 @@ public class InquiryController {
 	private InquiryCommentService inquiryCommentService;
 	
 	@GetMapping("/inquiry")
-	public String inquiry(HttpSession session) {
-		List<Inquiry> inquiryList = inquiryService.getInquiryList();
+	public String inquiry(HttpSession session, @PageableDefault(size=5, sort="inquirySeq", direction = Sort.Direction.DESC) Pageable pageable) {
+		Page<Inquiry> inquiryList = inquiryService.getInquiryList(pageable);
 		session.setAttribute("inquiryList", inquiryList);
 		return "cs/inquiry/inquiry";
+	}
+	
+	@GetMapping("/inquiry/searchInquiry")
+	public String searchInquiry(String keyword, Model model, @PageableDefault(size=5, sort="inquirySeq", direction = Sort.Direction.DESC)Pageable pageable) {
+		Page<Inquiry> inquirySearchList = inquiryService.searchInquiry(keyword, pageable);
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("inquirySearchList", inquirySearchList);
+		return "cs/inquiry/searchInquiry";
 	}
 	
 	@GetMapping("/insertInquiry")

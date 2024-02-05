@@ -3,6 +3,10 @@ package com.duru.project.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,10 +31,18 @@ public class NoticeController {
 	private NoticeService noticeService;
 	
 	@GetMapping("/notice")
-	public String notice(HttpSession session) {
-		List<Notice> noticeList = noticeService.getNoticeList();
+	public String notice(HttpSession session, @PageableDefault(size = 5, sort = "noticeSeq", direction = Sort.Direction.DESC) Pageable pageable) {
+		Page<Notice> noticeList = noticeService.getNoticeList(pageable);
 		session.setAttribute("noticeList", noticeList);
 		return "cs/notice/notice";
+	}
+	
+	@GetMapping("/notice/searchNotice")
+	public String searchNotice(String keyword, Model model, @PageableDefault(size=5, sort="noticeSeq",direction = Sort.Direction.DESC)Pageable pageable) {
+		Page<Notice> noticeSearchList = noticeService.searchNotice(keyword, pageable);
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("noticeSearchList", noticeSearchList);
+		return "cs/notice/searchNotice";
 	}
 	
 	@GetMapping("/insertNotice")

@@ -73,8 +73,8 @@
 </center>
 <br>
 <center>
-<h4>총 주문금액 : ${totalPrice }</h4>
-<input type="hidden" id="orderPrice" name="orderPrice" value="${totalPrice }">
+<h4>총 주문금액 : ${totalPrice - point }</h4>
+<input type="hidden" id="orderPrice" name="orderPrice" value="${totalPrice - point }">
 결제를 원하시면 '결제하기'버튼을 눌러주세요.
 </center>
 <br>

@@ -26,6 +26,7 @@ let OrderObject = {
 			orderRequest: $("#orderRequest").val(),
 			orderZipcode: $("#orderZipcode").val(),
 			orderPrice: $("#orderPrice").val()
+		
 		}
 
 		$.ajax({

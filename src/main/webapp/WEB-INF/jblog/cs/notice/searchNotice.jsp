@@ -20,7 +20,7 @@
 				<th>조회수</th>
 			</tr>
 		</thead>
-		<c:forEach var="notice" items="${noticeList.content }">
+		<c:forEach var="notice" items="${noticeSearchList.content }">
 			<tr>
 				<td><a href="/getNotice/${notice.noticeSeq }">${notice.noticeTitle }</a>
 				</td>
@@ -36,17 +36,21 @@
 <br>
 <br>
 <ul class="pagination">
+		<input type="hidden" id="keyword" name="keyword" value=${keyword }>
+		<li
+			class="page-item <c:if test="${noticeSearchList.first }">disabled</c:if>"><a
+			class="page-link"
+			href="?keyword=${keyword }&page=${noticeSearchList.number-1 }">Previous</a></li>
 
-	<li
-		class="page-item <c:if test="${noticeList.first }">disabled</c:if>"><a
-		class="page-link" href="?page=${noticeList.number-1 }">Previous</a></li>
-	<c:forEach var="page" begin="1" end="${noticeList.totalPages }">
-		<li class="page-item"><a class="page-link"
-			href="?page=${page-1 }">${page }</a></li>
-	</c:forEach>
-	<li class="page-item <c:if test="${noticeList.last }">disabled</c:if>"><a
-		class="page-link" href="?page=${noticeList.number+1 }">Next</a></li>
-</ul>
+		<c:forEach var="page" begin="1" end="${noticeSearchList.totalPages }">
+			<li class="page-item"><a class="page-link"
+				href="?keyword=${keyword }&page=${page-1 }">${page }</a></li>
+		</c:forEach>
+		<li
+			class="page-item <c:if test="${noticeSearchList.last }">disabled</c:if>"><a
+			class="page-link"
+			href="?keyword=${keyword }&page=${noticeSearchList.number+1 }">Next</a></li>
+	</ul>
 <c:if test="${principal.role eq 'ADMIN'}">
 	<center>
 		<button onclick="location.href='/insertNotice'"
