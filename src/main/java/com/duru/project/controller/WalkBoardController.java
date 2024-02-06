@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.duru.project.domain.User;
@@ -28,46 +30,53 @@ import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class WalkBoardController {
-	
+
 	@Autowired
 	private WalkBoardService walkBoardService;
-	
+
 	@Autowired
 	private WalkBoardCommentService walkBoardCommentService;
-	
 
-	//boardPage
+	// walkBoardPage // walkBoardSearchPage
 	@GetMapping("/walk")
-	public String getWalkBoardListPage(Model model, @PageableDefault(size = 4, sort ="waboSeq" , direction = Sort.Direction.DESC) Pageable pageable,  String searchKeyword) {
+	public String getWalkBoardListPage(Model model,
+			@PageableDefault(size = 4) Pageable pageable,
+			String searchKeyword, HttpSession session) {
 		
+		User findUser = (User) session.getAttribute("principal");
+	    double userLatitude = findUser.getLatitude(); 
+	    double userLongitude = findUser.getLongitude(); 
+
 		Page<WalkBoard> walkboardpage = null;
-		
-		if(searchKeyword == null) {
-			walkboardpage = walkBoardService.getWalkBoardListPage(pageable);
-		}else {
-			walkboardpage = walkBoardService.boardTitleSearchList(searchKeyword, pageable);
+
+		if (searchKeyword == null) {
+			walkboardpage = walkBoardService.getWalkBoardsOrderByDistanceAndRecentWithPaging(userLatitude, userLongitude, pageable);
+		} else {
+			walkboardpage = walkBoardService.getSearchWalkBoardsOrderByDistanceAndRecentWithPaging(userLatitude, userLongitude, searchKeyword, pageable);
 		}
 		
 		model.addAttribute("searchKeyword", searchKeyword);
 		model.addAttribute("walkboardpage", walkboardpage);
-		
+
 		return "board/walk/walkboardpage";
 	}
-	
-	//insert11
+
+	// insert11
 	@GetMapping("/insertWalkBoard")
 	public String insertWalkBoard() {
 		return "board/walk/insertwalkboard";
 	}
-	//insert22
+
+	// insert22
 	@PostMapping("/insertWalkBoard")
-	public @ResponseBody ResponseDTO<?> insertWalkBoard(@RequestBody WalkBoard walkboard, HttpSession session){
+	public @ResponseBody ResponseDTO<?> insertWalkBoard(@RequestBody WalkBoard walkboard, HttpSession session) {
 		User findUser = (User) session.getAttribute("principal");
 		walkboard.setUser(findUser);
 		walkBoardService.insertWalkBoard(walkboard);
-		return new ResponseDTO<>(HttpStatus.OK.value(),"글 등록 완료되었습니다.");
+		return new ResponseDTO<>(HttpStatus.OK.value(), "글 등록 완료되었습니다.");
 	}
-	//getBoard
+
+	// getBoard
 	@GetMapping("/getWalkBoard/{waboSeq}")
 	public String getWalkBoard(@PathVariable int waboSeq, Model model) {
 		WalkBoard findWalkBoard = walkBoardService.getWalkBoard(waboSeq);
@@ -76,36 +85,38 @@ public class WalkBoardController {
 		model.addAttribute("walkBoardCommentList", walkBoardCommentService.getWalkCommentList());
 		return "board/walk/walkboard";
 	}
-	//updateBoard11
+
+	// updateBoard11
 	@GetMapping("/updateWalkBoard/{waboSeq}")
 	public String updatePost(@PathVariable int waboSeq, Model model) {
-		WalkBoard findWalkBoard =walkBoardService.getWalkBoard(waboSeq);
+		WalkBoard findWalkBoard = walkBoardService.getWalkBoard(waboSeq);
 		model.addAttribute("walkBoard", findWalkBoard);
 		return "board/walk/updatewalkboard";
 	}
-	//updateBoard22
+
+	// updateBoard22
 	@PutMapping("/updateWalkBoard/{waboSeq}")
-	public @ResponseBody ResponseDTO<?> updateWalkBoard(@PathVariable int waboSeq, @RequestBody WalkBoard walkboard){
-		WalkBoard findWalkBoard =walkBoardService.getWalkBoard(waboSeq);
+	public @ResponseBody ResponseDTO<?> updateWalkBoard(@PathVariable int waboSeq, @RequestBody WalkBoard walkboard) {
+		WalkBoard findWalkBoard = walkBoardService.getWalkBoard(waboSeq);
 		findWalkBoard.setWaboTitle(walkboard.getWaboTitle());
 		findWalkBoard.setWaboContent(walkboard.getWaboContent());
 		walkBoardService.insertWalkBoard(findWalkBoard);
 		return new ResponseDTO<>(HttpStatus.OK.value(), "글 수정 완료");
 	}
-	//deleteBoard
+
+	// deleteBoard
 	@DeleteMapping("/deleteWalkBoard/{waboSeq}")
-	public @ResponseBody ResponseDTO<?> deleteWalkBoard(@PathVariable int waboSeq){
+	public @ResponseBody ResponseDTO<?> deleteWalkBoard(@PathVariable int waboSeq) {
 		walkBoardCommentService.deleteAllWalkComment(waboSeq);
 		walkBoardService.deleteWalkBoard(waboSeq);
 		return new ResponseDTO<>(HttpStatus.OK.value(), "글 삭제 완료");
 	}
-	
-	
+
 	// 댓글
-	
-	
+
 	@PostMapping("/insertWalkBoardComment/{waboSeq}")
-	public @ResponseBody ResponseDTO<?> insertWalkBoardComment(@PathVariable int waboSeq, @RequestBody WalkBoardComment walkBoardComment, HttpSession session){
+	public @ResponseBody ResponseDTO<?> insertWalkBoardComment(@PathVariable int waboSeq,
+			@RequestBody WalkBoardComment walkBoardComment, HttpSession session) {
 		User findUser = (User) session.getAttribute("principal");
 		walkBoardComment.setUser(findUser);
 		WalkBoard findWalkBoard = walkBoardService.getWalkBoard(waboSeq);
@@ -113,11 +124,11 @@ public class WalkBoardController {
 		walkBoardCommentService.insertWalkComment(walkBoardComment);
 		return new ResponseDTO<>(HttpStatus.OK.value(), "댓글등록이 완료 되었습니다.");
 	}
-	
+
 	@DeleteMapping("/deleteComment/{waboCoSeq}")
-	public @ResponseBody ResponseDTO<?> deleteComment(@PathVariable int waboCoSeq){
+	public @ResponseBody ResponseDTO<?> deleteComment(@PathVariable int waboCoSeq) {
 		walkBoardCommentService.deleteWalkComment(waboCoSeq);
-		return new ResponseDTO<>(HttpStatus.OK.value(),"댓글삭제가 완료 되었습니다.");
+		return new ResponseDTO<>(HttpStatus.OK.value(), "댓글삭제가 완료 되었습니다.");
 	}
 
 

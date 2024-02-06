@@ -148,7 +148,7 @@
 						<p>작성자: ${sns.user.nickname }</p>
 						<br> <br> <br>
 						<c:if
-							test="${fn:trim(principal.userid) == fn:trim(sns.user.userid)}">
+							test="${fn:trim(principal.userid) == fn:trim(sns.user.userid)  or principal.role eq 'ADMIN'}">
 							<a href="/updateSns/${sns.snsboSeq} " class="btn btn-warning">수정하기</a> &nbsp;&nbsp;&nbsp;
     			<button type="button" class="btn btn-danger btn-delete-snsbo"
 								data-sns-seq="${sns.snsboSeq}">삭제하기</button>
@@ -201,7 +201,7 @@
 															<td>${snsComment.snsboCoContent}</td>
 															<td>${snsComment.snsboCoDate}</td>
 															<td><c:if
-																	test="${principal.userid eq snsComment.user.userid}">
+																	test="${principal.userid eq snsComment.user.userid or principal.role eq 'ADMIN'}">
 																	<button type="button"
 																		class="btn btn-danger btn-sm btn-delete-comment"
 																		data-co-seq="${snsComment.snsboCoSeq}"

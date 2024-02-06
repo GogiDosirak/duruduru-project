@@ -40,6 +40,24 @@ public class PetService {
 	}
 	
 	@Transactional
+	public void updatePet(Pet pet , MultipartFile file) throws Exception{
+		Pet findPet = petRepository.findById(pet.getPetSeq()).get();
+		findPet.setPetName(pet.getPetName());
+		findPet.setPetBirthday(pet.getPetBirthday());
+		findPet.setPetType(pet.getPetType());
+		if(file.getSize()!=0) {
+			String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files"; 
+			UUID uuid = UUID.randomUUID(); 
+			String fileName = uuid + "_" + file.getOriginalFilename(); 
+			File saveFile = new File(projectPath, fileName); 
+			file.transferTo(saveFile);
+			findPet.setPetFilename(fileName);
+			findPet.setPetFilepath("/files/" + fileName);
+		}
+		petRepository.save(findPet);
+	}
+	
+	@Transactional
 	public List<Pet> myPetList(int userSeq){
 		return petRepository.findByUser_userSeq(userSeq);
 	}

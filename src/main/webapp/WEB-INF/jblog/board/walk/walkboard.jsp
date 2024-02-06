@@ -95,7 +95,7 @@ hr {
 <br>
 
 <div align="center">
-	<c:if test="${principal.userid eq walkBoard.user.userid}">
+	<c:if test="${principal.userid eq walkBoard.user.userid  or principal.role eq 'ADMIN'}">
 		<button type="button" id="go-updateWaBoard" class="btn btn-warning">글
 			수정하기</button>
 		<button type="button" id="btn-deleteWaBoard" class="btn btn-danger">글
@@ -145,7 +145,7 @@ hr {
 							<td>${walkBoardComment.waboCoContent}</td>
 							<td>${walkBoardComment.waboCoDate}</td>
 							<td><c:if
-									test="${principal.userid eq walkBoardComment.user.userid}">
+									test="${principal.userid eq walkBoardComment.user.userid or principal.role eq 'ADMIN'}">
 									<button type="button"
 										class="btn btn-danger btn-sm btn-delete-comment"
 										data-co-seq="${walkBoardComment.waboCoSeq}"

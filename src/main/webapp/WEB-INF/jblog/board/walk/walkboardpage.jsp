@@ -68,11 +68,13 @@
 		value=${searchKeyword }>
 	<ul class="pagination">
 		<li
-			class="page-item <c:if test="${walkboardpage.first }">disabled</c:if>"><a
+			class="page-item <c:if test="${walkboardpage.first }">disabled</c:if>">
+			${walkboardpage.totalPages}
+			<a
 			class="page-link"
-			href="?searchKeyword=${searchKeyword }&page=${pwalkboardpage.number-1 }">Previous</a></li>
-
-		<c:forEach var="page" begin="1" end="${walkboardpage.totalPages }">
+			href="?searchKeyword=${searchKeyword }&page=${walkboardpage.number-1 }">Previous</a></li>
+	
+		<c:forEach var="page" begin="1" end="${walkboardpage.totalPages}">
 			<li class="page-item"><a class="page-link"
 				href="?searchKeyword=${searchKeyword }&page=${page -1}">${page }</a></li>
 		</c:forEach>

@@ -47,9 +47,9 @@
   <div align="center" class="option">
             <div>
                 <form onsubmit="searchPlaces(); return false;">
-                    <h2>가까운 동물병원 찾기</h2> 
+                    <h2>가까운 동물병원과 업체 찾기</h2> 
                     <br> 
-                    <input type="text" value="${principal.address.split(' ')[0]} 동물병원" id="keyword" size="15"> 
+                    <input type="text" value="${principal.address.split(' ')[1]} 동물병원" id="keyword" size="15"> 
                     <button class="btn btn-warning" type="submit">검색하기</button> 
                     
                 </form>
