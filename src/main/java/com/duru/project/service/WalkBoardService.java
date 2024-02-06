@@ -54,67 +54,31 @@ public class WalkBoardService {
 	
 	//WalkBoardSearchPaging
 	@Transactional(readOnly = true)
-	public Page<WalkBoard> getSearchWalkBoardsOrderByDistanceAndRecentWithPaging(double userLatitude, double userLongitude, String searchKeyword, Pageable pageable){
-	    List<WalkBoard> searchWalkBoard = walkBoardRepository.findBywaboContentContaining(searchKeyword);
+	public Page<WalkBoard> getWalkBoardsOrderByDistanceAndRecentWithPaging(double userLatitude, double userLongitude, String searchKeyword, Pageable pageable) {
+	    List<WalkBoard> walkBoardList = null;
 
-	    // 거리와 최근성에 따라 정렬
-	    Collections.sort(searchWalkBoard, new DistanceAndRecentComparator(userLatitude, userLongitude));
-
-	    // 5키로 이내의 게시글만 필터링 및 페이징 처리
-	    List<WalkBoard> pagedSearchWalkBoard = filterAndPageByDistance(searchWalkBoard, userLatitude, userLongitude, 5.0, pageable.getPageNumber(), pageable.getPageSize());
-
-	    // 전체 리스트에서 페이징된 부분과 전체 개수를 사용하여 Page 객체 생성
-	    return new PageImpl<>(pagedSearchWalkBoard, pageable, pagedSearchWalkBoard.size());
-	}
-	
-	//WalkBoardPaging
-	@Transactional
-	public Page<WalkBoard> getWalkBoardsOrderByDistanceAndRecentWithPaging(double userLatitude, double userLongitude, Pageable pageable) {
-	    List<WalkBoard> walkBoard = walkBoardRepository.findAll();
-
-	    // 거리와 최근성에 따라 정렬
-	    Collections.sort(walkBoard, new DistanceAndRecentComparator(userLatitude, userLongitude));
-
-	    // 5키로 이내의 게시글만 필터링 및 페이징 처리
-	    List<WalkBoard> pagedWalkBoards = filterAndPageByDistance(walkBoard, userLatitude, userLongitude, 5.0, pageable.getPageNumber(), pageable.getPageSize());
-
-	    // 전체 리스트에서 페이징된 부분과 전체 개수를 사용하여 Page 객체 생성
-	    return new PageImpl<>(pagedWalkBoards, pageable, pagedWalkBoards.size());
-	}
-	
-	// 범위 이내 확인 및 페이징 처리 메서드
-	private List<WalkBoard> filterAndPageByDistance(List<WalkBoard> walkBoards, double userLatitude, double userLongitude, double maxDistance, int page, int pageSize) {
-	    // 필터링된 게시글 리스트 생성
-	    List<WalkBoard> filteredWalkBoards = walkBoards.stream()
-	            .filter(board -> calculateDistance(userLatitude, userLongitude, board.getUser().getLatitude(), board.getUser().getLongitude()) <= maxDistance)
-	            .collect(Collectors.toList());
-
-	    // 전체 페이지 수 계산
-	    int totalPages = (int) Math.ceil((double) filteredWalkBoards.size() / (double) pageSize);
-
-	    // 페이지가 빈 페이지인지 확인하고, 비어 있다면 빈 리스트를 반환
-	    if (page >= totalPages) {
-	        return Collections.emptyList();
+	    //검색어가 있는지 없는지 확인
+	    if (searchKeyword != null && !searchKeyword.isEmpty()) {
+	        walkBoardList = walkBoardRepository.findBywaboTitleContaining(searchKeyword);
+	    } else {
+	        walkBoardList = walkBoardRepository.findAll();
 	    }
 
-	    // 페이징 처리된 결과를 반환
-	    int start = page * pageSize;
-	    int end = Math.min((page + 1) * pageSize, filteredWalkBoards.size());
-	    return filteredWalkBoards.subList(start, end);
-	}
+	    // 거리와 최근성에 따라 정렬
+	    Collections.sort(walkBoardList, new DistanceAndRecentComparator(userLatitude, userLongitude));
 
-	// 위도 경도 비교 공식
-	private double calculateDistance(double lat1, double lon1, double lat2, double lon2) {
-	    double dLat = Math.toRadians(lat2 - lat1);
-	    double dLon = Math.toRadians(lon2 - lon1);
+	    // 필터링된 게시글 리스트 생성
+	    List<WalkBoard> filteredWalkBoards = walkBoardList.stream()
+	            .filter(board -> calculateDistance(userLatitude, userLongitude, board.getUser().getLatitude(), board.getUser().getLongitude()) <= 5.0)
+	            .collect(Collectors.toList());
 
-	    double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(Math.toRadians(lat1))
-	            * Math.cos(Math.toRadians(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+	    // 페이지 계산
+	    int start = (int) pageable.getOffset();
+	    int end = Math.min((start + pageable.getPageSize()), filteredWalkBoards.size());
+	    List<WalkBoard> pagedWalkBoards = filteredWalkBoards.subList(start, end);
 
-	    double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-
-	    final int R = 6371;
-	    return R * c;
+	    // 페이지 객체 생성
+	    return new PageImpl<>(pagedWalkBoards, pageable, filteredWalkBoards.size());
 	}
 
 	//정렬식
@@ -140,6 +104,20 @@ public class WalkBoardService {
 
 	        return distanceComparison;
 	    }
+	}
+	
+	// 위도 경도 비교 공식
+	private double calculateDistance(double lat1, double lon1, double lat2, double lon2) {
+	    double dLat = Math.toRadians(lat2 - lat1);
+	    double dLon = Math.toRadians(lon2 - lon1);
+
+	    double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(Math.toRadians(lat1))
+	            * Math.cos(Math.toRadians(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+
+	    double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+	    final int R = 6371;
+	    return R * c;
 	}
 
 }

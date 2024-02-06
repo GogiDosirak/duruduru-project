@@ -1,32 +1,22 @@
 
 package com.duru.project.controller;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.duru.project.domain.ImageSrcExtractor;
 import com.duru.project.domain.Product;
-import com.duru.project.dto.ResponseDTO;
 import com.duru.project.service.ProductService;
 
 import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class ShopController {
-	public ImageSrcExtractor imageSrcExtractor;
+	
 
 	@Autowired
 	private ProductService productService;

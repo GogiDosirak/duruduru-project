@@ -69,7 +69,7 @@
 	<ul class="pagination">
 		<li
 			class="page-item <c:if test="${walkboardpage.first }">disabled</c:if>">
-			${walkboardpage.totalPages}
+			
 			<a
 			class="page-link"
 			href="?searchKeyword=${searchKeyword }&page=${walkboardpage.number-1 }">Previous</a></li>

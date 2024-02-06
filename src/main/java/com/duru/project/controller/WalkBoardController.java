@@ -40,25 +40,25 @@ public class WalkBoardController {
 	// walkBoardPage // walkBoardSearchPage
 	@GetMapping("/walk")
 	public String getWalkBoardListPage(Model model,
-			@PageableDefault(size = 4) Pageable pageable,
-			String searchKeyword, HttpSession session) {
-		
-		User findUser = (User) session.getAttribute("principal");
-	    double userLatitude = findUser.getLatitude(); 
-	    double userLongitude = findUser.getLongitude(); 
+	        @PageableDefault(size = 4) Pageable pageable,
+	        @RequestParam(required = false) String searchKeyword, HttpSession session) {
 
-		Page<WalkBoard> walkboardpage = null;
+	    User findUser = (User) session.getAttribute("principal");
+	    double userLatitude = findUser.getLatitude();
+	    double userLongitude = findUser.getLongitude();
 
-		if (searchKeyword == null) {
-			walkboardpage = walkBoardService.getWalkBoardsOrderByDistanceAndRecentWithPaging(userLatitude, userLongitude, pageable);
-		} else {
-			walkboardpage = walkBoardService.getSearchWalkBoardsOrderByDistanceAndRecentWithPaging(userLatitude, userLongitude, searchKeyword, pageable);
-		}
-		
-		model.addAttribute("searchKeyword", searchKeyword);
-		model.addAttribute("walkboardpage", walkboardpage);
+	    Page<WalkBoard> walkboardpage = null;
 
-		return "board/walk/walkboardpage";
+	    if (searchKeyword == null) {
+	        walkboardpage = walkBoardService.getWalkBoardsOrderByDistanceAndRecentWithPaging(userLatitude, userLongitude, searchKeyword, pageable);
+	    } else  {
+	        walkboardpage = walkBoardService.getWalkBoardsOrderByDistanceAndRecentWithPaging(userLatitude, userLongitude, searchKeyword, pageable);
+	    }
+
+	    model.addAttribute("searchKeyword", searchKeyword);
+	    model.addAttribute("walkboardpage", walkboardpage);
+
+	    return "board/walk/walkboardpage";
 	}
 
 	// insert11
