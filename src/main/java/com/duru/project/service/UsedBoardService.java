@@ -1,11 +1,13 @@
 package com.duru.project.service;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -146,22 +148,78 @@ public class UsedBoardService {
 	}
 	
 	
-	//위도 경도 가까운 순 
-	
-	
-	//검색어 없는 경우
-	@Transactional
-	 public Page<UsedBoard> getUsedBoardOrderByDistance(Double userLatitude, Double userLongitude, Pageable pageable) {
-	        return usedBoardRepository.getUsedBoardOrderByDistance(userLatitude, userLongitude, pageable);
-	    }
 
 	
 	
-	//검색어 있는 경우 
-	@Transactional
-	    public Page<UsedBoard> searchUsedBoardByKeywordAndOrderByDistance(String searchKeyword, Double userLatitude, Double userLongitude, Pageable pageable) {
-	        return usedBoardRepository.searchUsedBoardByKeywordAndOrderByDistance(searchKeyword, userLatitude, userLongitude, pageable);
-	    }
+
 	
+	
+	//위도 경도 가까운 순 5km이내의 게시글만 뜨게
+	
+	//검색어 없는 경우
+	@Transactional
+	public Page<UsedBoard> getUsedBoardOrderByDistance(Double userLatitude, Double userLongitude, Pageable pageable) {
+	    // 사용자의 위치에 따라 특정 페이지의 게시글을 가져옵니다.
+	    Page<UsedBoard> usedBoardsPage = usedBoardRepository.getUsedBoardOrderByDistance(userLatitude, userLongitude, pageable);
+	    
+	    // 거리 필터링을 적용한 페이징 처리된 게시글을 반환합니다.
+	    return filterUsedBoardsByDistance(usedBoardsPage, userLatitude, userLongitude);
+	}
+	
+	
+	
+
+	//검색어 있는 경우
+	@Transactional
+	public Page<UsedBoard> searchUsedBoardByKeywordAndOrderByDistance(String searchKeyword, Double userLatitude, Double userLongitude, Pageable pageable) {
+	    // 사용자의 위치에 따라 특정 페이지의 게시글을 가져옵니다.
+	    Page<UsedBoard> usedBoardsPage = usedBoardRepository.searchUsedBoardByKeywordAndOrderByDistance(searchKeyword, userLatitude, userLongitude, pageable);
+	    
+	    // 거리 필터링을 적용한 페이징 처리된 게시글을 반환합니다.
+	    return filterUsedBoardsByDistance(usedBoardsPage, userLatitude, userLongitude);
+	}
+	
+	
+	
+	
+
+	// 5km 이내인지 확인하는 메서드
+	private Page<UsedBoard> filterUsedBoardsByDistance(Page<UsedBoard> usedBoards, Double userLatitude, Double userLongitude) {
+	    List<UsedBoard> filteredList = new ArrayList<>();
+	    for (UsedBoard usedBoard : usedBoards) {
+	        double distance = calculateDistance(userLatitude, userLongitude, usedBoard.getUser().getLatitude(), usedBoard.getUser().getLongitude());
+	        if (distance <= 5) {
+	            filteredList.add(usedBoard);
+	        }
+	    }
+	    return new PageImpl<>(filteredList, usedBoards.getPageable(), filteredList.size());
+	}
+
+
+	
+	
+	//5km이내 거리 계산
+	private double calculateDistance(double lat1, double lon1, double lat2, double lon2) {
+	    // 지구의 반지름 (단위: km)
+	    final double R = 6371.0;
+
+	    // 위도 및 경도를 라디안 단위로 변환
+	    double lat1Rad = Math.toRadians(lat1);
+	    double lon1Rad = Math.toRadians(lon1);
+	    double lat2Rad = Math.toRadians(lat2);
+	    double lon2Rad = Math.toRadians(lon2);
+
+	    // 위도 차이와 경도 차이 계산
+	    double deltaLat = lat2Rad - lat1Rad;
+	    double deltaLon = lon2Rad - lon1Rad;
+
+	    // Haversine 공식을 사용하여 두 지점 사이의 거리를 계산
+	    double a = Math.pow(Math.sin(deltaLat / 2), 2) + Math.cos(lat1Rad) * Math.cos(lat2Rad) * Math.pow(Math.sin(deltaLon / 2), 2);
+	    double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+	    double distance = R * c;
+
+	    return distance;
+	}
+
 	
 }

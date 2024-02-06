@@ -35,7 +35,16 @@ public class EventBoardController {
 	
 
 	@GetMapping("/event")
-	public String freeBoardList(Model model, @PageableDefault(size = 4, sort = "eventSeq", direction = Direction.DESC) Pageable pageable, String searchKeyword) {
+	public String freeBoardList(Model model, @PageableDefault(size = 4, sort = "eventSeq", direction = Direction.DESC) 
+	Pageable pageable, String searchKeyword, HttpSession session) {
+		
+		User user = (User) session.getAttribute("principal");
+        
+        if (user == null) {
+            // 로그인되어 있지 않으면 로그인 페이지로 리다이렉트 또는 다른 처리 수행
+            return "redirect:/login";
+        }
+		
 		Page<EventBoard> list = null;
 		
 		if(searchKeyword == null) {

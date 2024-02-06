@@ -25,6 +25,16 @@ public interface UsedBoardRepository extends JpaRepository<UsedBoard, Integer> {
 												@Param("userLongitude") double userLongitude, Pageable pageable);
 	
 	
+	
+
+	
+
+
+	
+	
+	
+	
+	
 
     // 거리 기준 정렬 및 키워드 검색 지원 메서드
     @Query(value = "SELECT ub FROM UsedBoard ub WHERE " +
@@ -34,5 +44,9 @@ public interface UsedBoardRepository extends JpaRepository<UsedBoard, Integer> {
     														@Param("userLatitude")double userLatitude, @Param("userLongitude")double userLongitude, Pageable pageable);
 
 	
+	
+	
+	
+
 
 }
