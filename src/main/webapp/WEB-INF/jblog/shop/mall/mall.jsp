@@ -53,7 +53,7 @@
 			class="page-item <c:if test="${productList.first }">disabled</c:if>"><a
 			class="page-link" href="?page=${productList.number-1 }">Previous</a></li>
 
-		<c:forEach var="page" begin="1" end="${productList.totalPages }">
+		<c:forEach var="page" begin="1" end="${productList.totalPages +1 }">
 			<li class="page-item"><a class="page-link"
 				href="?page=${page-1 }">${page }</a></li>
 		</c:forEach>

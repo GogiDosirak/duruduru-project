@@ -105,7 +105,7 @@
             <a href="#" onclick="loadPage('exchangeRefund')">교환 및 환불</a>
         </div>
  
-<input type="hidden" name="orderSeq" id="orderSeq" value=${userOrder.orderSeq }>
+<input type="hidden" name="orderSeq" id="orderSeq" value=${userPay.paySeq }>
 
 	
 	
@@ -129,11 +129,11 @@
     <c:forEach var="order" items="${orderList}">
         <c:if test="${order.user.userSeq == principal.userSeq}">
             <tr>	
-                <td style="vertical-align: middle; text-align: center;">${order.orderSeq }</td>
-                <td style="vertical-align: middle; text-align: center;">${order.orderName}</td>
-                <td style="vertical-align: middle; text-align: center;">${order.orderAddress}</td>
-                <td style="vertical-align: middle; text-align: center;">${order.orderPrice}원</td>	
-                <td style="vertical-align: middle; text-align: center;">${order.orderDate}</td>
+                <td style="vertical-align: middle; text-align: center;">${order.paySeq }</td>
+                <td style="vertical-align: middle; text-align: center;">${order.payName}</td>
+                <td style="vertical-align: middle; text-align: center;">${order.payAddress}</td>
+                <td style="vertical-align: middle; text-align: center;">${order.payPrice}원</td>	
+                <td style="vertical-align: middle; text-align: center;">${order.payDate}</td>
               
             </tr>
         </c:if>

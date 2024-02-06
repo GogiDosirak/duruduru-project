@@ -136,8 +136,8 @@
       alert('보유 포인트보다 많습니다.');
     } 
     // 물건 가격보다 높게 입력된 경우
-    else if (point > orderPrice) {
-      alert('물건 가격보다 낮게 입력해주세요.');
+    else if (point > orderPrice-10) {
+      alert('물건 가격보다 낮게 입력해주세요.(최소 10원 결제)');
     } 
     else if (point < 1) {
         alert('0보다 큰 값을 입력해주세요.');
@@ -152,6 +152,46 @@
   });
 </script>
 	<br>
+	<input type="checkbox" id="fillInfoCheckbox" onclick="fillInFields()">
+<label for="fillInfoCheckbox">회원 정보와 동일</label>
+<br>
+<script>
+    // 체크박스를 클릭할 때 실행되는 함수
+    function fillInFields() {
+        // 체크박스의 체크 여부 확인
+        var checkBox = document.getElementById("fillInfoCheckbox");
+        
+        // 체크되었을 때
+        if (checkBox.checked) {
+            // 주문 전화번호 필드 채우기
+            var orderPhonenumber = document.getElementById("orderPhonenumber");
+            orderPhonenumber.value = "${principal.phonenumber}";
+            
+            // 이메일 필드 채우기
+            var orderEmail = document.getElementById("orderEmail");
+            orderEmail.value = "${principal.email}";
+            
+            // 우편번호 필드 채우기
+            var orderZipcode = document.getElementById("orderZipcode");
+            orderZipcode.value = "${principal.zipcode}";
+            
+            // 도로명 주소 필드 채우기
+            var orderAddress = document.getElementById("orderAddress");
+            orderAddress.value = "${principal.address}";
+            
+            // 상세 주소 필드 채우기
+            var orderAddressDetail = document.getElementById("orderAddressDetail");
+            orderAddressDetail.value = "${principal.addressDetail}";
+        } else { // 체크가 해제되었을 때
+            // 모든 필드 초기화
+            document.getElementById("orderPhonenumber").value = "";
+            document.getElementById("orderEmail").value = "";
+            document.getElementById("orderZipcode").value = "";
+            document.getElementById("orderAddress").value = "";
+            document.getElementById("orderAddressDetail").value = "";
+        }
+    }
+</script>
 				<div class="form-group">
 					<label for="orderName">주문 성함</label> <input type="text" id="orderName"
 						name="orderName" required>
@@ -204,14 +244,12 @@
 					});
 				</script>
 	
-	
 				<br>
 				<div class="form-group">
 				
 		
-					<button id="btn-insertOrder" onclick="location.href='/goPay'">주문 제출</button>
+					<button id="btn-insertOrder">주문 제출</button>
 				</div> 
-	
 			</div>
 		</div>
 	

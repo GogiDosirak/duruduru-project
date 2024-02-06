@@ -113,6 +113,47 @@
 <h4>총 주문금액 : ${totalPrice - point} (${point } 포인트 사용)</h4> 
 <input type="hidden" id="orderPrice" name="orderPrice" value="${totalPrice - point }">
 <br>
+	<input type="checkbox" id="fillInfoCheckbox" onclick="fillInFields()">
+<label for="fillInfoCheckbox">회원 정보와 동일</label>
+<br>
+<script>
+    // 체크박스를 클릭할 때 실행되는 함수
+    function fillInFields() {
+        // 체크박스의 체크 여부 확인
+        var checkBox = document.getElementById("fillInfoCheckbox");
+        
+        // 체크되었을 때
+        if (checkBox.checked) {
+            // 주문 전화번호 필드 채우기
+            var orderPhonenumber = document.getElementById("orderPhonenumber");
+            orderPhonenumber.value = "${principal.phonenumber}";
+            
+            // 이메일 필드 채우기
+            var orderEmail = document.getElementById("orderEmail");
+            orderEmail.value = "${principal.email}";
+            
+            // 우편번호 필드 채우기
+            var orderZipcode = document.getElementById("orderZipcode");
+            orderZipcode.value = "${principal.zipcode}";
+            
+            // 도로명 주소 필드 채우기
+            var orderAddress = document.getElementById("orderAddress");
+            orderAddress.value = "${principal.address}";
+            
+            // 상세 주소 필드 채우기
+            var orderAddressDetail = document.getElementById("orderAddressDetail");
+            orderAddressDetail.value = "${principal.addressDetail}";
+        } else { // 체크가 해제되었을 때
+            // 모든 필드 초기화
+            document.getElementById("orderPhonenumber").value = "";
+            document.getElementById("orderEmail").value = "";
+            document.getElementById("orderZipcode").value = "";
+            document.getElementById("orderAddress").value = "";
+            document.getElementById("orderAddressDetail").value = "";
+        }
+    }
+</script>
+
 </center>
 <br>
 			<div class="form-group">
@@ -172,7 +213,7 @@
 			<div class="form-group">
 			
 	<input type="hidden" id="usePoint" name="usePoint" value="${point }">
-				<button id="btn-insertOrder" onclick="location.href='/goPay'">주문 제출</button>
+				<button id="btn-insertOrder">주문 제출</button>
 			</div> 
 
 		</div>

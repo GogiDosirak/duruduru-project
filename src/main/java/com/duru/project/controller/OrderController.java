@@ -18,10 +18,12 @@ import com.duru.project.domain.Basket;
 import com.duru.project.domain.Product;
 import com.duru.project.domain.User;
 import com.duru.project.domain.UserOrder;
+import com.duru.project.domain.UserPay;
 import com.duru.project.dto.ResponseDTO;
 import com.duru.project.service.BasketService;
 import com.duru.project.service.OrderService;
 import com.duru.project.service.ProductService;
+import com.duru.project.service.UserPayService;
 import com.duru.project.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
@@ -36,6 +38,8 @@ public class OrderController {
 	private ProductService productService;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private UserPayService userPayService;
 	
 	
 	@GetMapping("/order/{userSeq}")
@@ -69,6 +73,25 @@ public class OrderController {
 	
 	@GetMapping("/buyComplete")
 	public String buyComplete(HttpSession session) {
+		// 결제가 완료되면 userpay 테이블에 데이터 삽입
+		UserOrder userOrder = (UserOrder)session.getAttribute("userOrder");
+		User user = (User)session.getAttribute("principal");
+		UserPay userPay = new UserPay();
+		userPay.setUser(user);
+		userPay.setPayAddress(userOrder.getOrderAddress());
+		userPay.setPayAddressDetail(userOrder.getOrderAddressDetail());
+		userPay.setPayEmail(userOrder.getOrderEmail());
+		userPay.setPayName(userOrder.getOrderName());
+		userPay.setPayPhonenumber(userOrder.getOrderPhonenumber());
+		userPay.setPayPrice(userOrder.getOrderPrice());
+		userPay.setPayRequest(userOrder.getOrderRequest());
+		userPay.setPayZipcode(userOrder.getOrderZipcode());
+		//userOrder에서 값을 받아서 set해주고,
+		userPayService.insertUserPay(userPay); //저장
+		
+		//결제 완료되면 해당 userOrder 삭제
+		orderService.deleteOrder(userOrder.getOrderSeq());
+		
 		List<Basket> userBasketList = (List<Basket>)session.getAttribute("basketList");
 		for (Basket basket : userBasketList) {
 			// 유저 basket에 담긴 모든 상품에 대해서
@@ -78,11 +101,12 @@ public class OrderController {
 			
 		}
 		// 그 후, 
-		User user = (User)session.getAttribute("principal");
+		if(session.getAttribute("point") != null) { //point를 사용한 경우에만 해당 내용이 실행돼야함
 		int point = (int) session.getAttribute("point");
 		user.setPoint(user.getPoint()-point); // 사용한 만큼 포인트 깎아줌
 		userService.insertUser(user); // 저장
 		session.removeAttribute("point"); //저장해뒀던 포인트 정보 remove
+		}
 		basketService.deleteUserBasket(user.getUserSeq()); //해당 유저의 basket을 삭제
 	
 		return "/index";
@@ -90,15 +114,6 @@ public class OrderController {
 		
 	}
 	
-	@GetMapping("/orderHistory")
-	public String orderHistory(HttpSession session) {
-		User user = (User) session.getAttribute("principal");
-		List<UserOrder> orderList = orderService.getOrderList(user.getUserSeq());
-		session.setAttribute("orderList", orderList);
-		return "shop/order/orderHistory";
-	}
-	
-
 	
 	@GetMapping("/usePoint/{userSeq}")
 	public String usePoint(@PathVariable int userSeq,int point, HttpSession session) {
