@@ -16,7 +16,10 @@
 <meta name="keywords" content="">
 <meta name="description" content="">
 
-      
+
+
+      <script src="/webjars/jquery/3.6.0/dist/jquery.min.js"></script>
+
 
 
  <!-- summernote 시작 -->
@@ -212,7 +215,9 @@ body {
                            aria-labelledby="dropdownPages">
                            <li><a href="/notice" class="dropdown-item item-anchor">공지사항</a></li>
                            <li><a href="/event" class="dropdown-item item-anchor">이벤트</a></li>
-                           <li><a href="/inquiry" class="dropdown-item item-anchor">1:1문의
+
+                           <li><a href="/onetoone" class="dropdown-item item-anchor">1:1문의
+
                            </a></li>
                         </ul></li>
                      <li class="nav-item">

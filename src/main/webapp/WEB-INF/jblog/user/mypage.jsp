@@ -173,7 +173,9 @@
                 <h5>${principal.address }</h5>
             </div>
                         <div class="form-group">
-                <label for="addressDetail">상세주소</label>
+
+                <label for="address_detail">상세주소</label>
+
                 <h5>${principal.addressDetail }</h5>
             </div>
             

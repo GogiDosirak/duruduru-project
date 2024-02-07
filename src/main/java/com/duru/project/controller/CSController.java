@@ -10,9 +10,5 @@ public class CSController {
 
 	
 	
-	@GetMapping("/event")
-	public String event() {
-		return "cs/event/event";
-	}
 
 }
