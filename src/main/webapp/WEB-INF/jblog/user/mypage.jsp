@@ -102,10 +102,10 @@
     <br>
     <div class="container col-md-8 col-sm-8 col-xs-8">
         <div class="sidebar">
-            <a href="#" onclick="loadPage('profile')">내 정보</a>
+            <a href="/mypage" onclick="loadPage('profile')">내 정보</a>
             <a href="#" onclick="loadPage('petInfo')">반려동물 정보</a>
             <a href="#" onclick="loadPage('myPosts')">내가 쓴 글</a>
-            <a href="#" onclick="loadPage('myPosts')">주문내역</a>
+            <a href="/orderHistory" onclick="loadPage('myPosts')">주문내역</a>
             <a href="#" onclick="loadPage('exchangeRefund')">교환 및 환불</a>
         </div>
         <div class="login-container ">
@@ -115,7 +115,7 @@
             <form>
         <form>
         <br>
-        <input type="hidden" id="user_seq" name="user_seq" value="${principal.user_seq }">
+        <input type="hidden" id="userSeq" name="userSeq" value="${principal.userSeq }">
             <div class="form-group">
                 <label for="userid">아이디</label>
                 <h5>${principal.userid }</h5>
@@ -124,7 +124,36 @@
             <div class="form-group">
                 <label for="password">비밀번호</label>
                 <input type="text" id="password" name="password" value="${principal.password }">
+                 <small id="passwordError" class="text-danger"></small>
             </div>
+                 <div class="form-group">
+                <label for="passwordConfirm">비밀번호 확인</label>
+                <input type="text" id="passwordConfirm" name="passwordConfirm">
+                  <small id="passwordConfirmError" class="text-danger"></small>
+            </div>
+            
+            <script>
+    const passwordInput = document.getElementById('password');
+    const passwordError = document.getElementById('passwordError');
+    const passwordConfirmInput = document.getElementById('passwordConfirm');
+    const passwordConfirmError = document.getElementById('passwordConfirmError');
+
+    passwordInput.addEventListener('input', function (event) {
+        if (!passwordInput.checkValidity()) {
+            passwordError.textContent = '비밀번호는 최소 8자 이상이어야 하고 숫자, 영어, 특수문자(!@#$%^&*-)가 포함되어 있어야 합니다.';
+        } else {
+            passwordError.textContent = '';
+        }
+    });
+
+    passwordConfirmInput.addEventListener('input', function (event) {
+        if (passwordConfirmInput.value !== passwordInput.value) {
+            passwordConfirmError.textContent = '비밀번호가 일치하지 않습니다.';
+        } else {
+            passwordConfirmError.textContent = '';
+        }
+    });
+</script>
                         <div class="form-group">
                 <label for="nickname">닉네임</label>
                 <input type="text" id="nickname" name="nickname" value="${principal.nickname }">
@@ -144,8 +173,8 @@
                 <h5>${principal.address }</h5>
             </div>
                         <div class="form-group">
-                <label for="address_detail">상세주소</label>
-                <h5>${principal.address_detail }</h5>
+                <label for="addressDetail">상세주소</label>
+                <h5>${principal.addressDetail }</h5>
             </div>
             
                        <div class="form-group">

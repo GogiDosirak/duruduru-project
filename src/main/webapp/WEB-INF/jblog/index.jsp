@@ -19,6 +19,7 @@
 										<class ="display-1 text-uppercasetext-darkpb-2"></class>
 										<h1>'두루두루'</h1>
 										<h2>펫 커뮤니티</h2>
+										<c:if test="${principal == null }">
 										<br> <a href="/login"
 											class="btn btn-medium btn-arrow position-relative mt-5">
 											<span class="text-uppercase">로그인</span> <svg
@@ -26,6 +27,17 @@
                           <use xlink:href="/login"></use>
                         </svg>
 										</a>
+										</c:if>
+										<c:if test="${principal != null }">
+										<br> <a href="/logout"
+											class="btn btn-medium btn-arrow position-relative mt-5">
+											<span class="text-uppercase">로그아웃</span> <svg
+												class="arrow-right position-absolute" width="18" height="20">
+                          <use xlink:href="/logout"></use>
+                        </svg>
+										</a>
+										
+										</c:if>
 									</div>
 								</div>
 							</div>

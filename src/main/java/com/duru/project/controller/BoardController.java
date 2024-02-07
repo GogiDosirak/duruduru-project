@@ -5,10 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class BoardController {
-	@GetMapping("/freeboard")
-	public String freeboard() {
-		return "board/free/freeboard";
-	}
+	
 	
 	@GetMapping("/usedboard")
 	public String useddboard() {
@@ -24,5 +21,10 @@ public class BoardController {
 	public String walking() {
 		return "board/walking/walking";
 	}
-
+	
+	
+	@GetMapping("/insertwalkcheckboard")
+	public String insertwalkcheckboard() {
+		return "board/walking/insertwalkcheckboard";
+	}
 }
