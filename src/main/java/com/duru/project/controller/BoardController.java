@@ -8,10 +8,6 @@ public class BoardController {
 	
 	
 
-	@GetMapping("/usedboard")
-	public String useddboard() {
-		return "board/used/usedboard";
-	}
 
 
 	

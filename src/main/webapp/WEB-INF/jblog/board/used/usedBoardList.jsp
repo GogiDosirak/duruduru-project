@@ -36,7 +36,7 @@ function showPosition(position) {
     var longitude = position.coords.&{principal.longitude};
 
     // 서버로 위도와 경도 전송
-    window.location.href = "/used-boards?latitude=" + latitude + "&longitude=" + longitude;
+    window.location.href = "/used-boards?latitude=" + latitude + "&longitude=" + longitude	;
 }
 </script>
 

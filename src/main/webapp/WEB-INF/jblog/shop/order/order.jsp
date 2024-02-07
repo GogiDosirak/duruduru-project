@@ -252,10 +252,11 @@
 				</div> 
 			</div>
 		</div>
-	
+	</div>
+	<%@include file="/WEB-INF/jblog/layout/footer.jsp"%>
 	</body>
 	<script src="/js/order.js"></script>
 	<script src="/js/coolSMS.js"></script>
 	<script src="/js/user.js"></script>
-	<%@include file="/WEB-INF/jblog/layout/footer.jsp"%>
 	</html>
+	

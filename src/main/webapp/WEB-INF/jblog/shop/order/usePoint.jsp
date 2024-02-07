@@ -218,7 +218,7 @@
 
 		</div>
 	</div>
-
+</div>
 </body>
 <script src="/js/order.js"></script>
 <script src="/js/coolSMS.js"></script>

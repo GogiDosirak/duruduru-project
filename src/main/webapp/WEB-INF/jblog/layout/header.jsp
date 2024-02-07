@@ -176,16 +176,7 @@ body {
                      class="navbar-nav text-uppercase justify-content-end align-items-center flex-grow-1 pe-3">
 
                      <li class="nav-item"><a class="nav-link me-4" href="/">두루두루</a></li>
-                     <li class="nav-item dropdown"><a
-                        class="nav-link me-4 active dropdown-toggle" href="#billboard"
-                        id="dropdownPages" data-bs-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">동물병원&업장</a>
-                        <ul class="dropdown-menu list-unstyled"
-                           aria-labelledby="dropdownPages">
-                           <li><a href="/hospital" class="dropdown-item item-anchor">동물병원</a></li>
-                           <li><a href="/store" class="dropdown-item item-anchor">반려동물
-                                 업장 </a></li>
-                        </ul></li>
+                     <li class="nav-item"><a class="nav-link me-4" href="/hospital">동물병원&업장</a></li>
                      <li class="nav-item dropdown me-4"><a
                         class="nav-link dropdown-toggle" href="#" id="dropdownPages"
                         data-bs-toggle="dropdown" aria-haspopup="true"
@@ -217,7 +208,7 @@ body {
                            aria-labelledby="dropdownPages">
                            <li><a href="/notice" class="dropdown-item item-anchor">공지사항</a></li>
                            <li><a href="/event" class="dropdown-item item-anchor">이벤트</a></li>
-                           <li><a href="/onetoone" class="dropdown-item item-anchor">1:1문의
+                           <li><a href="/inquiry" class="dropdown-item item-anchor">1:1문의
 
                            </a></li>
                         </ul></li>

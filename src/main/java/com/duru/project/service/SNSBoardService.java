@@ -43,10 +43,11 @@ public class SNSBoardService {
 		return snsBoardRepository.findAll();
 	}
 
-	@Transactional
-	public void deleteSNS(int snsboSeq) {
-		snsBoardRepository.deleteById(snsboSeq);
-	}
+	   @Transactional
+	   public void deleteSNS(int snsboSeq) {
+	      likeRepository.deleteBySnsBoard_snsboSeq(snsboSeq);
+	      snsBoardRepository.deleteById(snsboSeq);
+	   }
 
 	@Transactional(readOnly = true)
 	public SNSBoard getSNSBaord(int snsboSeq) {

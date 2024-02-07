@@ -7,5 +7,6 @@ import com.duru.project.domain.LikeBoard;
 
 @Repository
 public interface likeRepository extends JpaRepository<LikeBoard, Integer>{
+	void deleteBySnsBoard_snsboSeq(int snsboSeq);
 	
 }
