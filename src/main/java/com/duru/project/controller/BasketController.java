@@ -92,6 +92,31 @@ public class BasketController {
 		}
 	}
 	
+	@PostMapping("/insertOneBasket")
+	public @ResponseBody ResponseDTO<?> insertOneBasket(int userSeq,int productSeq, int productAmount, HttpSession session) {
+		basketService.deleteUserBasket(userSeq);
+		Product product = productService.getProduct(productSeq); //jsp와 js를 통해 받은 productSeq로 상품 찾아서 세팅해주기
+		Basket basket = new Basket();
+		User user = (User)session.getAttribute("principal"); 
+		basket.setUser(user);
+		basket.setProduct(product);
+		basket.setBasketProductPrice(productAmount * basket.getProduct().getProductPrice());
+		basket.setBasketProductAmount(productAmount);
+		int totalPrice = basket.getBasketProductPrice(); 	 // 장바구니 총 금액 처리, 하나만 구매할 경우이므로 그냥 ProductPrice 가져오면 됨
+		if(basket.getBasketProductAmount() > product.getProductStock()) {
+			//재고보다 수량이 많다면 저장안하고
+			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(),"재고가 부족합니다.");
+		} else {
+	
+		basketService.insertBasket(basket);
+		List<Basket> basketList = basketService.getBasketList(userSeq);
+		session.setAttribute("totalPrice", totalPrice); 
+		session.setAttribute("basketList", basketList);
+		return new ResponseDTO<>(HttpStatus.OK.value(),"주문창으로 넘어갑니다.");
+		}
+		}
+	
+	
 	@PutMapping("/updateBasket") 
 	public @ResponseBody ResponseDTO<?> updateBasket(int productSeq, int basketProductAmount) {
 		Product product = productService.getProduct(productSeq);

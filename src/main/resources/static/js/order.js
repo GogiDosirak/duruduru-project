@@ -73,7 +73,8 @@ let OrderObject = {
 		});
 
 
-	}
+	},
+	
 	}
 	OrderObject.init();
 	

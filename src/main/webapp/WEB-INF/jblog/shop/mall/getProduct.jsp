@@ -112,7 +112,7 @@ img {
 				</div>
 				<button type="button"	
 					id="btn-insertBasket"
-					class="btn btn-warning">장바구니 추가</button>
+					class="btn btn-warning">장바구니 추가</button>&nbsp; <button type="button" id="btn-insertOneBasket" class="btn btn-danger">구매하기</button>
 				<script src="/js/shop.js"></script>
 				<script src="/js/basket.js"></script>
 			</c:if>
