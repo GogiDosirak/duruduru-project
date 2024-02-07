@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/jblog/layout/header.jsp"%>
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
@@ -13,61 +13,61 @@
 <title>Join</title>
 <style>
 .container {
-	display: flex;
-	align-items: center;
-	justify-content: center;
+   display: flex;
+   align-items: center;
+   justify-content: center;
 }
 
 .login-container {
-	background-color: #FFFAF0;
-	border-radius: 8px;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-	padding: 20px;
-	width: 300px;
+   background-color: #FFFAF0;
+   border-radius: 8px;
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+   padding: 20px;
+   width: 300px;
 }
 
 .login-container h2 {
-	text-align: center;
-	margin-bottom: 20px;
+   text-align: center;
+   margin-bottom: 20px;
 }
 
 .form-group {
-	margin-bottom: 15px;
+   margin-bottom: 15px;
 }
 
 .form-group label {
-	display: block;
-	font-weight: bold;
-	margin-bottom: 5px;
+   display: block;
+   font-weight: bold;
+   margin-bottom: 5px;
 }
 
 .form-group input {
-	width: 100%;
-	padding: 8px;
-	box-sizing: border-box;
-	border: 1px solid #ccc;
-	border-radius: 4px;
+   width: 100%;
+   padding: 8px;
+   box-sizing: border-box;
+   border: 1px solid #ccc;
+   border-radius: 4px;
 }
 
 .form-group button {
-	width: 100%; /* 버튼의 넓이를 100%로 설정 */
-	padding: 10px;
-	box-sizing: border-box;
-	background-color: #F5DEB3;
-	color: #000000;
-	border: none;
-	border-radius: 4px;
-	cursor: pointer;
-	font-size: 14px;
+   width: 100%; /* 버튼의 넓이를 100%로 설정 */
+   padding: 10px;
+   box-sizing: border-box;
+   background-color: #F5DEB3;
+   color: #000000;
+   border: none;
+   border-radius: 4px;
+   cursor: pointer;
+   font-size: 14px;
 }
 
 .form-group button:hover {
-	background-color: #F5DEB3;
+   background-color: #F5DEB3;
 }
 
 #duruduru-image {
-	width: 270px; /* 원하는 크기로 조절하세요 */
-	height: auto;
+   width: 270px; /* 원하는 크기로 조절하세요 */
+   height: auto;
 }
 </style>
 <script>
@@ -251,6 +251,7 @@
 
 		</div>
 	</div>
+
 
 </body>
 <script src="/js/coolSMS.js"></script>

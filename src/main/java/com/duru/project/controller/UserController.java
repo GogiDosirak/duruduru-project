@@ -156,8 +156,8 @@ public class UserController {
 			return "user/mypage";
 		}
 		
-		@PutMapping("/updateUser/{user_seq}")
-		public @ResponseBody ResponseDTO<?> updateUser(@RequestBody User user, @PathVariable int user_seq, HttpSession session) {
+		@PutMapping("/updateUser/{userSeq}")
+		public @ResponseBody ResponseDTO<?> updateUser(@RequestBody User user, @PathVariable int userSeq, HttpSession session) {
 			User myUser = (User)session.getAttribute("principal");
 			myUser.setPassword(user.getPassword());
 			myUser.setNickname(user.getNickname());

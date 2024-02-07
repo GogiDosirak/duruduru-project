@@ -84,7 +84,10 @@ body {
 ul.inner-list li {
   font-size: 1.2em;
 }
-
+        hr {
+            border-top: 2px solid #ccc;
+            margin: 1.5rem 0;
+        }
 strong {
   font-weight: bold;
 }
@@ -1064,7 +1067,7 @@ h5 {
 /*----------------------------------------------*/
 .pagination .page-link {
   color: var(--bs-primary);
-  background-color: var(--bs-light);
+  background-color: vhttps://github.com/GogiDosirak/duruduru-project/pull/31/conflict?name=src%252Fmain%252Fresources%252Fstatic%252Fcss%252Fstyle.css&ancestor_oid=f5354de7798631277585483d82e82cbc3e326b39&base_oid=b92d8dfa3d7f8da92cfc4e1a35a2565ff29ff2b9&head_oid=abeb8356dc4883115f4626b971f9c05da8563a80ar(--bs-light);
   border: 1px solid var(--bs-primary);
 }
 
@@ -1084,7 +1087,30 @@ h5 {
   color: var(--bs-light);
 }
 
-   #searchForm {
+/* 내가 추가한 스타일 */
+/* 페이지네이션을 가운데 정렬하는 스타일 */
+.pagination {
+	display: flex;
+	justify-content: center;
+	list-style: none;
+	padding: 0;
+}
+
+.pagination li {
+	margin: 0 5px;
+}
+
+​ /* Optional: 페이지 링크 스타일 조정 */  
+.pagination a {
+	text-decoration: none;
+	color: #007bff; /* 링크 색상을 원하는 색상으로 조정 */
+}
+
+.pagination a:hover {
+	text-decoration: underline;
+	
+}
+     #searchForm {
         display: flex;
         justify-content: flex-end;
         margin-bottom: 15px;
@@ -1108,7 +1134,9 @@ h5 {
         border-bottom-left-radius: 10px; /* 검색 창과 버튼 사이 둥글게 조정 */
         border-top-right-radius: 10px; /* 버튼 오른쪽 윤곽선 둥글게 조정 */
         border-bottom-right-radius: 10px; /* 버튼 오른쪽 윤곽선 둥글게 조정 */
+
     }
+
     .comment-container {
     text-align: right;
 }
@@ -1121,3 +1149,4 @@ h5 {
 textarea {
     margin-right: 10px; /* 텍스트 박스와 버튼 간의 간격 조절 */
 }
+

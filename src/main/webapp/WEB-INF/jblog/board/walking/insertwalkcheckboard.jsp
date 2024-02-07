@@ -73,14 +73,14 @@
 <div class="container">
     <div class="login-container">
             <div class="form-group">
-                <label for="wachbo_title">제목</label>
-                <input type="text" id="wachbo_title" name="wachbo_title" required>
+                <label for="wachboTitle">제목</label>
+                <input type="text" id="wachboTitle" name="wachboTitle" required>
             </div>
 
             <div class="form-group">
-           <label for="wachbo_content">내용</label>
+           <label for="wachboContent">내용</label>
                     <div class="mb-3">
-    <textarea class="form-control" id="wachbo_content" rows="5"></textarea>
+    <textarea class="form-control" id="wachboContent" rows="5"></textarea>
     </div>
     
      <script>

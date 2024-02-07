@@ -31,6 +31,7 @@ public class User {
     @Column(name = "userSeq")
     private int userSeq;
 
+
     @Column(name = "userid", unique = true, nullable = false, length = 40)
     private String userid;
 
@@ -54,9 +55,6 @@ public class User {
 
     @Column(name = "zipcode", nullable = false, length = 20)
     private String zipcode;
-
-    @Column(name = "localcode", length = 20)
-    private String localcode;
     
     @Column(name = "latitude")
     private double latitude;
@@ -75,7 +73,7 @@ public class User {
     @Column(name = "point")
     private int point;
     
-    @Column(name = "last_point_date")
+    @Column(name = "lastPointDate")
     private LocalDate lastPointDate;
 
 }

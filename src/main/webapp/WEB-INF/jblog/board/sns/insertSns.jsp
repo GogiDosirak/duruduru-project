@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
+
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@include file="/WEB-INF/jblog/layout/header.jsp"%>
@@ -133,3 +134,4 @@
 </div>
 </div>
 <%@include file="/WEB-INF/jblog/layout/footer.jsp"%>
+

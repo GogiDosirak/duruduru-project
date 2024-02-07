@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<script src="/webjars/jquery/3.6.0/dist/jquery.min.js"></script>
 
 <!DOCTYPE html>
 <html>
@@ -16,7 +17,9 @@
 <meta name="description" content="">
 
 
+
       <script src="/webjars/jquery/3.6.0/dist/jquery.min.js"></script>
+
 
 
  <!-- summernote 시작 -->
@@ -36,7 +39,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap"
    rel="stylesheet">
+
 <link rel="icon" href="/favicon.png" type="image/x-icon">
+
 <style>
 /* 기존 CSS 코드 ... */
 body {
@@ -213,6 +218,7 @@ body {
                            <li><a href="/notice" class="dropdown-item item-anchor">공지사항</a></li>
                            <li><a href="/event" class="dropdown-item item-anchor">이벤트</a></li>
                            <li><a href="/onetoone" class="dropdown-item item-anchor">1:1문의
+
                            </a></li>
                         </ul></li>
                      <li class="nav-item">

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+   pageEncoding="UTF-8"%>
+   <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file = "/WEB-INF/jblog/layout/header.jsp"%>
     <style>
 .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
@@ -40,16 +40,20 @@
 #pagination a {display:inline-block;margin-right:10px;}
 #pagination .on {font-weight: bold; cursor: default;color:#777;}
 </style>
+
 	<div class="container mt-3">
+
   <h2>동물병원</h2>    
 
   <!-- 지도시작 -->
   <div align="center" class="option">
             <div>
                 <form onsubmit="searchPlaces(); return false;">
+
                     <h2>가까운 동물병원과 업체 찾기</h2> 
                     <br> 
                     <input type="text" value="${principal.address.split(' ')[1]} 동물병원" id="keyword" size="15"> 
+
                     <button class="btn btn-warning" type="submit">검색하기</button> 
                     
                 </form>

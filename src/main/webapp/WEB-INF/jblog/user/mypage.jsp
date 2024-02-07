@@ -104,8 +104,9 @@
         <div class="sidebar">
             <a href="#" onclick="loadPage('profile')">내 정보</a>
             <a href="/petInfo/${principal.userSeq}" >반려동물 정보</a>
+
             <a href="#" onclick="loadPage('myPosts')">내가 쓴 글</a>
-            <a href="#" onclick="loadPage('myPosts')">주문내역</a>
+            <a href="/orderHistory" onclick="loadPage('myPosts')">주문내역</a>
             <a href="#" onclick="loadPage('exchangeRefund')">교환 및 환불</a>
         </div>
         <div class="login-container ">
@@ -174,6 +175,7 @@
             </div>
                         <div class="form-group">
                 <label for="addressDetail">상세주소</label>
+
                 <h5>${principal.addressDetail }</h5>
             </div>
             

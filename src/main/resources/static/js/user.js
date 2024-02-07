@@ -62,9 +62,11 @@ let userObject = {
 			phonenumber: $("#phonenumber").val(),
 			address: $("#address").val(),
 			addressDetail: $("#addressDetail").val(),
+
 			zipcode: $("#zipcode").val(),
 			latitude : $("#latitude").val(),
 			longitude : $("#longitude").val()
+
 		}
 		
 		let checkbox = document.getElementById("myCheck");

@@ -1,43 +1,72 @@
-let insertProductObject = {
-	init : function() {
+let ProductObject = {
+	init: function() {
 		let _this = this;
 		$("#btn-insertProduct").on("click", () => {
 			_this.insertProduct();
-			
-		});
-		
-		
+
+		}),
+			$("#btn-deleteProduct").on("click", () => {
+				_this.deleteProduct();
+
+			});
+
+
+
+
 	},
-	
-	insertProduct : function() {
+
+	insertProduct: function() {
 		alert("글등록 요청됨");
 		let insertProductData = {
-			product_name : $("#product_name").val(),
-			product_content : $("#product_content").val(),
-			product_price : $("#product_price").val(),
-			product_stock : $("#product_stock").val()
+			productName: $("#productName").val(),
+			productContent: $("#productContent").val(),
+			productPrice: $("#productPrice").val(),
+			productStock: $("#productStock").val()
 		}
-		
+
 		$.ajax({
-			type : "POST",
-			url : "/insertProduct",
-			data : JSON.stringify(insertProductData),
-			contentType : "application/json; charset=utf-8"
-			
-		}).done(function(response){
+			type: "POST",
+			url: "/insertProduct",
+			data: JSON.stringify(insertProductData),
+			contentType: "application/json; charset=utf-8"
+
+		}).done(function(response) {
 			let message = response["data"];
 			alert(message);
 			location = "/mall"    // /auth/getBoardList
-		}).fail(function(error){
+		}).fail(function(error) {
 			let message = error["data"];
-			alert(	"에러 발생 : " + message);
-			
+			alert("에러 발생 : " + message);
+
 		});
-		
-		
+
+
 	},
-	
-	
-	
+
+	deleteProduct: function() {
+		alert("글삭제 요청됨");
+		let deleteProductData = {
+			productSeq: $("#productSeq").val()
+		};
+		$.ajax({
+			type: "DELETE",
+			url: "/deleteProduct/" + deleteProductData.productSeq,
+			data: JSON.stringify(deleteProductData),
+			contentType: "application/json; charset=utf-8"
+
+		}).done(function(response) {
+			let message = response["data"];
+			alert(message);
+			location = "/mall"
+		}).fail(function(error) {
+			let message = error["data"];
+			alert("에러 발생 : " + message);
+
+		});
+
+
+	},
+
+
 }
-insertProductObject.init();
+ProductObject.init();

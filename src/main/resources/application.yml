@@ -1,11 +1,13 @@
 #서버설정
 server:
-  port: 8087
+  port: 8089
   servlet:
     context-path: /
     encoding:
       charset: UTF-8
       
+
+
 #뷰리졸버
 spring:
   mvc:
@@ -30,3 +32,12 @@ spring:
     properties:
       hibernate.format_sql: true
       
+
+      
+      
+      
+      
+logging:
+  level:
+    org.springframework.data.jpa: DEBUG
+

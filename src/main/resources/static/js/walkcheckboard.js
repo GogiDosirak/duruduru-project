@@ -13,8 +13,8 @@ let wachboObject = {
 		alert("글 등록이 요청되었습니다");
 		//사용자가 입력한 값 (jsp화면에서  )
 	let wachbo = {
-		wachbo_title : $("#wachbo_title").val(),
-		wachbo_content : $("#wachbo_content").val()
+		wachboTitle : $("#wachboTitle").val(),
+		wachboContent : $("#wachboContent").val()
 	}	  
 	//Ajax 비동기 호출 동기 호출: 맨위에서 순서대로, 비동기 호출: 순서대로가 아님
 	//done() 함수 : 요청 처리에 성고했을때
