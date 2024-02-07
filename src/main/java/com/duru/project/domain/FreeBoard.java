@@ -32,27 +32,27 @@ public class FreeBoard {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "frbo_seq")
-    private int frbo_seq;
+    @Column(name = "frboSeq")
+    private int frboSeq;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "user_seq")
+	@JoinColumn(name = "userSeq")
 	private User user;
 
 	
-    @Column(name = "frbo_title", length = 200)
-    private String frbo_title;
+    @Column(name = "frboTitle", length = 200)
+    private String frboTitle;
 
     @Lob
-    @Column(name = "frbo_content", columnDefinition = "LONGTEXT")
-    private String frbo_content;
+    @Column(name = "frboContent", columnDefinition = "LONGTEXT")
+    private String frboContent;
 
-    @Column(name = "frbo_date")
+    @Column(name = "frboDate")
     @CreationTimestamp
-    private Timestamp frbo_date;
+    private Timestamp frboDate;
 
-    @Column(name = "frbo_cnt")
-    private int frbo_cnt;
+    @Column(name = "frboCnt")
+    private int frboCnt;
 	
 
 }

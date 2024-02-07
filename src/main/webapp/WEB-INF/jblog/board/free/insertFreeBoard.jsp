@@ -10,18 +10,18 @@
          <div class="col-md-8">
             <div class="mb-3 mt-3">
                <label for="product_stock"></label> <input type="text"
-                  class="form-control" id="freeBoard_title" placeholder="제목을 입력하세요"
-                  name="freeboard_title">
+                  class="form-control" id="freeBoardTitle" placeholder="제목을 입력하세요"
+                  name="freeBoardTitle">
             </div>
          </div>
 
 <div class="col-md-8">
     <div class="mb-3">
-        <label for="freeBoard_content"></label>
-        <textarea id="freeBoard_content"></textarea>
+        <label for="freeBoardContent"></label>
+        <textarea id="freeBoardContent"></textarea>
         <script>
             $(document).ready(function() {
-                $("#freeBoard_content").summernote({
+                $("#freeBoardContent").summernote({
                     height: 500,
                     placeholder: "내용을 입력하세요"
                 }).siblings('.note-editor').find('.note-editable').css('text-align', 'left');

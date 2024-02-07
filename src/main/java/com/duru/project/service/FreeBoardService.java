@@ -34,8 +34,8 @@ public class FreeBoardService {
 	
 	
 	@Transactional(readOnly = true)
-	public FreeBoard getFreeBoard(int frbo_seq) {
-		FreeBoard findFreeBoard = freeBoardRepository.findById(frbo_seq).orElseGet( () -> {
+	public FreeBoard getFreeBoard(int frboSeq) {
+		FreeBoard findFreeBoard = freeBoardRepository.findById(frboSeq).orElseGet( () -> {
 			return new FreeBoard();
 		});
 		return findFreeBoard;
