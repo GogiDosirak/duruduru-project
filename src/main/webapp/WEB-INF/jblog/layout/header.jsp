@@ -39,7 +39,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap"
    rel="stylesheet">
-<link rel="icon" href="./favicon.png" type="image/x-icon">
+
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+
 <style>
 /* 기존 CSS 코드 ... */
 body {
@@ -204,7 +206,7 @@ body {
                            <li><a href="/usedboard" class="dropdown-item item-anchor">중고물품거래
                            </a></li>
                            <li><a href="/sns" class="dropdown-item item-anchor">SNS</a></li>
-                           <li><a href="/walking" class="dropdown-item item-anchor">산책게시판</a></li>
+                           <li><a href="/walk" class="dropdown-item item-anchor">산책게시판</a></li>
                            <li><a href="/walkcheckboard" class="dropdown-item item-anchor">산책인증게시판</a></li>
                         </ul></li>
                      <li class="nav-item dropdown"><a
@@ -215,7 +217,6 @@ body {
                            aria-labelledby="dropdownPages">
                            <li><a href="/notice" class="dropdown-item item-anchor">공지사항</a></li>
                            <li><a href="/event" class="dropdown-item item-anchor">이벤트</a></li>
-
                            <li><a href="/onetoone" class="dropdown-item item-anchor">1:1문의
 
                            </a></li>

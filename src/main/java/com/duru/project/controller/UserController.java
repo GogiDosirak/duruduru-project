@@ -89,7 +89,6 @@ public class UserController {
 			if(user.getAddress() == null || user.getAddress().equals("") || user.getAddressDetail() == null || user.getAddressDetail().equals("")) {
 				return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "주소를 기입해주세요");
 			} 
-			
 			userService.insertUser(user);
 			return new ResponseDTO<>(HttpStatus.OK.value(), user.getUserid() + "님 회원가입 완료되었습니다.");
 		} else {
@@ -164,6 +163,5 @@ public class UserController {
 			myUser.setNickname(user.getNickname());
 			userService.updateUser(myUser, session);
 			return new ResponseDTO<>(HttpStatus.OK.value(),"회원 수정이 성공했습니다.");
-			
 		}
 }

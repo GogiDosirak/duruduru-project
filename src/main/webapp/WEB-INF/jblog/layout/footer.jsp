@@ -4,11 +4,12 @@
    <section id="brand-collection"
       class="padding-small border-top border-bottom overflow-hidden margin-large mb-0">
 
+    
          <div
             class="d-flex flex-wrap justify-content-between align-items-center gap-3">
 
          </div>
-
+  
    </section>
 
    <footer id="footer" class="overflow-hidden padding-large">
@@ -45,6 +46,7 @@
          </div>
       </div>
    </footer>
+
 
    
    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>

@@ -1,4 +1,4 @@
-
+var sido='';
 
 function execPostCode() {
          new daum.Postcode({
@@ -9,7 +9,12 @@ function execPostCode() {
                 // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
                 var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
                 var extraRoadAddr = ''; // 도로명 조합형 주소 변수
- 
+
+              // 주소에서 시/도 부분 추출
+            if (data.sido) {
+                cityProvince = data.sido;
+            }
+
                 // 법정동명이 있을 경우 추가한다. (법정리는 제외)
                 // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
                 if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
@@ -31,14 +36,17 @@ function execPostCode() {
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
                 console.log(data.zonecode);
                 console.log(fullRoadAddr);
+                console.log(cityProvince); 
                 
                 
                 $("[name=zipcode]").val(data.zonecode);
                 $("[name=address]").val(fullRoadAddr);
+                $("[name=sido]").val(cityProvince);
                 
                 // 회원가입 버튼 클릭 시 우편번호와 주소 필드의 값이 있는지 확인하고, 값이 없는 경우 회원가입을 막는다.
             var zipcode = $("[name=zipcode]").val();
             var address = $("[name=address]").val();
+            sido = $("[name=sido]").val();
 				 if (!zipcode || !address) {
 					 alert("우편번호와 주소를 입력해주세요.");
 					 return;

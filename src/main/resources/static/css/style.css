@@ -1136,8 +1136,7 @@ h5 {
         border-bottom-right-radius: 10px; /* 버튼 오른쪽 윤곽선 둥글게 조정 */
 
     }
-    
-    
+
     .comment-container {
     text-align: right;
 }
@@ -1150,5 +1149,4 @@ h5 {
 textarea {
     margin-right: 10px; /* 텍스트 박스와 버튼 간의 간격 조절 */
 }
-
 
