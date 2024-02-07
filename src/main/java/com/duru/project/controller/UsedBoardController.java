@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.duru.project.domain.RoleType;
 import com.duru.project.domain.UsedBoard;
 import com.duru.project.domain.UsedComment;
 import com.duru.project.domain.User;
@@ -188,7 +189,7 @@ public class UsedBoardController {
 	//위도, 경도 가까운순으로 검색, 페이징 되게(5km)이내
 	@GetMapping("/usedboard")
 	public String getUsedBoardList(Model model,
-	                               @PageableDefault(size = 4) Pageable pageable,
+	                               @PageableDefault(size = 4, sort = "usboSeq", direction = Direction.DESC) Pageable pageable,
 	                               String searchKeyword,
 	                               HttpSession session) {
 	    User user = (User) session.getAttribute("principal");
@@ -200,6 +201,22 @@ public class UsedBoardController {
 
 	    Page<UsedBoard> usedboardpage = null;
 
+	    
+	    //관리자는 모든 게시글을 볼 수 있게
+	    if(user.getRole().equals(RoleType.ADMIN)) {
+	    	usedboardpage = usedBoardService.boardTitleSearchList(searchKeyword, pageable);
+	    	if (searchKeyword != null && !searchKeyword.isEmpty()) {
+		        // 검색어가 있는 경우
+		        usedboardpage = usedBoardService.boardTitleSearchList(
+		            searchKeyword, pageable);
+		    } else {
+		        // 검색어가 없는 경우
+		        usedboardpage = usedBoardService.usedAll(pageable);
+		           
+		    }
+	    	//관리자가 아닌 로그인 유저인 경우
+	    } else { 
+	    
 	    if (searchKeyword != null && !searchKeyword.isEmpty()) {
 	        // 검색어가 있는 경우
 	        usedboardpage = usedBoardService.searchUsedBoardByKeywordAndOrderByDistance(
@@ -209,12 +226,14 @@ public class UsedBoardController {
 	        usedboardpage = usedBoardService.getUsedBoardOrderByDistance(
 	            user.getLatitude(), user.getLongitude(), pageable);
 	    }
+	    }
+	    
+	    //페이지 갯수 받아오기 위해 리스트로 받아온 것
 
 	    model.addAttribute("searchKeyword", searchKeyword);
 	    model.addAttribute("usedboardpage", usedboardpage);
-
 	    return "board/used/usedBoardList";
+	
 	}
-
 	
 }

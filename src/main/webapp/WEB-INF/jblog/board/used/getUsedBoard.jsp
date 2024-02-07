@@ -105,7 +105,7 @@
     <br>
     
     <div align="center">
-        <c:if test="${principal.userid eq findUsedBoard.user.userid}">
+        <c:if test="${principal.userid eq findUsedBoard.user.userid or principal.role eq 'ADMIN'}">
             <a href="/updateUsedBoard?usboSeq=${findUsedBoard.usboSeq }" class="btn btn-warning">글 수정하기</a>
             <button type="button" id="btn-deleteusedboard" class="btn btn-danger">글 삭제하기</button>
         </c:if>

@@ -94,12 +94,19 @@ public class UsedBoardService {
 	}
 	
 	
-	//검색기능
-//	@Transactional(readOnly = true)
-//	public Page<UsedBoard> boardTitleSearchList(String searchKeyword, Pageable pageable) {
-//		return usedBoardRepository.findByUsboTitleContaining(searchKeyword, pageable);
-//	}
+	//검색기능 (위도, 경도 상관없이 관리자한테는 모든페이지 다 뜨게)
+	@Transactional(readOnly = true)
+	public Page<UsedBoard> boardTitleSearchList(String searchKeyword, Pageable pageable) {
+		return usedBoardRepository.findByUsboTitleContaining(searchKeyword, pageable);
+	}
 	
+	//검색기능 검색 null일 때 나머지 리스트 다 나오게 (관리자인 경우 모두 볼 수 있게)
+	@Transactional
+	public Page<UsedBoard> usedAll(Pageable pageable) {
+		return usedBoardRepository.findAll(pageable);
+	}
+
+
 	
 	
 	@Transactional
@@ -167,33 +174,38 @@ public class UsedBoardService {
 	}
 	
 	
+		
+		
+		//검색어 있는 경우
+		@Transactional
+		public Page<UsedBoard> searchUsedBoardByKeywordAndOrderByDistance(String searchKeyword, Double userLatitude, Double userLongitude, Pageable pageable) {
+		    // 사용자의 위치에 따라 특정 페이지의 게시글을 가져옵니다.
+		    Page<UsedBoard> usedBoardsPage = usedBoardRepository.searchUsedBoardByKeywordAndOrderByDistance(searchKeyword, userLatitude, userLongitude, pageable);
+		    
+		    // 거리 필터링을 적용한 페이징 처리된 게시글을 반환합니다.
+		    return filterUsedBoardsByDistance(usedBoardsPage, userLatitude, userLongitude);
+		}
+		
+		
+		
+
+		// 5km 이내인지 확인하는 메서드
+		private Page<UsedBoard> filterUsedBoardsByDistance(Page<UsedBoard> usedBoards, Double userLatitude, Double userLongitude) {
+		    List<UsedBoard> filteredList = new ArrayList<>();
+		    for (UsedBoard usedBoard : usedBoards) {
+		        double distance = calculateDistance(userLatitude, userLongitude, usedBoard.getUser().getLatitude(), usedBoard.getUser().getLongitude());
+		        if (distance <= 5) {
+		            filteredList.add(usedBoard);
+		        }
+		    }
+		    
+		    return new PageImpl<>(filteredList, usedBoards.getPageable(), filteredList.size());
+		}
+		
+		
+		
 	
 
-	//검색어 있는 경우
-	@Transactional
-	public Page<UsedBoard> searchUsedBoardByKeywordAndOrderByDistance(String searchKeyword, Double userLatitude, Double userLongitude, Pageable pageable) {
-	    // 사용자의 위치에 따라 특정 페이지의 게시글을 가져옵니다.
-	    Page<UsedBoard> usedBoardsPage = usedBoardRepository.searchUsedBoardByKeywordAndOrderByDistance(searchKeyword, userLatitude, userLongitude, pageable);
-	    
-	    // 거리 필터링을 적용한 페이징 처리된 게시글을 반환합니다.
-	    return filterUsedBoardsByDistance(usedBoardsPage, userLatitude, userLongitude);
-	}
-	
-	
-	
-	
-
-	// 5km 이내인지 확인하는 메서드
-	private Page<UsedBoard> filterUsedBoardsByDistance(Page<UsedBoard> usedBoards, Double userLatitude, Double userLongitude) {
-	    List<UsedBoard> filteredList = new ArrayList<>();
-	    for (UsedBoard usedBoard : usedBoards) {
-	        double distance = calculateDistance(userLatitude, userLongitude, usedBoard.getUser().getLatitude(), usedBoard.getUser().getLongitude());
-	        if (distance <= 5) {
-	            filteredList.add(usedBoard);
-	        }
-	    }
-	    return new PageImpl<>(filteredList, usedBoards.getPageable(), filteredList.size());
-	}
 
 
 	

@@ -105,7 +105,7 @@
     <br>
     
     <div align="center">
-        <c:if test="${principal.userid eq findFreeBoard.user.userid}">
+        <c:if test="${principal.userid eq findFreeBoard.user.userid or principal.role eq 'ADMIN'}">
             <button type="button" id="go-updatefreeoard" class="btn btn-warning">글 수정하기</button>
             <button type="button" id="btn-deletefreeboard" class="btn btn-danger">글 삭제하기</button>
         </c:if>

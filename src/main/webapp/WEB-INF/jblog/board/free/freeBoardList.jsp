@@ -82,6 +82,7 @@
 <br>
 <br>
 
+
 <center>
  <button id="btn-writeFreeBoard" class="btn btn-warning">글등록</button>
 </center>
