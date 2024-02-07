@@ -109,6 +109,7 @@ public class FreeBoardController {
 	
 	
 	@GetMapping("/getfreeboard/{frboSeq}")
+
 	public  String getFreeBoard(@PathVariable int frboSeq, Model model) {
 		
 		FreeBoard findFreeBoard = freeBoardService.getFreeBoard(frboSeq);
@@ -121,6 +122,7 @@ public class FreeBoardController {
 		List<FreeComment> freeCommentList = freeBoardService.FreeCommentList();
 		model.addAttribute("freeCommentList", freeCommentList);
 		
+
 		
 		return "board/free/getFreeBoard";
 		

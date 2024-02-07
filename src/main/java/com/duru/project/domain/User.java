@@ -30,6 +30,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "userSeq")
     private int userSeq;
+
     
     @Column(name = "latitude")
     private Double latitude;
@@ -38,7 +39,7 @@ public class User {
     private Double longitude;
     
     
-    
+
     @Column(name = "userid", unique = true, nullable = false, length = 40)
     private String userid;
 
@@ -57,7 +58,9 @@ public class User {
     @Column(name = "address", nullable = false, length = 200)
     private String address;
 
+
     @Column(name = "address_detail", nullable = false, length = 200)
+
     private String addressDetail;
 
     @Column(name = "zipcode", nullable = false, length = 20)
@@ -77,7 +80,7 @@ public class User {
     @Column(name = "point")
     private int point;
     
-    @Column(name = "last_point_date")
+    @Column(name = "lastPointDate")
     private LocalDate lastPointDate;
 
 }

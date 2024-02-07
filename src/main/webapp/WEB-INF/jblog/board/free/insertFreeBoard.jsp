@@ -11,7 +11,9 @@
             <div class="mb-3 mt-3">
                <label for="product_stock"></label> <input type="text"
                   class="form-control" id="freeBoardTitle" placeholder="제목을 입력하세요"
+
                   name="freeboardTitle">
+
             </div>
          </div>
 

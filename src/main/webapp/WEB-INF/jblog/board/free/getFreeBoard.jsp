@@ -82,6 +82,7 @@
         <h3 align="left">${findFreeBoard.user.nickname}</h3>   
         <h6 align="left">날짜 : ${findFreeBoard.frboDate}　　 조회수 : ${findFreeBoard.frboCnt}</h6>
         <hr>
+
         
         <div class="details" >
         

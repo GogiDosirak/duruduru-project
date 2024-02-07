@@ -1,11 +1,13 @@
 #서버설정
 server:
-  port: 8087
+  port: 8089
   servlet:
     context-path: /
     encoding:
       charset: UTF-8
       
+
+
 #뷰리졸버
 spring:
   mvc:
@@ -17,7 +19,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/duru
     username: root
-    password: 12345678
+    password: 1234
 
   jpa:
     open-in-view: true
@@ -30,6 +32,7 @@ spring:
     properties:
       hibernate.format_sql: true
       
+
       
       
       
@@ -37,3 +40,4 @@ spring:
 logging:
   level:
     org.springframework.data.jpa: DEBUG
+
