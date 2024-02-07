@@ -44,7 +44,7 @@
 	<table class="table">
 		<thead>
 			<tr>
-				<th>글번호</th>
+				<th>지역</th>
 				<th>제목</th>
 				<th>작성자</th>
 				<th>조회수</th>
@@ -54,7 +54,7 @@
 
 		<c:forEach var="walkboard" items="${walkboardpage.content}">
 			<tr>
-				<td>${walkboard.waboSeq}</td>
+				<td>${walkboard.user.address.split(' ')[1] }</td>
 				<td><a href="/getWalkBoard/${walkboard.waboSeq}">${walkboard.waboTitle}</a></td>
 				<td>${walkboard.user.nickname}</td>
 				<td>${walkboard.waboCnt}</td>

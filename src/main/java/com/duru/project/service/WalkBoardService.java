@@ -1,19 +1,17 @@
 package com.duru.project.service;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.duru.project.domain.SNSBoard;
 import com.duru.project.domain.WalkBoard;
 import com.duru.project.persistence.WalkBoardRepository;
 
@@ -68,9 +66,13 @@ public class WalkBoardService {
 	    Collections.sort(walkBoardList, new DistanceAndRecentComparator(userLatitude, userLongitude));
 
 	    // 필터링된 게시글 리스트 생성
-	    List<WalkBoard> filteredWalkBoards = walkBoardList.stream()
-	            .filter(board -> calculateDistance(userLatitude, userLongitude, board.getUser().getLatitude(), board.getUser().getLongitude()) <= 5.0)
-	            .collect(Collectors.toList());
+	    List<WalkBoard> filteredWalkBoards = new ArrayList<>();
+	    for (WalkBoard board : walkBoardList) {
+	        double distance = calculateDistance(userLatitude, userLongitude, board.getUser().getLatitude(), board.getUser().getLongitude());
+	        if (distance <= 5.0) {
+	            filteredWalkBoards.add(board);
+	        }
+	    }
 
 	    // 페이지 계산
 	    int start = (int) pageable.getOffset();

@@ -116,7 +116,9 @@
 			<div class="container d-flex align-items-center justify-content-center"
 				style="min-height: 100vh;" id="${sns.snsboSeq}">
 				<div class="text-center">
+				
 					<div class="image-container mx-auto">
+					
 						<img src="${sns.filepath}">
 					</div>
 					<br>

@@ -4,10 +4,8 @@ package com.duru.project.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.duru.project.domain.RoleType;
 import com.duru.project.domain.User;
 import com.duru.project.domain.WalkBoard;
 import com.duru.project.domain.WalkBoardComment;
@@ -39,26 +38,33 @@ public class WalkBoardController {
 
 	// walkBoardPage // walkBoardSearchPage
 	@GetMapping("/walk")
-	public String getWalkBoardListPage(Model model,
-	        @PageableDefault(size = 4) Pageable pageable,
-	        @RequestParam(required = false) String searchKeyword, HttpSession session) {
+	public String getWalkBoardListPage(Model model, @PageableDefault(size = 4) Pageable pageable,
+			@RequestParam(required = false) String searchKeyword, HttpSession session) {
 
-	    User findUser = (User) session.getAttribute("principal");
-	    double userLatitude = findUser.getLatitude();
-	    double userLongitude = findUser.getLongitude();
+		User findUser = (User) session.getAttribute("principal");
+		double userLatitude = findUser.getLatitude();
+		double userLongitude = findUser.getLongitude();
 
-	    Page<WalkBoard> walkboardpage = null;
-
-	    if (searchKeyword == null) {
-	        walkboardpage = walkBoardService.getWalkBoardsOrderByDistanceAndRecentWithPaging(userLatitude, userLongitude, searchKeyword, pageable);
-	    } else  {
-	        walkboardpage = walkBoardService.getWalkBoardsOrderByDistanceAndRecentWithPaging(userLatitude, userLongitude, searchKeyword, pageable);
+		Page<WalkBoard> walkboardpage = null;
+		
+		   // 관리자 여부에 따라 페이지 조회를 다르게 처리
+	    if (findUser.getRole().equals(RoleType.ADMIN)) {
+	        walkboardpage = walkBoardService.getWalkBoardListPage(pageable);
+	    } else {
+	        // 유저일 때 검색어 존재 확인
+	        if (searchKeyword == null) {
+	            walkboardpage = walkBoardService.getWalkBoardsOrderByDistanceAndRecentWithPaging(userLatitude,
+	                    userLongitude, searchKeyword, pageable);
+	        } else {
+	            walkboardpage = walkBoardService.getWalkBoardsOrderByDistanceAndRecentWithPaging(userLatitude,
+	                    userLongitude, searchKeyword, pageable);
+	        }
 	    }
 
-	    model.addAttribute("searchKeyword", searchKeyword);
-	    model.addAttribute("walkboardpage", walkboardpage);
+		model.addAttribute("searchKeyword", searchKeyword);
+		model.addAttribute("walkboardpage", walkboardpage);
 
-	    return "board/walk/walkboardpage";
+		return "board/walk/walkboardpage";
 	}
 
 	// insert11
@@ -130,6 +136,5 @@ public class WalkBoardController {
 		walkBoardCommentService.deleteWalkComment(waboCoSeq);
 		return new ResponseDTO<>(HttpStatus.OK.value(), "댓글삭제가 완료 되었습니다.");
 	}
-
 
 }
