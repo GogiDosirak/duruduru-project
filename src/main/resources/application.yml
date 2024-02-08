@@ -6,6 +6,8 @@ server:
     encoding:
       charset: UTF-8
       
+
+
 #뷰리졸버
 spring:
   mvc:
@@ -30,3 +32,12 @@ spring:
     properties:
       hibernate.format_sql: true
       
+
+      
+      
+      
+      
+logging:
+  level:
+    org.springframework.data.jpa: DEBUG
+

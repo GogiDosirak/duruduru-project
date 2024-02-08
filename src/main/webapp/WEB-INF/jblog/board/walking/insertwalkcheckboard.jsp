@@ -9,6 +9,7 @@
 <title>duruduru</title>
 </head>
 <body>
+
 	<%@ include file="/WEB-INF/jblog/layout/header.jsp"%>
 	<div class="container mt-3">
 

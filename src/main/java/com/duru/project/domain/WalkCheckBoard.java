@@ -48,6 +48,7 @@ public class WalkCheckBoard {
     @CreationTimestamp
     @Column(name = "wachboDate")
     private Timestamp wachboDate;
+
     
     @Column(name = "wachboCheck")
     private int wachboCheck;
@@ -70,5 +71,6 @@ public class WalkCheckBoard {
     
     @Column(name = "lastPointDate")
     private LocalDate lastPointDate;
+
     
 }

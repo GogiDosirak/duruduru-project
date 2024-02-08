@@ -43,12 +43,14 @@ public class Product {
 	    private int productStock;
 	    
 	    @Column
-	    private String filename;
+	    private String productFilename;
 	    
 	    @Column
-	    private String filepath;
+	    private String productFilepath;
 
 	    @CreationTimestamp
-	    private Timestamp productCreatedate;
+
+	    private Date productCreateDate;
+
 
 }

@@ -103,9 +103,10 @@
     <div class="container col-md-8 col-sm-8 col-xs-8">
         <div class="sidebar">
             <a href="#" onclick="loadPage('profile')">내 정보</a>
-            <a href="#" onclick="loadPage('petInfo')">반려동물 정보</a>
+            <a href="/petInfo/${principal.userSeq}" >반려동물 정보</a>
+
             <a href="#" onclick="loadPage('myPosts')">내가 쓴 글</a>
-            <a href="#" onclick="loadPage('myPosts')">주문내역</a>
+            <a href="/orderHistory" onclick="loadPage('myPosts')">주문내역</a>
             <a href="#" onclick="loadPage('exchangeRefund')">교환 및 환불</a>
         </div>
         <div class="login-container ">
@@ -113,9 +114,9 @@
             <img id="duruduru-image" src="images/duruduru.png" alt="Duruduru Logo"> <!-- 프로필 사진 -->
             </center>
             <form>
-        <form>
+
         <br>
-        <input type="hidden" id="user_seq" name="user_seq" value="${principal.user_seq }">
+        <input type="hidden" id="userSeq" name="userSeq" value="${principal.userSeq }">
             <div class="form-group">
                 <label for="userid">아이디</label>
                 <h5>${principal.userid }</h5>
@@ -173,8 +174,9 @@
                 <h5>${principal.address }</h5>
             </div>
                         <div class="form-group">
-                <label for="address_detail">상세주소</label>
-                <h5>${principal.address_detail }</h5>
+                <label for="addressDetail">상세주소</label>
+
+                <h5>${principal.addressDetail }</h5>
             </div>
             
                        <div class="form-group">
@@ -193,5 +195,4 @@
 </body>
 <%@include file="/WEB-INF/jblog/layout/footer.jsp" %>
 <script src="/js/user.js"></script>
-
 </html>

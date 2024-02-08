@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/jblog/layout/header.jsp"%>
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
@@ -13,63 +13,77 @@
 <title>Join</title>
 <style>
 .container {
-	display: flex;
-	align-items: center;
-	justify-content: center;
+   display: flex;
+   align-items: center;
+   justify-content: center;
 }
 
 .login-container {
-	background-color: #FFFAF0;
-	border-radius: 8px;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-	padding: 20px;
-	width: 300px;
+   background-color: #FFFAF0;
+   border-radius: 8px;
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+   padding: 20px;
+   width: 300px;
 }
 
 .login-container h2 {
-	text-align: center;
-	margin-bottom: 20px;
+   text-align: center;
+   margin-bottom: 20px;
 }
 
 .form-group {
-	margin-bottom: 15px;
+   margin-bottom: 15px;
 }
 
 .form-group label {
-	display: block;
-	font-weight: bold;
-	margin-bottom: 5px;
+   display: block;
+   font-weight: bold;
+   margin-bottom: 5px;
 }
 
 .form-group input {
-	width: 100%;
-	padding: 8px;
-	box-sizing: border-box;
-	border: 1px solid #ccc;
-	border-radius: 4px;
+   width: 100%;
+   padding: 8px;
+   box-sizing: border-box;
+   border: 1px solid #ccc;
+   border-radius: 4px;
 }
 
 .form-group button {
-	width: 100%; /* 버튼의 넓이를 100%로 설정 */
-	padding: 10px;
-	box-sizing: border-box;
-	background-color: #F5DEB3;
-	color: #000000;
-	border: none;
-	border-radius: 4px;
-	cursor: pointer;
-	font-size: 14px;
+   width: 100%; /* 버튼의 넓이를 100%로 설정 */
+   padding: 10px;
+   box-sizing: border-box;
+   background-color: #F5DEB3;
+   color: #000000;
+   border: none;
+   border-radius: 4px;
+   cursor: pointer;
+   font-size: 14px;
 }
 
 .form-group button:hover {
-	background-color: #F5DEB3;
+   background-color: #F5DEB3;
 }
 
 #duruduru-image {
-	width: 270px; /* 원하는 크기로 조절하세요 */
-	height: auto;
+   width: 270px; /* 원하는 크기로 조절하세요 */
+   height: auto;
 }
 </style>
+<script>
+	$(function() {
+		// Geolocation API에 액세스할 수 있는지 확인
+		if (navigator.geolocation) {
+			// 위치 정보를 얻기
+			navigator.geolocation.getCurrentPosition(function(pos) {
+				$('#latitude').val(pos.coords.latitude); // 위도를 hidden input에 저장
+				$('#longitude').val(pos.coords.longitude); // 경도를 hidden input에 저장
+			});
+		} else {
+			alert("이 브라우저에서는 Geolocation이 지원되지 않습니다.")
+		}
+	});
+</script>
 </head>
 <body>
 	<br>
@@ -77,8 +91,9 @@
 	<div class="container">
 		<div class="login-container">
 			<img id="duruduru-image" src="images/duruduru.png"
-				alt="Duruduru Logo">
-
+				alt="Duruduru Logo"> <input type="hidden" id="latitude"
+				name="latitude"> <input type="hidden" id="longitude"
+				name="longitude">
 			<div class="form-group">
 				<label for="userid">아이디</label> <input type="text" id="userid"
 					name="userid" required>
@@ -205,7 +220,7 @@
 				</div>
 			</div>
 
-			<!-- 전화인증 끝 --> --%>
+
 
 			<div class="form-group">
 				<input class="form-control" style="width: 40%; display: inline;"
@@ -224,7 +239,11 @@
 				<input class="form-control" placeholder="상세주소" name="addressDetail"
 					id="addressDetail" type="text" />
 			</div>
-
+    <div class="form-check mb-3">
+      <input class="form-check-input" type="checkbox" id="myCheck"  name="myCheck" required>
+      <label class="form-check-label" for="myCheck">이용약관 개인정보 수집 및 정보이용에 동의합니다.</label>
+    </div>
+ 
 			<br>
 			<div class="form-group">
 				<button id="btn-join">회원가입</button>
@@ -232,6 +251,7 @@
 
 		</div>
 	</div>
+
 
 </body>
 <script src="/js/coolSMS.js"></script>

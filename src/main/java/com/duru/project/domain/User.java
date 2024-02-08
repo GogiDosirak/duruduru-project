@@ -54,9 +54,12 @@ public class User {
 
     @Column(name = "zipcode", nullable = false, length = 20)
     private String zipcode;
+    
+    @Column(name = "latitude")
+    private double latitude;
 
-    @Column(name = "localcode", length = 20)
-    private String localcode;
+    @Column(name = "longitude")
+    private double longitude;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
@@ -69,7 +72,7 @@ public class User {
     @Column(name = "point")
     private int point;
     
-    @Column(name = "last_point_date")
+    @Column(name = "lastPointDate")
     private LocalDate lastPointDate;
 
 }

@@ -69,6 +69,7 @@ public class UserService {
 		
 	}
 	
+
 	@Transactional(readOnly = true)
 	public User getCheckUser (int userSeq) {
 		User findUser = userRepository.findById(userSeq).get();
@@ -83,5 +84,6 @@ public class UserService {
 		
 	}
 	
+
 
 }

@@ -89,7 +89,6 @@ public class UserController {
 			if(user.getAddress() == null || user.getAddress().equals("") || user.getAddressDetail() == null || user.getAddressDetail().equals("")) {
 				return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "주소를 기입해주세요");
 			} 
-			
 			userService.insertUser(user);
 			return new ResponseDTO<>(HttpStatus.OK.value(), user.getUserid() + "님 회원가입 완료되었습니다.");
 		} else {
@@ -157,14 +156,13 @@ public class UserController {
 			return "user/mypage";
 		}
 		
-		@PutMapping("/updateUser/{user_seq}")
-		public @ResponseBody ResponseDTO<?> updateUser(@RequestBody User user, @PathVariable int user_seq, HttpSession session) {
+		@PutMapping("/updateUser/{userSeq}")
+		public @ResponseBody ResponseDTO<?> updateUser(@RequestBody User user, @PathVariable int userSeq, HttpSession session) {
 			User myUser = (User)session.getAttribute("principal");
 			myUser.setPassword(user.getPassword());
 			myUser.setNickname(user.getNickname());
 			userService.updateUser(myUser, session);
 			return new ResponseDTO<>(HttpStatus.OK.value(),"회원 수정이 성공했습니다.");
-			
 		}
 		
 		@PutMapping("/pluspoint/{userSeq}")

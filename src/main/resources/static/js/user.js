@@ -31,7 +31,6 @@ let userObject = {
 	},
 
 	login: function() {
-		alert("로그인이 요청되었습니다.");
 
 		let data = {
 			userid: $("#userid").val(),
@@ -67,8 +66,15 @@ let userObject = {
 			phonenumber: $("#phonenumber").val(),
 			address: $("#address").val(),
 			addressDetail: $("#addressDetail").val(),
-			zipcode: $("#zipcode").val()
+
+
+			zipcode: $("#zipcode").val(),
+			latitude : $("#latitude").val(),
+			longitude : $("#longitude").val()
+
 		}
+		
+		let checkbox = document.getElementById("myCheck");
 		
 		if (this.isEmpty(user.userid)) {
 			alert("아이디를 입력해주세요.");
@@ -99,7 +105,10 @@ let userObject = {
 			return; // 이메일이 올바르지 않으면 함수 종료
 		}
 
-	
+		if(!checkbox.checked){
+			alert("이용약관 개인정보 수집 및 정보이용에 동의해주세요.")
+			return;
+		}
 
 		$.ajax({
 			type: "POST",
@@ -208,7 +217,7 @@ let userObject = {
 			password : $("#password").val(),
 			passwordConfirm : $("#passwordConfirm").val(),
 			nickname : $("#nickname").val(),
-			user_seq : $("#user_seq").val()
+			userSeq : $("#userSeq").val()
 		}
 		 if (!this.isValidPassword(updateUser.password)) {
 			alert("올바른 비밀번호를 입력해주세요(특수문자,대문자 1개 이상 포함)")
@@ -224,7 +233,7 @@ let userObject = {
 
 		$.ajax({
 			type: "PUT",
-			url: "/updateUser/" + updateUser.user_seq,
+			url: "/updateUser/" + updateUser.userSeq,
 			data: JSON.stringify(updateUser),
 			contentType: "application/json; charset=utf-8"
 

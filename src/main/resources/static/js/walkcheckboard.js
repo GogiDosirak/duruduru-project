@@ -15,6 +15,7 @@ let wachboObject = {
 	insertwachbo : function() {
 		alert("글 등록이 요청되었습니다");
 		//사용자가 입력한 값 (jsp화면에서  )
+    
 	let insertwachbo = {
 		wachboTitle : $("#wachboTitle").val(),
 		wachboContent : $("#wachboContent").val()
