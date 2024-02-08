@@ -151,7 +151,7 @@
  <td>${freeComment.frboCoContent }</td>
  <td>${freeComment.frboCoDate }</td>
   <td>
- <c:if test="${principal.userid eq freeComment.user.userid }">
+ <c:if test="${principal.userid eq freeComment.user.userid or principal.role eq 'ADMIN'}">
 <button type="button"  class="btn btn-danger btn-sm btn-delete-comment" data-co-seq="${freeComment.frboCoSeq }" style="padding: 1px 1px;">삭제하기</button> 
 </c:if>
  </td>

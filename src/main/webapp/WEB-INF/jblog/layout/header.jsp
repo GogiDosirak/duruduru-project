@@ -202,6 +202,13 @@ body {
                           							<li><a href="/walkcheckboard" class="dropdown-item item-anchor">산책모임게시판</a></li>
 									<li><a href="/findpet" class="dropdown-item item-anchor">동물 찾기 게시판</a></li>
 									<li><a class="dropdown-item item-anchor" onclick="openNewWindow();">메신저 테스트</a></li>
+									<script>
+                              function openNewWindow() {
+                                 var newWindowUrl = '/chat';
+                                 window.open(newWindowUrl, '_blank',
+                                       'width=600,height=700');
+                              }
+                           </script>
                         </ul></li>
                      <li class="nav-item dropdown"><a
                         class="nav-link dropdown-toggle" href="#" id="dropdownPages"

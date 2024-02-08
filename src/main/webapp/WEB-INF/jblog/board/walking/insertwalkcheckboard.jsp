@@ -53,7 +53,7 @@
 
 					</div>
 					<style>
-#product_content+.note-editor .note-editable {
+#wachboContent+.note-editor .note-editable {
 	text-align: left;
 }
 

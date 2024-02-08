@@ -152,7 +152,7 @@
  <td>${usedComment.usboCoContent }</td>
  <td>${usedComment.usboCoDate }</td>
   <td>
- <c:if test="${principal.userid eq usedComment.user.userid }">
+ <c:if test="${principal.userid eq usedComment.user.userid or principal.role eq 'ADMIN'}">
 <button type="button"  class="btn btn-danger btn-sm btn-delete-comment" data-co-seq="${usedComment.usboCoSeq }" style="padding: 1px 1px;">삭제하기</button> 
 </c:if>
  </td>

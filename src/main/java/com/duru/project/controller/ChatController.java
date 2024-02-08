@@ -48,7 +48,7 @@ public class ChatController {
     System.out.println(chatroom.getCrSeq());
     
     // 세션에서 현재 사용자 정보 가져오기
-    User user = userService.getUser("123123"); // 적절한 방식으로 현재 사용자를 가져오는 메서드 호출
+    User user = userService.getUser("yyjjmm2003"); // 적절한 방식으로 현재 사용자를 가져오는 메서드 호출
     
     // ChatJoinId 객체 설정
     chatJoinId.setCrSeq(chatroom.getCrSeq());

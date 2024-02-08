@@ -20,20 +20,20 @@ public interface UsedBoardRepository extends JpaRepository<UsedBoard, Integer> {
 
 	
 	
-	
-	 // 거리 기준 정렬만 하는 메서드
-	@Query(value = "SELECT ub FROM UsedBoard ub ORDER BY ST_DISTANCE_SPHERE(POINT(:userLatitude, :userLongitude), POINT(ub.user.latitude, ub.user.longitude)) ASC, ub.usboSeq DESC")
-	Page<UsedBoard> getUsedBoardOrderByDistance(@Param("userLatitude") double userLatitude, 
-												@Param("userLongitude") double userLongitude, Pageable pageable);
-	
-	
+	//5km이내 거리 가까운 순, 거리 똑같으면 seq순으로 
+		@Query(value = "SELECT ub FROM UsedBoard ub ORDER BY ST_DISTANCE_SPHERE(POINT(:userLongitude, :userLatitude), POINT(ub.user.longitude, ub.user.latitude)) ASC, ub.usboSeq DESC")
+		Page<UsedBoard> getUsedBoardOrderByDistance(@Param("userLatitude") double userLatitude,
+				@Param("userLongitude") double userLongitude, Pageable pageable);
 
-    // 거리 기준 정렬 및 키워드 검색 지원 메서드
-    @Query(value = "SELECT ub FROM UsedBoard ub WHERE " +
-            "LOWER(ub.usboTitle) LIKE LOWER(CONCAT('%', :searchKeyword, '%')) " +
-            "ORDER BY ST_DISTANCE_SPHERE(POINT(:userLatitude, :userLongitude), POINT(ub.user.latitude, ub.user.longitude)) ASC, ub.usboSeq DESC")
-    Page<UsedBoard> searchUsedBoardByKeywordAndOrderByDistance(@Param("searchKeyword") String searchKeyword, 
-    														@Param("userLatitude")double userLatitude, @Param("userLongitude")double userLongitude, Pageable pageable);
+		
+		
+		//5km이내 거리 가까운 순, 거리 똑같으면 seq순으로 (검색까지)
+		@Query(value = "SELECT ub FROM UsedBoard ub WHERE "
+				+ "LOWER(ub.usboTitle) LIKE LOWER(CONCAT('%', :searchKeyword, '%')) "
+				+ "ORDER BY ST_DISTANCE_SPHERE(POINT(:userLongitude, :userLatitude), POINT(ub.user.longitude, ub.user.latitude)) ASC, ub.usboSeq DESC")
+		Page<UsedBoard> searchUsedBoardByKeywordAndOrderByDistance(@Param("searchKeyword") String searchKeyword,
+				@Param("userLatitude") double userLatitude, @Param("userLongitude") double userLongitude,
+				Pageable pageable);
 
 	
 	

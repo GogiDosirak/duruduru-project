@@ -164,36 +164,29 @@ public class UsedBoardService {
 	//위도 경도 가까운 순 5km이내의 게시글만 뜨게
 	
 	//검색어 없는 경우
-	@Transactional
-	public Page<UsedBoard> getUsedBoardOrderByDistance(Double userLatitude, Double userLongitude, Pageable pageable) {
-	    // 사용자의 위치에 따라 특정 페이지의 게시글을 가져옵니다.
-	    Page<UsedBoard> usedBoardsPage = usedBoardRepository.getUsedBoardOrderByDistance(userLatitude, userLongitude, pageable);
-	    
-	    // 거리 필터링을 적용한 페이징 처리된 게시글을 반환합니다.
-	    return filterUsedBoardsByDistance(usedBoardsPage, userLatitude, userLongitude);
-	}
-	
-	
-		
+		@Transactional
+		public Page<UsedBoard> getUsedBoardOrderByDistance(Double userLatitude, Double userLongitude, Pageable pageable) {
+		    Page<UsedBoard> usedBoardsPage = usedBoardRepository.getUsedBoardOrderByDistance(userLongitude, userLatitude, pageable);
+		    return filterUsedBoardsByDistance(usedBoardsPage, userLatitude, userLongitude);
+		}
+
 		
 		//검색어 있는 경우
 		@Transactional
 		public Page<UsedBoard> searchUsedBoardByKeywordAndOrderByDistance(String searchKeyword, Double userLatitude, Double userLongitude, Pageable pageable) {
-		    // 사용자의 위치에 따라 특정 페이지의 게시글을 가져옵니다.
-		    Page<UsedBoard> usedBoardsPage = usedBoardRepository.searchUsedBoardByKeywordAndOrderByDistance(searchKeyword, userLatitude, userLongitude, pageable);
-		    
-		    // 거리 필터링을 적용한 페이징 처리된 게시글을 반환합니다.
+		    Page<UsedBoard> usedBoardsPage = usedBoardRepository.searchUsedBoardByKeywordAndOrderByDistance(searchKeyword, userLongitude, userLatitude, pageable);
 		    return filterUsedBoardsByDistance(usedBoardsPage, userLatitude, userLongitude);
 		}
-		
-		
-		
+			
+			
 
+			
+		
 		// 5km 이내인지 확인하는 메서드
-		private Page<UsedBoard> filterUsedBoardsByDistance(Page<UsedBoard> usedBoards, Double userLatitude, Double userLongitude) {
+		private Page<UsedBoard> filterUsedBoardsByDistance(Page<UsedBoard> usedBoards, Double userLongitude , Double userLatitude) {
 		    List<UsedBoard> filteredList = new ArrayList<>();
 		    for (UsedBoard usedBoard : usedBoards) {
-		        double distance = calculateDistance(userLatitude, userLongitude, usedBoard.getUser().getLatitude(), usedBoard.getUser().getLongitude());
+		        double distance = calculateDistance( userLongitude,userLatitude, usedBoard.getUser().getLongitude(), usedBoard.getUser().getLatitude());
 		        if (distance <= 5) {
 		            filteredList.add(usedBoard);
 		        }
