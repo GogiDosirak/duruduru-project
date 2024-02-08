@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+
    <section id="brand-collection"
       class="padding-small border-top border-bottom overflow-hidden margin-large mb-0">
 
@@ -8,9 +9,11 @@
          <div
             class="d-flex flex-wrap justify-content-between align-items-center gap-3">
 
+
          </div>
   
    </section>
+
 
    <footer id="footer" class="overflow-hidden padding-large">
       <div class="container-fluid">
@@ -53,5 +56,6 @@
    <script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
    <script type="text/javascript" src="/js/plugins.js"></script>
    <script type="text/javascript" src="/js/script.js"></script>
+
 </body>
 </html>

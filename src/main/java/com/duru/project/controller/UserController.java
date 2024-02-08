@@ -164,4 +164,15 @@ public class UserController {
 			userService.updateUser(myUser, session);
 			return new ResponseDTO<>(HttpStatus.OK.value(),"회원 수정이 성공했습니다.");
 		}
+		
+		@PutMapping("/pluspoint/{userSeq}")
+		public @ResponseBody ResponseDTO<?> pluspoint(@PathVariable int userSeq) {
+			User myUser = userService.getCheckUser(userSeq);
+			// 포인트 증가 로직 추가
+			int pointToAdd = 30; // 포인트를 증가시킬 값
+			myUser.setPoint(myUser.getPoint() + pointToAdd);
+			userService.updateCheckUser(myUser);
+			return new ResponseDTO<>(HttpStatus.OK.value(), 1);
+			
+		}
 }

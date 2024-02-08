@@ -1,6 +1,7 @@
 package com.duru.project.domain;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -13,6 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -47,7 +49,28 @@ public class WalkCheckBoard {
     @Column(name = "wachboDate")
     private Timestamp wachboDate;
 
+    
+    @Column(name = "wachboCheck")
+    private int wachboCheck;
+    
+    @PrePersist
+    public void prePersist() {
+        if (this.wachboCheck == 0) {
+            this.wachboCheck = 1;
+        }
+    }
+    
+    @Column
+    private String wachFilename;
+    
+    @Column
+    private String wachFilepath;
+
     @Column(name = "wachboCnt")
     private int wachboCnt;
+    
+    @Column(name = "lastPointDate")
+    private LocalDate lastPointDate;
+
     
 }

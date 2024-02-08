@@ -22,6 +22,7 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class ShopController {
 
+
 	@Autowired
 	private ProductService productService;
 
@@ -82,4 +83,5 @@ public class ShopController {
 		
 		return "shop/mall/searchProduct";
 	}
+
 }

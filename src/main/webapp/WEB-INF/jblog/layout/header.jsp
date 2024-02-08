@@ -199,6 +199,9 @@ body {
                            <li><a href="/sns" class="dropdown-item item-anchor">SNS</a></li>
                            <li><a href="/walk" class="dropdown-item item-anchor">산책게시판</a></li>
                            <li><a href="/walkcheckboard" class="dropdown-item item-anchor">산책인증게시판</a></li>
+                          							<li><a href="/walkcheckboard" class="dropdown-item item-anchor">산책모임게시판</a></li>
+									<li><a href="/findpet" class="dropdown-item item-anchor">동물 찾기 게시판</a></li>
+									<li><a class="dropdown-item item-anchor" onclick="openNewWindow();">메신저 테스트</a></li>
                         </ul></li>
                      <li class="nav-item dropdown"><a
                         class="nav-link dropdown-toggle" href="#" id="dropdownPages"
@@ -219,6 +222,7 @@ body {
                                  data-bs-target="#search-box" aria-controls="search-box"
                                  aria-expanded="false" aria-label="Toggle navigation"><svg
                                     class="search" width="18" height="18">
+
                           <use xlink:href="#search"></use>
                         </svg></li>
                               <li class="pe-3"><a href="/mypage"> <svg class="user"

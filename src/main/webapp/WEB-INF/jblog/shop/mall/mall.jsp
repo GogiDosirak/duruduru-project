@@ -72,6 +72,7 @@
 			</div>
 		</div>
 	</c:if>
+
 </div>
 
 <%@include file="/WEB-INF/jblog/layout/footer.jsp"%>

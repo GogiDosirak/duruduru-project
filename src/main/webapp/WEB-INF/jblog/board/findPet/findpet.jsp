@@ -17,12 +17,11 @@
                 <div class="col-md-3 mb-4">
                     <div class="product-card image-zoom-effect link-effect d-flex flex-wrap">
                         <div class="image-holder">
-                            <img src="${wachbo.wachFilepath}" alt="product-item" class="product-image img-fluid" onclick="location.href='/getWach/${wachbo.wachboSeq}'">
-                            
+                            <img src="${wachbo.wach_filepath}" alt="product-item" class="product-image img-fluid">
                         </div>
                         <div class="cart-concern">
                             <h3 class="card-title text-uppercase pt-3 text-primary">
-                                <a href="single-product.html" class="text-primary">${wachbo.wachboTitle}</a>
+                                <a href="single-product.html" class="text-primary">${wachbo.wachbo_title}</a>
                             </h3>
                         </div>
                     </div>

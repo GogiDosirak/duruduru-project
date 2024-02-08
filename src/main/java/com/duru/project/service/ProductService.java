@@ -1,5 +1,3 @@
-
-
 package com.duru.project.service;
 
 import java.io.File;
@@ -21,6 +19,7 @@ import com.duru.project.persistence.ProductRepository;
 @Service
 public class ProductService {
 
+
 	@Autowired
 	private ProductRepository productRepository;
 	@Autowired
@@ -37,9 +36,11 @@ public class ProductService {
 		product.setProductFilename(fileName); //저장된 파일의 이름
 		product.setProductFilepath("/files/" + fileName);  //저장된 파일의 경로와 이름 set
 
-		productRepository.save(product);
 
-	}
+      productRepository.save(product);
+
+   }
+
 
 	@Transactional(readOnly = true)
 	public Page<Product> getProductList(Pageable pageable) {

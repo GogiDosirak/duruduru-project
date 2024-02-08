@@ -31,7 +31,6 @@ public class User {
     @Column(name = "userSeq")
     private int userSeq;
 
-
     @Column(name = "userid", unique = true, nullable = false, length = 40)
     private String userid;
 
