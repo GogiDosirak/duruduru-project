@@ -91,6 +91,12 @@ public class ProductService {
 	}
 	
 	@Transactional
+	public List<Product> getProductListAll() {
+		List<Product> getProductListAll =  productRepository.findAll();
+		return getProductListAll;
+	}
+	
+	@Transactional
 	public Page<Product> search(String keyword, Pageable pageable) {
 		Page<Product> productSearchList = productRepository.findByProductNameContaining(keyword, pageable);
 		return productSearchList;

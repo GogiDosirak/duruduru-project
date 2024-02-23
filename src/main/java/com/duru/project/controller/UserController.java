@@ -1,6 +1,7 @@
 package com.duru.project.controller;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.server.Session.Cookie;
@@ -14,8 +15,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.duru.project.domain.Product;
+import com.duru.project.domain.SNSBoard;
 import com.duru.project.domain.User;
 import com.duru.project.dto.ResponseDTO;
+import com.duru.project.service.ProductService;
+import com.duru.project.service.SNSBoardService;
 import com.duru.project.service.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -27,10 +32,20 @@ public class UserController {
 
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	ProductService productService;
+	
+	@Autowired
+	SNSBoardService snsBoardService;
 
 	@GetMapping({ "", "/" })
-	public String index() {
-		return "index";
+	public String index(Model model) {
+		List<Product> getProductListAll = productService.getProductListAll();
+		List<SNSBoard> getSnsBoardList = snsBoardService.getTopSNSBoardsByLikes();
+		model.addAttribute("snsList", getSnsBoardList);
+		model.addAttribute("productList", getProductListAll);
+		return "/index";
 	}
 
 	@GetMapping("/login")
@@ -39,9 +54,13 @@ public class UserController {
 	}
 
 	@GetMapping("/logout")
-	public String logout(HttpSession session) {
+	public String logout(HttpSession session, Model model) {
 		session.invalidate();
-		return "index";
+		List<Product> getProductListAll = productService.getProductListAll();
+		List<SNSBoard> getSnsBoardList = snsBoardService.getTopSNSBoardsByLikes();
+		model.addAttribute("snsList", getSnsBoardList);
+		model.addAttribute("productList", getProductListAll);
+		return "/index";
 	}
 
 	@PostMapping("/login")
