@@ -63,6 +63,7 @@ hr {
 .center-align {
 	text-align: center;
 }
+
 </style>
 </head>
 
@@ -75,8 +76,40 @@ hr {
 <h2 class="center-align"> 산책게시판</h2>
 <div class="container">
 	<h2 id="title" align="center">${walkBoard.waboTitle}</h2>
+
+
+	<!-- 1대1 채팅 시작 -->
 	<h3>${walkBoard.user.nickname}</h3>
-	<h6>날짜 : ${walkBoard.waboDate} 조회수 : ${walkBoard.waboCnt}</h6>
+	<input type="hidden" name="userSeq" id="userSeq"
+		value="${walkBoard.user.userSeq}">
+	<button type="button" class="btn btn-outline-dark"
+		onclick="doSomething()" style="float: right;">1:1대화하기</button>
+
+	<script>
+		function openNewWindow(crSeq) {
+			var newWindowUrl = "/chat/room/" + crSeq;
+			window.open(newWindowUrl, '_blank', 'width=1100,height=700');
+		}
+
+		function doSomething() {
+			let userSeq = $("#userSeq").val();
+			console.log("userSeq 값: ", userSeq);
+			$.ajax({
+				type : "post",
+				url : "/chat/onebyone/" + userSeq,
+				success : function(result) {
+					console.log("동작완료")
+
+					let crSeq = result;
+					console.log("crSeq 값:", crSeq);
+					openNewWindow(crSeq);
+
+				}
+			})
+		}
+	</script>
+	<!-- 1대1 채팅 끝 -->
+	<h6>날짜 : ${walkBoard.waboDate} &nbsp;&nbsp;  조회수 : ${walkBoard.waboCnt}</h6>
 	<hr>
 
 	<div class="details">

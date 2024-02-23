@@ -35,7 +35,7 @@
 
 <div id="searchForm">
     <form action="/walk" method="GET" class="form-inline">
-        <input type="text" name="searchKeyword" class="form-control-sm" id="searchKeyword" placeholder="제목으로 검색하기">
+        <input type="text" name="search" class="form-control-sm" id="search" placeholder="제목으로 검색하기">
         <button class="btn btn-warning bi bi-search" id="searchButton">검색</button>
     </form>
 </div>
@@ -72,16 +72,16 @@
 			
 			<a
 			class="page-link"
-			href="?searchKeyword=${searchKeyword }&page=${walkboardpage.number-1 }">Previous</a></li>
+			href="?searchKeyword=${searchKeyword}&page=${walkboardpage.number-1 }">Previous</a></li>
 	
 		<c:forEach var="page" begin="1" end="${walkboardpage.totalPages}">
 			<li class="page-item"><a class="page-link"
-				href="?searchKeyword=${searchKeyword }&page=${page -1}">${page }</a></li>
+				href="?searchKeyword=${searchKeyword}&page=${page -1}">${page }</a></li>
 		</c:forEach>
 		<li
 			class="page-item <c:if test="${walkboardpage.last }">disabled</c:if>"><a
 			class="page-link"
-			href="?searchKeyword=${searchKeyword }&page=${walkboardpage.number+1 }">Next</a></li>
+			href="?searchKeyword=${searchKeyword}&page=${walkboardpage.number+1 }">Next</a></li>
 	</ul>
 </div>
 <br>

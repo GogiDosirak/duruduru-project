@@ -8,5 +8,5 @@ import com.duru.project.domain.ChatRoom;
 
 public interface ChatRoomRepository extends JpaRepository<ChatRoom, String>{
 
-
+	
 }

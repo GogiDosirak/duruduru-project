@@ -24,37 +24,37 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "FindPetBoard")
+@Table
 public class FindPetBoard {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "fPetSeq")
-    private int fPetSeq;
+    @Column(name = "fpSeq")
+    private int fpSeq;
 
     @ManyToOne(fetch = FetchType.EAGER)
   	@JoinColumn(name = "userSeq")
   	private User user;
 
-    @Column(name = "fPetTitle", length = 50)
-    private String fPetTitle;
+    @Column(name = "fpTitle", length = 50)
+    private String fpTitle;
 
     @Lob
-    @Column(name = "fPetContent")
-    private String fPetContent;
+    @Column(name = "fpContent")
+    private String fpContent;
 
-    @Column(name = "fPetDate")
+    @Column(name = "fpDate")
     @CreationTimestamp
-    private Date fPetDate;
+    private Date fpDate;
     
     @Column
-    private String fPetFilename;
+    private String fpFilename;
     
     @Column
-    private String fPetFilepath;
+    private String fpFilepath;
 
     @Column(name = "fPetCnt")
-    private Integer fPetCnt;
+    private Integer fpCnt;
 
   
 }

@@ -175,7 +175,7 @@ body {
                   <ul id="navbar"
                      class="navbar-nav text-uppercase justify-content-end align-items-center flex-grow-1 pe-3">
 
-                     <li class="nav-item"><a class="nav-link me-4" href="/">두루두루</a></li>
+                    
                      <li class="nav-item"><a class="nav-link me-4" href="/hospital">동물병원&업장</a></li>
                      <li class="nav-item dropdown me-4"><a
                         class="nav-link dropdown-toggle" href="#" id="dropdownPages"
@@ -197,18 +197,18 @@ body {
                            <li><a href="/usedboard" class="dropdown-item item-anchor">중고물품거래
                            </a></li>
                            <li><a href="/sns" class="dropdown-item item-anchor">SNS</a></li>
-                           <li><a href="/walk" class="dropdown-item item-anchor">산책게시판</a></li>
+                        		<li><a href="/findPetBoard" class="dropdown-item item-anchor">동물 찾기 게시판</a></li>
+							
+                        </ul></li>
+                         <li class="nav-item dropdown me-4"><a
+                        class="nav-link dropdown-toggle" href="#" id="dropdownPages"
+                        data-bs-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">산책</a>
+                        <ul class="dropdown-menu list-unstyled"
+                           aria-labelledby="dropdownPages">
+                              <li><a href="/walk" class="dropdown-item item-anchor">산책게시판</a></li>
+                           <li><a href="/walkReservation" class="dropdown-item item-anchor">산책모임게시판</a></li>
                            <li><a href="/walkcheckboard" class="dropdown-item item-anchor">산책인증게시판</a></li>
-                          							<li><a href="/walkcheckboard" class="dropdown-item item-anchor">산책모임게시판</a></li>
-									<li><a href="/findpet" class="dropdown-item item-anchor">동물 찾기 게시판</a></li>
-									<li><a class="dropdown-item item-anchor" onclick="openNewWindow();">메신저 테스트</a></li>
-									<script>
-                              function openNewWindow() {
-                                 var newWindowUrl = '/chat';
-                                 window.open(newWindowUrl, '_blank',
-                                       'width=600,height=700');
-                              }
-                           </script>
                         </ul></li>
                      <li class="nav-item dropdown"><a
                         class="nav-link dropdown-toggle" href="#" id="dropdownPages"
@@ -225,13 +225,28 @@ body {
                      <li class="nav-item">
                         <div class="user-items ps-5">
                            <ul class="d-flex justify-content-end list-unstyled">
-                              <li class="search-item pe-3" data-bs-toggle="collapse"
-                                 data-bs-target="#search-box" aria-controls="search-box"
-                                 aria-expanded="false" aria-label="Toggle navigation"><svg
-                                    class="search" width="18" height="18">
+                           
+                           
+                           
+                            <li class="pe-3">
 
-                          <use xlink:href="#search"></use>
-                        </svg></li>
+                         <img
+                     src="/images/149446.png" class="logo" width="18" height="18" onclick="openNewWindow();">
+                     
+								
+                        	
+                        </li>	
+                        
+                        	<script>
+                              function openNewWindow() {
+                                 var newWindowUrl = '/chat';
+                                 window.open(newWindowUrl, '_blank',
+                                       'width=1100,height=700');
+                              }
+                           </script>
+                        
+                        
+                        
                               <li class="pe-3"><a href="/mypage"> <svg class="user"
                                        width="18" height="18">
                             <use xlink:href="#user"></use>

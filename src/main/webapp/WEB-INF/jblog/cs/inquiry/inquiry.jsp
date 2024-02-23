@@ -6,13 +6,14 @@
 	<h2>1:1문의</h2>
 	<div id="searchForm">
     <form action="/inquiry/searchInquiry" method="GET" class="form-inline">
-        <input type="text" name="keyword" class="form-control-sm" id="search" placeholder="제목">
+        <input type="text" name="keyword" class="form-control-sm" id="search" placeholder="제목으로 검색하기">
         <button class="btn btn-warning bi bi-search" id="searchButton">검색</button>
     </form>
 </div>
 	<table class="table">
 		<thead>
 			<tr>
+			<th>번호</th>
 				<th>제목</th>
 				<th>작성자</th>
 				<th>작성일</th>
@@ -21,6 +22,7 @@
 		</thead>
 		<c:forEach var="inquiry" items="${inquiryList.content }">
 			<tr>
+			<td>${inquiry.inquirySeq }</td>
 				<td><a href="/getInquiry/${inquiry.inquirySeq }">${inquiry.inquiryTitle }</a>
 				</td>
 				<td>${inquiry.user.nickname }</td>

@@ -7,11 +7,13 @@ document.write("<script\n" +
     "  crossorigin=\"anonymous\"></script>")
 
 
+
 var usernamePage = document.querySelector('#username-page');
 var chatPage = document.querySelector('#chat-page');
 var usernameForm = document.querySelector('#usernameForm');
 var messageForm = document.querySelector('#messageForm');
 var messageInput = document.querySelector('#message');
+var userSeqInput = document.querySelector('#userSeq');
 var messageArea = document.querySelector('#messageArea');
 var connectingElement = document.querySelector('.connecting');
 
@@ -26,6 +28,7 @@ var colors = [
 // crSeq 파라미터 가져오기
 var crSeqInput = document.getElementById('crSeq');
 const crSeq = crSeqInput.value;
+  
 
 function connect(event) {
     username = document.querySelector('#name').value.trim();
@@ -34,6 +37,7 @@ function connect(event) {
     // usernamePage 에 hidden 속성 추가해서 가리고
     // chatPage 를 등장시킴
     usernamePage.classList.add('hidden');
+    // 입장 알림 포인트 1
     chatPage.classList.remove('hidden');
 
     // 연결하고자하는 Socket 의 endPoint
@@ -59,55 +63,110 @@ function onConnected() {
         {},
         JSON.stringify({
             "crSeq": crSeq,
+            userSeq : userSeqInput.value,
             cuSender: username,
             cuRole: 'ENTER'
         })
+        
+       
     )
 
-    connectingElement.classList.add('hidden');
+    
 
 }
 
-// 유저 닉네임 중복 확인
-function isDuplicateName() {
+function disconnected() {
+	console.log("값 출력하기99");
 
+  	stompClient.subscribe('/sub/chat/room/' + crSeq, onMessageReceived);
+
+    // 서버에 username 을 가진 유저가 들어왔다는 것을 알림
+    // /pub/chat/enterUser 로 메시지를 보냄
+    stompClient.send("/pub/chat/leaveUser",
+        {},
+        JSON.stringify({
+            "crSeq": crSeq,
+            userSeq : userSeqInput.value,
+            cuSender: username,
+            cuRole: 'LEAVE'
+        }),
+        
+         location = '/chat'
+    )
+
+
+
+}
+
+//저장된 채팅 내역 불러오기
+function getChatList() {
     $.ajax({
         type: "GET",
-        url: "/chat/duplicateName",
+        url: "/chat/chatlist",
         data: {
-            "username": username,
             "crSeq": crSeq
         },
         success: function (data) {
-            console.log("함수 동작 확인 : " + data);
-
-            username = data;
-        }
-    })
-
-}
-
-// 유저 리스트 받기
-// ajax 로 유저 리스를 받으며 클라이언트가 입장/퇴장 했다는 문구가 나왔을 때마다 실행된다.
-function getUserList() {
-    const $list = $("#list");
-
-    $.ajax({
-        type: "GET",
-        url: "/chat/userlist",
-        data: {
-            "crSeq": crSeq
-        },
-        success: function (data) {
-            var users = "";
-            for (let i = 0; i < data.length; i++) {
-                //console.log("data[i] : "+data[i]);
-                users += "<li class='dropdown-item'>" + data[i] + "</li>"
-            }
-            $list.html(users);
+            // 서버로부터 받은 대화 내역을 스타일시트에 맞게 처리하여 표시
+            displayChatList(data);
         }
     })
 }
+
+function displayChatList(chatList) {
+    chatList.forEach(function(chat) {
+        var messageElement = document.createElement('li');
+
+        // 채팅 메시지의 종류에 따라 스타일 적용
+        if (chat.cuRole === 'ENTER') {
+            messageElement.classList.add('event-message');
+        } else if (chat.cuRole === 'LEAVE') {
+            messageElement.classList.add('event-message');
+        } else {
+            messageElement.classList.add('chat-message');
+
+            var avatarElement = document.createElement('i');
+            var avatarText = document.createTextNode(chat.cuSender[0]);
+            avatarElement.appendChild(avatarText);
+            avatarElement.style['background-color'] = getAvatarColor(chat.cuSender);
+            messageElement.appendChild(avatarElement);
+
+            var usernameElement = document.createElement('span');
+            var usernameText = document.createTextNode(chat.cuSender);
+            usernameElement.appendChild(usernameText);
+            messageElement.appendChild(usernameElement);
+        }
+
+        var contentElement = document.createElement('p');
+        if (chat.s3DataUrl != null) {
+            var imgElement = document.createElement('img');
+            imgElement.setAttribute("src", chat.s3DataUrl);
+            imgElement.setAttribute("width", "300");
+            imgElement.setAttribute("height", "300");
+
+            var downBtnElement = document.createElement('button');
+            downBtnElement.setAttribute("class", "btn fa fa-download");
+            downBtnElement.setAttribute("id", "downBtn");
+            downBtnElement.setAttribute("name", chat.fileName);
+            downBtnElement.setAttribute("onclick", `downloadFile('${chat.fileName}', '${chat.fileDir}')`);
+
+            contentElement.appendChild(imgElement);
+            contentElement.appendChild(downBtnElement);
+        } else {
+            var messageText = document.createTextNode(chat.cuMessage);
+            contentElement.appendChild(messageText);
+        }
+
+        messageElement.appendChild(contentElement);
+
+        messageArea.appendChild(messageElement);
+    });
+
+    messageArea.scrollTop = messageArea.scrollHeight;
+}
+
+getChatList();
+
 
 
 function onError(error) {
@@ -123,6 +182,7 @@ function sendMessage(event) {
     if (messageContent && stompClient) {
         var chatMessage = {
             "crSeq": crSeq,
+            userSeq : userSeqInput.value,
             cuSender: username,
             cuMessage: messageInput.value,
             cuRole: 'TALK'
@@ -144,14 +204,8 @@ function onMessageReceived(payload) {
 
     if (chat.cuRole === 'ENTER') {  // chatType 이 enter 라면 아래 내용
         messageElement.classList.add('event-message');
-        chat.content = chat.cuSender + chat.message;
-        getUserList();
-
     } else if (chat.cuRole === 'LEAVE') { // chatType 가 leave 라면 아래 내용
         messageElement.classList.add('event-message');
-        chat.content = chat.cuSender + chat.message;
-        getUserList();
-
     } else { // chatType 이 talk 라면 아래 내용
     console.log("값 출력하기2");
         messageElement.classList.add('chat-message');
@@ -212,6 +266,26 @@ function getAvatarColor(messagecuSender) {
     var index = Math.abs(hash % colors.length);
     return colors[index];
 }
+
+        function copyToClipboard() {
+     
+            // 숨겨진 input 요소에서 텍스트를 가져옵니다.
+            var copyInput = document.getElementById("copyInput");
+            var textToCopy = copyInput.value;
+
+            // 텍스트를 클립보드에 복사합니다.
+            navigator.clipboard.writeText(textToCopy)
+                .then(function() {
+                    // 복사 완료 메시지를 표시합니다.
+                    alert("텍스트가 클립보드에 복사되었습니다: " + copyInput.value);
+                })
+                .catch(function(error) {
+                    // 복사 실패 메시지를 표시합니다.
+                    alert("텍스트 복사 중 오류가 발생했습니다: " + error);
+                });
+        }
+        
+    
 
 usernameForm.addEventListener('submit', connect, true)
 messageForm.addEventListener('submit', sendMessage, true)

@@ -7,13 +7,14 @@
 	<div id="searchForm">
 		<form action="/notice/searchNotice" method="GET" class="form-inline">
 			<input type="text" name="keyword" class="form-control-sm" id="search"
-				placeholder="제목">
+				placeholder="제목으로 검색하기">
 			<button class="btn btn-warning bi bi-search" id="searchButton">검색</button>
 		</form>
 	</div>
 	<table class="table">
 		<thead>
 			<tr>
+				<th>번호</th>
 				<th>제목</th>
 				<th>작성자</th>
 				<th>작성일</th>
@@ -22,6 +23,7 @@
 		</thead>
 		<c:forEach var="notice" items="${noticeList.content }">
 			<tr>
+				<td>${notice.noticeSeq }</td>
 				<td><a href="/getNotice/${notice.noticeSeq }">${notice.noticeTitle }</a>
 				</td>
 				<td>운영자</td>
