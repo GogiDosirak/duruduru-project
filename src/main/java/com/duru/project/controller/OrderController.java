@@ -109,7 +109,7 @@ public class OrderController {
 		}
 		basketService.deleteUserBasket(user.getUserSeq()); //해당 유저의 basket을 삭제
 	
-		return "/index";
+		return "redirect:/orderHistory";
 		
 		
 	}
