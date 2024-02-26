@@ -37,6 +37,14 @@ public class InquiryController {
 	
 	@GetMapping("/inquiry")
 	public String inquiry(HttpSession session, @PageableDefault(size=5, sort="inquirySeq", direction = Sort.Direction.DESC) Pageable pageable) {
+		
+		User user = (User) session.getAttribute("principal");
+
+		if (user == null) {
+			// 로그인되어 있지 않으면 로그인 페이지로 리다이렉트 또는 다른 처리 수행
+			return "redirect:/login";
+		}
+
 		Page<Inquiry> inquiryList = inquiryService.getInquiryList(pageable);
 		session.setAttribute("inquiryList", inquiryList);
 		return "cs/inquiry/inquiry";

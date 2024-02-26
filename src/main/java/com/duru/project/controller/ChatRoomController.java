@@ -28,7 +28,9 @@ public class ChatRoomController {
 
     @GetMapping("/chat")
     public String goChatRoom(Model model){
+    	
     	model.addAttribute("list", chatDetailService.chatRoomList());    
+    	
 
         return "/chat/roomlist";
     }

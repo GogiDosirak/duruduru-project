@@ -22,6 +22,14 @@ public class UserPayController {
 	
 	@GetMapping("/orderHistory")
 	public String orderHistory(HttpSession session) {
+		
+		User users = (User) session.getAttribute("principal");
+
+		if (users == null) {
+			// 로그인되어 있지 않으면 로그인 페이지로 리다이렉트 또는 다른 처리 수행
+			return "redirect:/login";
+		}
+		
 		User user = (User) session.getAttribute("principal");
 		List<UserPay> orderList = userPayService.getUserPayList(user.getUserSeq());
 		session.setAttribute("orderList", orderList);

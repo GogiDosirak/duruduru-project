@@ -26,7 +26,14 @@ public class PetController {
 	PetService petService;
 	
 	@GetMapping("/petInfo/{userSeq}")
-	public String petInfo(Model model, @PathVariable int userSeq){
+	public String petInfo(Model model, @PathVariable int userSeq, HttpSession session){
+		User user = (User) session.getAttribute("principal");
+
+		if (user == null) {
+			// 로그인되어 있지 않으면 로그인 페이지로 리다이렉트 또는 다른 처리 수행
+			return "redirect:/login";
+		}
+		
 		model.addAttribute("myPetList", petService.myPetList(userSeq));
 		return "/pet/petInfo";
 	}
