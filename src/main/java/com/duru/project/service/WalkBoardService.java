@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.duru.project.domain.UsedBoard;
 import com.duru.project.domain.WalkBoard;
 import com.duru.project.persistence.WalkBoardRepository;
 
@@ -49,8 +50,29 @@ public class WalkBoardService {
 		walkBoard.setWaboCnt(walkBoard.getWaboCnt()+1);
 		walkBoardRepository.save(walkBoard);
 	}
+
+	//검색기능 (위도, 경도 상관없이 관리자한테는 모든페이지 다 뜨게)
+	@Transactional(readOnly = true)
+	public Page<WalkBoard> getWalkBoardTitleSearchList(String searchKeyword, Pageable pageable) {
+		// 필터링된 게시글 리스트 생성
+	    List<WalkBoard> walkBoards = new ArrayList<>();
+	    //검색어가 있는지 없는지 확인
+	    if (searchKeyword != null && !searchKeyword.isEmpty()) {
+	    	walkBoards = walkBoardRepository.findBywaboTitleContaining(searchKeyword);
+	    } else {
+	    	walkBoards = walkBoardRepository.findAll();
+	    }
+	    // 페이지 계산
+	    int start = (int) pageable.getOffset();
+	    int end = Math.min((start + pageable.getPageSize()), walkBoards.size());
+	    List<WalkBoard> pagedWalkBoards = walkBoards.subList(start, end);
+
+	    // 페이지 객체 생성
+	    return new PageImpl<>(pagedWalkBoards, pageable, walkBoards.size());
+
+	}
 	
-	//WalkBoardSearchPaging
+	//검색기능 (위도, 경도 까지 적용된 사용자용)
 	@Transactional(readOnly = true)
 	public Page<WalkBoard> getWalkBoardsOrderByDistanceAndRecentWithPaging(double userLatitude, double userLongitude, String searchKeyword, Pageable pageable) {
 	    List<WalkBoard> walkBoardList = null;

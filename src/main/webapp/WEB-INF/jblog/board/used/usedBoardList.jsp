@@ -100,7 +100,7 @@ function showPosition(position) {
 	
 	<div class="container mt-3 mx-auto d-flex justify-content-center">
     <ul class="pagination">
-    <input type="hidden" id="searchKeyword" value="${searchKeyword }"> 
+
 <li class="page-item <c:if test="${usedboardpage.first }">disabled</c:if>"><a class="page-link" href="?searchKeyword=${searchKeyword }&page=${usedboardpage.number-1 }">Previous</a></li>
 <c:forEach var="page" begin="1" end="${usedboardpage.totalPages+1}">
 <li class="page-item"><a class="page-link" href="?searchKeyword=${searchKeyword }&page=${page -1}">${page }</a></li>

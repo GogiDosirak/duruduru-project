@@ -40,8 +40,7 @@
 #pagination a {display:inline-block;margin-right:10px;}
 #pagination .on {font-weight: bold; cursor: default;color:#777;}
 </style>
-   <div class="container mt-3">
-  <h2>동물병원</h2>    
+   <div class="container mt-3">  
 
   <!-- 지도시작 -->
   <div align="center" class="option">
@@ -287,5 +286,6 @@ function removeAllChildNods(el) {
     }
 }
 </script>
+</div>
 <!-- 지도api끝 -->
 <%@include file = "/WEB-INF/jblog/layout/footer.jsp"%>

@@ -64,26 +64,18 @@ public class SNSController {
 	}
 
 	@GetMapping("/insertSNS")
-	public String insertSNS() {
+	public String insertSNS(HttpSession session) {
+        User user = (User) session.getAttribute("principal");
+        if (user == null) {
+            // 로그인되어 있지 않으면 로그인 페이지로 리다이렉트 또는 다른 처리 수행
+            return "redirect:/login";
+        }
 		return "/board/sns/insertSns";
 	}
 
 	@PostMapping("/insertSNS")
 	public String insertSNS(SNSBoard snsBoard, MultipartFile file, HttpSession session) throws Exception {
-		String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files"; // 저장할 경로를 지정
-
-		UUID uuid = UUID.randomUUID(); // 식별자(이름) 랜덤 생성
-
-		String fileName = uuid + "_" + file.getOriginalFilename(); // 랜덤으로 식별자가 붙은 다음에 _원래파일이름(매개변수로 들어온)
-
-		File saveFile = new File(projectPath, fileName); // 파일 껍데기를 생성해줄건데 projectPath 경로에 넣어줄거고 이름은 위의 파일네임 (매개변수 file을
-															// 넣어줄 껍데기 생성)
-
-		file.transferTo(saveFile); // Exception 해줘야 밑줄 사라짐
-
-		snsBoard.setFilename(fileName); // 저장된 파일의 이름
-		snsBoard.setFilepath("/files/" + fileName); // 저장된 파일의 경로와 이름 set
-
+		
 		User findUser = (User) session.getAttribute("principal");
 		snsBoard.setUser(findUser);
 		snsBoardService.insertSNS(snsBoard, file); // service에서 매개변수 추가됐으므로 file 해주고
@@ -95,8 +87,12 @@ public class SNSController {
 
 	// updatePet11
 	@GetMapping("/updateSns/{snsboSeq}")
-	public String updateSns(@PathVariable int snsboSeq, Model model) {
-
+	public String updateSns(@PathVariable int snsboSeq, Model model, HttpSession session) {
+        User user = (User) session.getAttribute("principal");
+        if (user == null) {
+            // 로그인되어 있지 않으면 로그인 페이지로 리다이렉트 또는 다른 처리 수행
+            return "redirect:/login";
+        }
 		model.addAttribute("sns", snsBoardService.getSNSBaord(snsboSeq));
 		return "/board/sns/updateSns";
 	}
@@ -169,7 +165,7 @@ public class SNSController {
 	
 	@PostMapping("/insertSnsLike/{snsboSeq}")
 	public @ResponseBody ResponseDTO<?> insertLike(@PathVariable int snsboSeq, LikeBoard likeBoard, HttpSession session) {
-		System.out.println("좋앙요" +snsboSeq);
+		System.out.println("좋아요" +snsboSeq);
 		
 		User findUser = (User)session.getAttribute("principal");
 		likeBoard.setUser(findUser);
