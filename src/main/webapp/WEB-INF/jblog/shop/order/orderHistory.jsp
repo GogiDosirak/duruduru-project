@@ -100,7 +100,7 @@
         <div class="sidebar">
             <a href="/mypage" onclick="loadPage('profile')">내 정보</a>
             <a href="/petInfo/${principal.userSeq}" onclick="loadPage('petInfo')">반려동물 정보</a>
-            <a href="/mywritten" onclick="loadPage('myPosts')">내가 쓴 글</a>
+            <a href="/mywritten/${principal.userSeq }" onclick="loadPage('myPosts')">내가 쓴 글</a>
             <a href="/orderHistory" onclick="loadPage('myPosts')">주문내역</a>
             <a href="#" onclick="loadPage('exchangeRefund')">교환 및 환불</a>
         </div>

@@ -1,5 +1,6 @@
 package com.duru.project.domain;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 
@@ -47,7 +48,7 @@ public class WalkCheckBoard {
     
     @CreationTimestamp
     @Column(name = "wachboDate")
-    private Timestamp wachboDate;
+    private Date wachboDate;
 
     
     @Column(name = "wachboCheck")

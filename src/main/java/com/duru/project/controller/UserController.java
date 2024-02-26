@@ -39,7 +39,7 @@ public class UserController {
 	@Autowired
 	SNSBoardService snsBoardService;
 
-	@GetMapping({ "", "/" })
+	@GetMapping({ "/", "" })
 	public String index(Model model) {
 		List<Product> getProductListAll = productService.getProductListAll();
 		List<SNSBoard> getSnsBoardList = snsBoardService.getTopSNSBoardsByLikes();
@@ -52,6 +52,7 @@ public class UserController {
 	public String login() {
 		return "user/login";
 	}
+	
 
 	@GetMapping("/logout")
 	public String logout(HttpSession session, Model model) {
@@ -188,8 +189,4 @@ public class UserController {
 
 	}
 
-	@GetMapping("/mywritten")
-	public String mywritten() {
-		return "user/mywritten";
-	}
 }

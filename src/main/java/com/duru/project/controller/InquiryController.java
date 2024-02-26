@@ -55,14 +55,6 @@ public class InquiryController {
 		return "cs/inquiry/insertInquiry";
 	}
 	
-	@PostMapping("/insertInquiry")
-	public @ResponseBody ResponseDTO<?> insertInquiry(@RequestBody Inquiry inquiry, HttpSession session) {
-		User user = (User) session.getAttribute("principal");
-		inquiry.setUser(user);
-		inquiryService.insertInquiry(inquiry);
-		return new ResponseDTO<>(HttpStatus.OK.value(), "1:1문의 등록 완료");
-	}
-	
 	@GetMapping("/getInquiry/{inquirySeq}")
 	public String getInquiry(@PathVariable int inquirySeq, Model model) {
 		Inquiry getInquiry = inquiryService.getInquiry(inquirySeq);
@@ -73,17 +65,27 @@ public class InquiryController {
 		
 	}
 	
-	@DeleteMapping("/deleteInquiry/{inquirySeq}")
-	public @ResponseBody ResponseDTO<?> deleteInquiry(@PathVariable int inquirySeq) {
-		inquiryService.deleteInquiry(inquirySeq);
-		return new ResponseDTO<>(HttpStatus.OK.value(), "1:1문의 삭제 완료");
-	}
-	
 	@GetMapping("/updateInquiry/{inquirySeq}")
 	public String updateInquiry(@PathVariable int inquirySeq, Model model) {
 		Inquiry getInquiry = inquiryService.getInquiry(inquirySeq);
 		model.addAttribute("getInquiry",getInquiry);
 		return "cs/inquiry/updateInquiry";
+	}
+	
+
+	@PostMapping("/insertInquiry")
+	public @ResponseBody ResponseDTO<?> insertInquiry(@RequestBody Inquiry inquiry, HttpSession session) {
+		User user = (User) session.getAttribute("principal");
+		inquiry.setUser(user);
+		inquiryService.insertInquiry(inquiry);
+		return new ResponseDTO<>(HttpStatus.OK.value(), "1:1문의 등록 완료");
+	}
+	
+	
+	@DeleteMapping("/deleteInquiry/{inquirySeq}")
+	public @ResponseBody ResponseDTO<?> deleteInquiry(@PathVariable int inquirySeq) {
+		inquiryService.deleteInquiry(inquirySeq);
+		return new ResponseDTO<>(HttpStatus.OK.value(), "1:1문의 삭제 완료");
 	}
 	
 	@PutMapping("/updateInquiry/{inquirySeq}")
