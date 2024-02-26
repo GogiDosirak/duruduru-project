@@ -99,7 +99,7 @@
 									</div>
 									<div class="cart-concern">
 										<h3 class="card-title text-uppercase pt-3 text-primary">
-											<a href="single-product.html" class="text-primary">고양이 사료</a>
+											<a href="single-product.html" class="text-primary">고</a>
 										</h3>
 										<div class="cart-info">
 											<a class="pseudo-text-effect" href="#"

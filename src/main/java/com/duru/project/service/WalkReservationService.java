@@ -57,6 +57,7 @@ public class WalkReservationService {
 
 	    //검색어가 있는지 없는지 확인
 	    if (searchKeyword != null && !searchKeyword.isEmpty()) {
+	    	System.out.println("---------------------------------------------------------------------------------");
 	        WalkReservationList = walkReservationRepository.findBywareTitleContaining(searchKeyword);
 	    } else {
 	        WalkReservationList = walkReservationRepository.findAll();

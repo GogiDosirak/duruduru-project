@@ -40,7 +40,7 @@ public class FindPetBoard {
     private String fpTitle;
 
     @Lob
-    @Column(name = "fpContent")
+    @Column(name = "fpContent", columnDefinition = "LONGTEXT")
     private String fpContent;
 
     @Column(name = "fpDate")

@@ -35,6 +35,9 @@ public class ChatRoomController {
 	@GetMapping("/chat")
 	public String goChatRoom(HttpSession session) {
 		User user = (User) session.getAttribute("principal");
+		if(user == null) {
+			return "redirect:/login";
+		}
 		session.setAttribute("list", chatDetailService.chatRoomList(user.getUserSeq() , "ENTER"));
 		return "/chat/roomlist";
 	}

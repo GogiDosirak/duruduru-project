@@ -35,7 +35,7 @@
 
 <div id="searchForm">
     <form action="/walk" method="GET" class="form-inline">
-        <input type="text" name="search" class="form-control-sm" id="search" placeholder="제목으로 검색하기">
+        <input type="text" name="searchKeyword" class="form-control-sm" id="search" placeholder="제목으로 검색하기">
         <button class="btn btn-warning bi bi-search" id="searchButton">검색</button>
     </form>
 </div>
@@ -64,8 +64,6 @@
 
 	</table>
 
-	<input type="hidden" id="searchKeyword" name="searchKeyword"
-		value=${searchKeyword }>
 	<ul class="pagination">
 		<li
 			class="page-item <c:if test="${walkboardpage.first }">disabled</c:if>">

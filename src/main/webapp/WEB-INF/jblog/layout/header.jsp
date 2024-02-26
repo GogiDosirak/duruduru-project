@@ -227,7 +227,7 @@ body {
                            <ul class="d-flex justify-content-end list-unstyled">
                            
                            
-                           
+                           <c:if test="${principal.userSeq != null}">
                             <li class="pe-3">
 
                          <img
@@ -236,7 +236,7 @@ body {
 								
                         	
                         </li>	
-                        
+                        </c:if>
                         	<script>
                               function openNewWindow() {
                                  var newWindowUrl = '/chat';

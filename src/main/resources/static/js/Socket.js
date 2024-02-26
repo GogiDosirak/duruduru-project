@@ -53,8 +53,7 @@ function connect(event) {
 }
 
 function onConnected() {
-	console.log("값 출력하기15");
-    // sub 할 url => /sub/chat/room/crSeq 로 구독한다
+    // sub로 구독할 url을 지정
     stompClient.subscribe('/sub/chat/room/' + crSeq, onMessageReceived);
 
     // 서버에 username 을 가진 유저가 들어왔다는 것을 알림
@@ -76,7 +75,6 @@ function onConnected() {
 }
 
 function disconnected() {
-	console.log("값 출력하기99");
 
   	stompClient.subscribe('/sub/chat/room/' + crSeq, onMessageReceived);
 
@@ -187,7 +185,8 @@ function sendMessage(event) {
             cuMessage: messageInput.value,
             cuRole: 'TALK'
         };
-
+		
+		// pub으로 메세지 전달
         stompClient.send("/pub/chat/sendMessage", {}, JSON.stringify(chatMessage));
         messageInput.value = '';
     }

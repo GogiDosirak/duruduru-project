@@ -103,10 +103,7 @@
     <a href="/findPetBoard"><h5>뒤로가기</h5></a>
     </div>
   <br>
-    <div align="center">
-    <a href="/findPetBoard"><h5>뒤로가기</h5></a>
-    </div>
-    <br>
+  
     
     <div align="center">
         <c:if test="${principal.userid eq findFindPetBoard.user.userid or principal.role eq 'ADMIN'}">
