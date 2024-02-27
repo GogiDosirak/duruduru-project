@@ -4,7 +4,7 @@
 <%@ include file = "/WEB-INF/jblog/layout/header.jsp"%>
 	<div class="container mt-3">
 
-  <h2>장바구니</h2>         
+  <a href="/basket"><h2>장바구니</a></h2>         
  <table class="table">
     <tr style="text-align: center;">
         <th style="vertical-align: middle;">상품이미지</th>

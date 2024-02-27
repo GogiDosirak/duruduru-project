@@ -102,7 +102,6 @@
             <a href="/petInfo/${principal.userSeq}" onclick="loadPage('petInfo')">반려동물 정보</a>
             <a href="/mywritten/${principal.userSeq }" onclick="loadPage('myPosts')">내가 쓴 글</a>
             <a href="/orderHistory" onclick="loadPage('myPosts')">주문내역</a>
-            <a href="#" onclick="loadPage('exchangeRefund')">교환 및 환불</a>
         </div>
  
 <input type="hidden" name="orderSeq" id="orderSeq" value=${userOrder.orderSeq }>
@@ -153,7 +152,7 @@
             <tr>	
                 <td style="vertical-align: middle; text-align: center;">산책인증게시판</td>
                 <td style="vertical-align: middle; text-align: center;"><a href="/getWach/${walkCheckBoard.wachboSeq}">${walkCheckBoard.wachboTitle}</a></td>
-                <td style="vertical-align: middle; text-align: center;">${walkCheckBoard.wachboCnt}</td>	  
+                <td style="vertical-align: middle; text-align: center;">0</td>	  
                 <td style="vertical-align: middle; text-align: center;">${walkCheckBoard.wachboDate}</td>	  
             </tr>
     </c:forEach>

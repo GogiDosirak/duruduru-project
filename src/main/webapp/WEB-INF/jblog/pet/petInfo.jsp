@@ -127,10 +127,9 @@
 	<div class="container col-md-8 col-sm-8 col-xs-8">
 		<div class="sidebar">
 			<a href="/mypage" onclick="/mypage">내 정보</a> <a
-				href="/petInfo/${principal.userSeq}">반려동물 정보</a> <a href="/mywritten"
+				href="/petInfo/${principal.userSeq}">반려동물 정보</a> <a href="/mywritten/${principal.userSeq }"
 				onclick="/mywritten/${principal.userSeq }">내가 쓴 글</a> <a href="/orderHistory"
-				onclick="/orderHistory">주문내역</a> <a href="#"
-				onclick="loadPage('exchangeRefund')">교환 및 환불</a>
+				onclick="/orderHistory">주문내역</a>
 		</div>
 		<div class="login-container ">
 			<center>

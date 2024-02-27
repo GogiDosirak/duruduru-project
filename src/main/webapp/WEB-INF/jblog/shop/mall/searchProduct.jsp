@@ -4,7 +4,7 @@
 <%@ include file="/WEB-INF/jblog/layout/header.jsp"%>
 
 <div class="container mt-3">
-		<a href="/mall"><h2>두루두루 쇼핑몰</h2></a>
+		<a href="/mall"><h2>두루두루 쇼핑몰</a></h2>
 
 	<style>
 .product-image {

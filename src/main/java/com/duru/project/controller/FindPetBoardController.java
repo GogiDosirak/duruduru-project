@@ -220,7 +220,7 @@ public class FindPetBoardController {
 
 		    model.addAttribute("searchKeyword", searchKeyword);
 		    model.addAttribute("findPetBoardpage", findPetBoardpage);
-		    return "board/findPet/findPetPage";
+		    return "board/findPet/findpetPage";
 		
 		}
 }

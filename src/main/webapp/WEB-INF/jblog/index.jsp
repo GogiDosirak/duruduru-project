@@ -93,129 +93,35 @@
 				<div id="featured-swiper" class="product-swiper col-md-12">
 					<div class="swiper">
 						<div class="swiper-wrapper">
-							<div class="swiper-slide">
-								<div
-									class="product-card image-zoom-effect link-effect d-flex flex-wrap">
-									<div class="image-holder">
-										<img src="images/product-item1.jpg" alt="product-item"
-											class="product-image img-fluid">
-									</div>
-									<div class="cart-concern">
-										<h3 class="card-title text-uppercase pt-3 text-primary">
-											<a href="single-product.html" class="text-primary">강아지 사료</a>
-										</h3>
-										<div class="cart-info">
-											<a class="pseudo-text-effect" href="#"
-												data-after="ADD TO CART"><span>29000</span></a>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="swiper-slide">
-								<div
-									class="product-card image-zoom-effect link-effect d-flex flex-wrap">
-									<div class="image-holder">
-										<img src="images/product-item2.jpg" alt="product-item"
-											class="product-image img-fluid">
-									</div>
-									<div class="cart-concern">
-										<h3 class="card-title text-uppercase pt-3 text-primary">
-											<a href="single-product.html" class="text-primary">고</a>
-										</h3>
-										<div class="cart-info">
-											<a class="pseudo-text-effect" href="#"
-												data-after="ADD TO CART"> <span>32000</span>
-											</a>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="swiper-slide">
-								<div
-									class="product-card image-zoom-effect link-effect d-flex flex-wrap">
-									<div class="image-holder">
-										<img src="images/product-item3.jpg" alt="product-item"
-											class="product-image img-fluid">
-									</div>
-									<div class="cart-concern">
-										<h3 class="card-title text-uppercase pt-3 text-primary">
-											<a href="single-product.html" class="text-primary">강아지 담요</a>
-										</h3>
-										<div class="cart-info">
-											<a class="pseudo-text-effect" href="#"
-												data-after="ADD TO CART"> <span>15000</span>
-											</a>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="swiper-slide">
-								<div
-									class="product-card image-zoom-effect link-effect d-flex flex-wrap">
-									<div class="image-holder">
-										<img src="images/product-item4.jpg" alt="product-item"
-											class="product-image img-fluid">
-									</div>
-									<div class="cart-concern">
-										<h3 class="card-title text-uppercase pt-3 text-primary">
-											<a href="single-product.html" class="text-primary">사르르 쮸르</a>
-										</h3>
-										<div class="cart-info">
-											<a class="pseudo-text-effect" href="#"
-												data-after="ADD TO CART"> <span>8000</span>
-											</a>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="swiper-slide">
-								<div
-									class="product-card image-zoom-effect link-effect d-flex flex-wrap">
-									<div class="image-holder">
-										<img src="images/product-item5.jpg" alt="product-item"
-											class="product-image img-fluid">
-									</div>
-									<div class="cart-concern">
-										<h3 class="card-title text-uppercase pt-3 text-primary">
-											<a href="single-product.html" class="text-primary">Black
-												Sofa Set</a>
-										</h3>
-										<div class="cart-info">
-											<a class="pseudo-text-effect" href="#"
-												data-after="ADD TO CART"> <span>$200</span>
-											</a>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="swiper-slide">
-								<div
-									class="product-card image-zoom-effect link-effect d-flex flex-wrap">
-									<div class="image-holder">
-										<img src="images/product-item6.jpg" alt="product-item"
-											class="product-image img-fluid">
-									</div>
-									<div class="cart-concern">
-										<h3 class="card-title text-uppercase pt-3 text-primary">
-											<a href="single-product.html" class="text-primary">Minimal
-												Sofa</a>
-										</h3>
-										<div class="cart-info">
-											<a class="pseudo-text-effect" href="#"
-												data-after="ADD TO CART"> <span>$200</span>
-											</a>
-										</div>
-									</div>
-								</div>
-
-							</div>
+												<c:forEach var="productItem" items="${productList }">
+				<div class="col-md-3 mb-4">
+					<div
+						class="product-card image-zoom-effect link-effect d-flex flex-wrap">
+						<div class="image-holder2">
+							<a href="/getProduct/${productItem.productSeq }"><img
+								src="${productItem.productFilepath}" alt="product-item"
+								class="product-image2 img-fluid"></a>
 						</div>
-					</div>
-				</div>
-			</c:forEach>
+						<div class="cart-concern">
+							<h3 class="card-title text-uppercase pt-3 text-primary">
+							<c:if test="${principal != null }">
+								<a href="/getProduct/${productItem.productSeq}" class="text-primary">${productItem.productName}</a>
+								</c:if>
+								<c:if test="${principal == null }">
+								<a href="/login" class="text-primary">${productItem.productName}</a>
+								</c:if>
+
+							</h3>
+							<div class="cart-info">
+								<a class="pseudo-text-effect" href="#" data-after="ADD TO CART">
+									<span>${productItem.productPrice}</span>
+								</a>
 	
 						</div>
 					</div>
+					</div>
+					</div>
+					</c:forEach>
 					<div class="swiper-pagination text-center mt-5"></div>
 				</div>
 			</div>

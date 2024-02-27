@@ -97,7 +97,7 @@
                 {
                     pg: "html5_inicis.INIBillTst",		//KG이니시스 pg파라미터 값
                     pay_method: "card",		//결제 방법
-                    merchant_uid: ${userOrder.orderSeq},//주문번호
+                    merchant_uid: ${userOrder.orderSeq+100},//주문번호
                     name: "${userOrder.orderName}님 주문건",		//상품 명
                     amount: ${userOrder.orderPrice},				//금액
       				buyer_email: "${userOrder.orderEmail}",

@@ -30,7 +30,7 @@
 
 
 	<div class="container mt-3">
-  <a href="/event"><h2>이벤트게시판</h2></a>
+  <a href="/event"><h2>이벤트게시판</a></h2>
   
   
  <!-- 검색버튼 form -->
@@ -69,12 +69,12 @@
 </div>
  <div class="container mt-3 text-center">
     <ul class="pagination">
-<li class="page-item <c:if test="${getEventBoardList.first }">disabled</c:if>"><a class="page-link" href="?searchKeyword=${searchKeyword }&page=${getEventBoardList.number-1 }">이전</a></li>
+<li class="page-item <c:if test="${getEventBoardList.first }">disabled</c:if>"><a class="page-link" href="?searchKeyword=${searchKeyword }&page=${getEventBoardList.number-1 }">Previous</a></li>
 
 <c:forEach var="page" begin="1" end="${getEventBoardList.totalPages }">
 <li class="page-item"><a class="page-link" href="?searchKeyword=${searchKeyword }&page=${page -1}">${page }</a></li>
 </c:forEach>
-<li class="page-item <c:if test="${getEventBoardList.last }">disabled</c:if>"><a class="page-link" href="?searchKeyword=${searchKeyword }&page=${getEventBoardList.number+1 }">다음</a></li>
+<li class="page-item <c:if test="${getEventBoardList.last }">disabled</c:if>"><a class="page-link" href="?searchKeyword=${searchKeyword }&page=${getEventBoardList.number+1 }">Next</a></li>
 </ul>
 </div>
  

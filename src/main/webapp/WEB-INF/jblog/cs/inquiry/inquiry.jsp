@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="/WEB-INF/jblog/layout/header.jsp"%>
 <div class="container mt-3">
-	<h2>1:1문의</h2>
+	<a href="/inquiry"><h2>1:1문의</a></h2>
 	<div id="searchForm">
     <form action="/inquiry/searchInquiry" method="GET" class="form-inline">
         <input type="text" name="keyword" class="form-control-sm" id="search" placeholder="제목으로 검색하기">

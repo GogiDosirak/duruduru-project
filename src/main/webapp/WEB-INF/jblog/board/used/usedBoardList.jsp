@@ -4,7 +4,7 @@
 <%@ include file="/WEB-INF/jblog/layout/header.jsp"%>
 
 <div class="container mt-3">
-	<a href="/usedboard"><h2>중고물품거래</h2></a>
+	<a href="/usedboard"><h2>중고물품거래</a></h2>
 
 
 

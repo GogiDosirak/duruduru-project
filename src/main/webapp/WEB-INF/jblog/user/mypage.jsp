@@ -106,7 +106,6 @@
             <a href="/petInfo/${principal.userSeq}" >반려동물 정보</a>
             <a href="/mywritten/${principal.userSeq }" onclick="loadPage('myPosts')">내가 쓴 글</a>
             <a href="/orderHistory" onclick="loadPage('myPosts')">주문내역</a>
-            <a href="#" onclick="loadPage('exchangeRefund')">교환 및 환불</a>
         </div>
         <div class="login-container ">
         <center>

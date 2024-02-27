@@ -207,7 +207,6 @@ body {
                         <ul class="dropdown-menu list-unstyled"
                            aria-labelledby="dropdownPages">
                               <li><a href="/walk" class="dropdown-item item-anchor">산책게시판</a></li>
-                           <li><a href="/walkReservation" class="dropdown-item item-anchor">산책모임게시판</a></li>
                            <li><a href="/walkcheckboard" class="dropdown-item item-anchor">산책인증게시판</a></li>
                         </ul></li>
                      <li class="nav-item dropdown"><a
