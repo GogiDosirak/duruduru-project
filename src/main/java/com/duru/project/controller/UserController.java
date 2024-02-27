@@ -1,6 +1,7 @@
 package com.duru.project.controller;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.server.Session.Cookie;
@@ -14,8 +15,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.duru.project.domain.Product;
+import com.duru.project.domain.SNSBoard;
 import com.duru.project.domain.User;
 import com.duru.project.dto.ResponseDTO;
+import com.duru.project.service.ProductService;
+import com.duru.project.service.SNSBoardService;
 import com.duru.project.service.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -27,10 +32,20 @@ public class UserController {
 
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	ProductService productService;
+	
+	@Autowired
+	SNSBoardService snsBoardService;
 
-	@GetMapping({ "", "/" })
-	public String index() {
-		return "index";
+	@GetMapping({ "/", "" })
+	public String index(Model model) {
+		List<Product> getProductListAll = productService.getProductListAll();
+		List<SNSBoard> getSnsBoardList = snsBoardService.getTopSNSBoardsByLikes();
+		model.addAttribute("snsList", getSnsBoardList);
+		model.addAttribute("productList", getProductListAll);
+		return "/index";
 	}
 
 	@GetMapping("/login")
@@ -38,17 +53,20 @@ public class UserController {
 		return "user/login";
 	}
 	
+
 	@GetMapping("/logout")
-	public String logout(HttpSession session) {
+	public String logout(HttpSession session, Model model) {
 		session.invalidate();
-		return "index";
+		List<Product> getProductListAll = productService.getProductListAll();
+		List<SNSBoard> getSnsBoardList = snsBoardService.getTopSNSBoardsByLikes();
+		model.addAttribute("snsList", getSnsBoardList);
+		model.addAttribute("productList", getProductListAll);
+		return "/index";
 	}
-	
 
-	  @PostMapping("/login")
-	   public @ResponseBody ResponseDTO<?> login(@RequestBody User user, HttpSession session) {
-	      User findUser = userService.getUser(user.getUserid());
-
+	@PostMapping("/login")
+	public @ResponseBody ResponseDTO<?> login(@RequestBody User user, HttpSession session) {
+		User findUser = userService.getUser(user.getUserid());
 
 		if (findUser.getUserid() == null) {
 			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "아이디가 존재하지 않습니다.");
@@ -68,7 +86,7 @@ public class UserController {
 				} else {
 					session.setAttribute("principal", findUser);
 					return new ResponseDTO<>(HttpStatus.OK.value(), "하루에 한 번만 포인트를 쌓을 수 있습니다.");
-					
+
 				}
 			} else {
 				return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "비밀번호가 틀렸습니다.");
@@ -80,45 +98,39 @@ public class UserController {
 	public String join() {
 		return "user/join";
 	}
-	
 
 	@PostMapping("/join")
 	public @ResponseBody ResponseDTO<?> insertUser(@RequestBody User user) {
 		User findUser = userService.getUser(user.getUserid());
 		if (findUser.getUserid() == null) {
-			if(user.getAddress() == null || user.getAddress().equals("") || user.getAddressDetail() == null || user.getAddressDetail().equals("")) {
+			if (user.getAddress() == null || user.getAddress().equals("") || user.getAddressDetail() == null
+					|| user.getAddressDetail().equals("")) {
 				return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "주소를 기입해주세요");
-			} 
+			}
 			userService.insertUser(user);
 			return new ResponseDTO<>(HttpStatus.OK.value(), user.getUserid() + "님 회원가입 완료되었습니다.");
 		} else {
 			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), user.getUserid() + "은 중복된 아이디 입니다.");
 		}
 	}
-	
-	
-	
 
 	@GetMapping("/findid")
 	public String findid() {
 		return "user/findid";
 	}
 
-	
-	
 	@PostMapping("/findid")
 	public @ResponseBody ResponseDTO<?> findid(@RequestBody User user) {
 		System.out.println(user.getPhonenumber());
 		User findUser = userService.getUserid(user.getEmail(), user.getPhonenumber());
-		
-		if(findUser.getUserid() == null) {
+
+		if (findUser.getUserid() == null) {
 			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "아이디가 존재하지 않습니다.");
 		} else {
-				return new ResponseDTO<>(HttpStatus.OK.value(), "회원님의 아이디는 " + findUser.getUserid() + " 입니다.");	
+			return new ResponseDTO<>(HttpStatus.OK.value(), "회원님의 아이디는 " + findUser.getUserid() + " 입니다.");
 		}
 	}
-	
-	
+
 	@PostMapping("/findpw")
 	public @ResponseBody ResponseDTO<?> findpw(@RequestBody User user) {
 		User findUser = userService.getUserpw(user.getUserid(), user.getPhonenumber(), user.getEmail());
@@ -126,53 +138,55 @@ public class UserController {
 		System.out.println(findUser.getUserid());
 		System.out.println(findUser.getEmail());
 		System.out.println(findUser.getPassword());
-		if(findUser.getPassword() == null) {
+		if (findUser.getPassword() == null) {
 			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "비밀번호가 존재하지 않습니다.");
 		} else {
-				return new ResponseDTO<>(HttpStatus.OK.value(), "회원님의 비밀번호는 " + findUser.getPassword() + " 입니다.");
+			return new ResponseDTO<>(HttpStatus.OK.value(), "회원님의 비밀번호는 " + findUser.getPassword() + " 입니다.");
 		}
 	}
-	
+
 	@PostMapping("/checkId")
-	   public @ResponseBody ResponseDTO<?> checkId(@RequestBody User user){
-	      User findUser = userService.getUser(user.getUserid());
-	      if (findUser.getUserid() == null) {
-	         return new ResponseDTO<>(HttpStatus.OK.value(), "회원가입 가능합니다.");
-	      } else {
-	         return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), findUser.getUserid()+"는 중복된 아이디 입니다.");
-	      }
-	   }
-	   
-	   
-	   @PostMapping("/checkPw")
-	   public @ResponseBody ResponseDTO<?> checkPw(String password, String password2){
-	      if(password.equals(password2)) {
-	         return new ResponseDTO<>(HttpStatus.OK.value(), "번호가 일치합니다.");
-	      }return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "번호가 일치하지 않습니다.");
-	   }
-	   
-	   @GetMapping("/mypage")
-		public String mypage() {
-			return "user/mypage";
+	public @ResponseBody ResponseDTO<?> checkId(@RequestBody User user) {
+		User findUser = userService.getUser(user.getUserid());
+		if (findUser.getUserid() == null) {
+			return new ResponseDTO<>(HttpStatus.OK.value(), "회원가입 가능합니다.");
+		} else {
+			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), findUser.getUserid() + "는 중복된 아이디 입니다.");
 		}
-		
-		@PutMapping("/updateUser/{userSeq}")
-		public @ResponseBody ResponseDTO<?> updateUser(@RequestBody User user, @PathVariable int userSeq, HttpSession session) {
-			User myUser = (User)session.getAttribute("principal");
-			myUser.setPassword(user.getPassword());
-			myUser.setNickname(user.getNickname());
-			userService.updateUser(myUser, session);
-			return new ResponseDTO<>(HttpStatus.OK.value(),"회원 수정이 성공했습니다.");
+	}
+
+	@PostMapping("/checkPw")
+	public @ResponseBody ResponseDTO<?> checkPw(String password, String password2) {
+		if (password.equals(password2)) {
+			return new ResponseDTO<>(HttpStatus.OK.value(), "번호가 일치합니다.");
 		}
-		
-		@PutMapping("/pluspoint/{userSeq}")
-		public @ResponseBody ResponseDTO<?> pluspoint(@PathVariable int userSeq) {
-			User myUser = userService.getCheckUser(userSeq);
-			// 포인트 증가 로직 추가
-			int pointToAdd = 30; // 포인트를 증가시킬 값
-			myUser.setPoint(myUser.getPoint() + pointToAdd);
-			userService.updateCheckUser(myUser);
-			return new ResponseDTO<>(HttpStatus.OK.value(), 1);
-			
-		}
+		return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "번호가 일치하지 않습니다.");
+	}
+
+	@GetMapping("/mypage")
+	public String mypage() {
+		return "user/mypage";
+	}
+
+	@PutMapping("/updateUser/{userSeq}")
+	public @ResponseBody ResponseDTO<?> updateUser(@RequestBody User user, @PathVariable int userSeq,
+			HttpSession session) {
+		User myUser = (User) session.getAttribute("principal");
+		myUser.setPassword(user.getPassword());
+		myUser.setNickname(user.getNickname());
+		userService.updateUser(myUser, session);
+		return new ResponseDTO<>(HttpStatus.OK.value(), "회원 수정이 성공했습니다.");
+	}
+
+	@PutMapping("/pluspoint/{userSeq}")
+	public @ResponseBody ResponseDTO<?> pluspoint(@PathVariable int userSeq) {
+		User myUser = userService.getCheckUser(userSeq);
+		// 포인트 증가 로직 추가
+		int pointToAdd = 30; // 포인트를 증가시킬 값
+		myUser.setPoint(myUser.getPoint() + pointToAdd);
+		userService.updateCheckUser(myUser);
+		return new ResponseDTO<>(HttpStatus.OK.value(), 1);
+
+	}
+
 }

@@ -39,11 +39,10 @@ public class FreeBoardService {
 	
 	
 	
-//	@Transactional(readOnly = true)
-//	public List<FreeBoard> freeBoardList() {
-//		List<FreeBoard> getFreeBoardList = freeBoardRepository.findAll();
-//		return getFreeBoardList;
-//	}
+	@Transactional(readOnly = true)
+	public List<FreeBoard> freeBoard(int userSeq) {
+		return freeBoardRepository.findByUser_UserSeq(userSeq);
+	}
 
 	
 	

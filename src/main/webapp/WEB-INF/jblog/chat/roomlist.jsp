@@ -13,27 +13,16 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
             crossorigin="anonymous"></script>
-
-    <link rel="stylesheet"
-          href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
-          integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
-          crossorigin="anonymous">
-    <script src="/js/roomlist/bootstrap-show-password.min.js"></script>
+            
+    <link
+   href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Poppins:wght@200;300;400;500&display=swap"
+   rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap"
+   rel="stylesheet">
+    
     <script th:inline="javascript">
-
-        let crSeq;
-
-        $(function(){
-            let $crCount = $("#crCount");
-
-            // 모달창 열릴 때 이벤트 처리 => crSeq 가져오기
-            $("#enterRoomModal").on("show.bs.modal", function (event) {
-                crSeq = $(event.relatedTarget).data('id');
-                
-
-            });
-
-           
 
         // 채팅방 생성
         function createRoom() {
@@ -62,6 +51,30 @@
             }
             return true;
         }
+        
+        function enterRoom(){
+            let chatCode = $("#chatCode").val();
+
+            $.ajax({
+                type : "post",
+                url : "/chat/chatCode/"+ chatCode,
+                async : false,
+                success : function(result){
+                    console.log("동작완료")
+                    // console.log("확인 : "+chkRoomUserCnt(roomId))
+
+                    if(result){
+                        
+                            location.href = "/chat/room/"+ chatCode;
+                        
+                    }else {
+                        alert("채팅 정원 초과");
+                    }
+               
+                }
+            })
+        }
+
 
      
 
@@ -90,44 +103,48 @@
         span.input-group-text.input-password-show {
             height: 40px;
         }
+        body {
+   font-family: 'Jua', sans-serif; /* 변경할 폰트 지정 */
+	}
 
     </style>
 </head>
 <body>
 <div class="container">
     <div class="container">
-
-        <h2>${principal.nickname} 님의 채팅방</h2>
-
+	<center>
+        <h1>${principal.nickname} 님의 채팅방</h1>
+</center>
         <table class="table table-hover" id="table">
             <tr>
-                <th scope="col">채팅방명</th>
+                <th scope="col"><h3>채팅방명</h3></th>
 
-                <th scope="col">참여 인원</th>
+                <th scope="col"><h3>참여 인원</h3></th>
                 
-                <th scope="col">채팅생성일</th>
+                <th scope="col"><h3>등록일</h3></th>
                 
             </tr>
          
 	<c:forEach var="room" items="${list}">
                 <tr>
-                    <span class="hidden" id="${room.crName}"></span>
+                    <span class="hidden" id="${room.chatRoom.crName}"></span>
                     <td>
-                        <a href="/chat/room/${room.crSeq}">[[${room.crName}]]</a>
+                        <a href="/chat/room/${room.chatRoom.crSeq}">[[${room.chatRoom.crName}]]</a>
                     </td>
                   
                     <td>
-                        <span class="badge bg-primary rounded-pill">${room.crCount}</span>
+                        <span class="badge bg-primary rounded-pill">${room.chatRoom.crCount}</span>
                     </td>
                     
                       <td>
-                        <span class="badge bg-primary rounded-pill">${room.crDate}</span>
+                        <span class="badge bg-primary rounded-pill">${room.chatRoom.crDate}</span>
                     </td>
                 </tr>
    </c:forEach>
 
         </table>
         <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#roomModal">방 생성</button>
+        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#enterRoomModal">방 입장하기</button>
 
     </div>
 </div>
@@ -161,10 +178,28 @@
 </div>
 
 
+                <div class="modal fade" id="enterRoomModal" tabindex="-1" aria-labelledby="enterRoomModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">채팅방 코드를 입력해주세요</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="chatCode" class="col-form-label">채팅 코드</label>
+                    <div class="input-group">
+                        <input type="text" name="chatCode" id="chatCode" class="form-control" data-toggle="chatCode">
+                    </div>
+                </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary" onclick="enterRoom()">입장하기</button>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
    
 
 

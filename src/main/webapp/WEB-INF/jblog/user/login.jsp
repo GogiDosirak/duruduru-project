@@ -92,9 +92,9 @@
 </div>
 <br>
 <center>
-    <button type="button" class="btn btn-warning" onclick="location.href='/join'">회원가입</button>
+    <button type="button" class="btn btn-warning" onclick="location.href='/auth/join'">회원가입</button>
     &nbsp;&nbsp;&nbsp;
-    <button type="button" class="btn btn-warning" onclick="location.href='/findid'">아이디/비밀번호 찾기</button>
+    <button type="button" class="btn btn-warning" onclick="location.href='/auth/findid'">아이디/비밀번호 찾기</button>
     </center>
 </div>
 

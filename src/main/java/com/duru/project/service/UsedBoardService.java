@@ -54,6 +54,10 @@ public class UsedBoardService {
 //		return usedBoardRepository.findAll(pageable);
 //	}
 
+	@Transactional(readOnly = true)
+	public List<UsedBoard> usedBoard(int userSeq) {
+		return usedBoardRepository.findByUser_UserSeq(userSeq);
+	}
 	
 	
 	@Transactional(readOnly = true)

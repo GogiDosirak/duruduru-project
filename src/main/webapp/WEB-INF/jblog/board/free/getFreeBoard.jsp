@@ -80,7 +80,7 @@
     <input type="hidden" id="frboSeq" value="${findFreeBoard.frboSeq }">
         <h2 id="title" align="center">${findFreeBoard.frboTitle}</h2>
         <h3 align="left">${findFreeBoard.user.nickname}</h3>   
-        <h6 align="left">날짜 : ${findFreeBoard.frboDate}　　 조회수 : ${findFreeBoard.frboCnt}</h6>
+        <h6 align="left">날짜 : ${findFreeBoard.frboDate}&nbsp;&nbsp;&nbsp;&nbsp;조회수 : ${findFreeBoard.frboCnt}</h6>
         <hr>
 
         

@@ -53,12 +53,25 @@ function showPosition(position) {
 	width: 300px;
 	height: 300px;
 	object-fit: cover;
+	}
+	
+.image-zoom-effect .image-holder {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  transform: scale(1);
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.image-zoom-effect:hover .image-holder {
+  transform: scale(0.95);
+}
 }
 </style>
 
 <div id="searchForm">
     <form action="/usedboard" method="GET" class="form-inline">
-        <input type="text" name="searchKeyword" class="form-control-sm" id="searchKeyword" placeholder="제목으로 검색하기">
+        <input type="text" name="searchKeyword" class="form-control-sm" id="search" placeholder="제목으로 검색하기">
         <button class="btn btn-warning bi bi-search" id="searchButton">검색</button>
     </form>
 </div>
@@ -85,9 +98,9 @@ function showPosition(position) {
 							</h3>
 							
 						</div>
-						<div class="image-holder" >
+			<div class="image-holder" >
 					<h6>${used.user.nickname }</h6>
-					</div>
+</div>
 					<div class="image-holder" >
 					<h6>${used.usboCnt }</h6>
 					</div>

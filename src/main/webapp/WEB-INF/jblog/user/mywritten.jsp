@@ -99,8 +99,8 @@
     <div class="container">
         <div class="sidebar">
             <a href="/mypage" onclick="loadPage('profile')">내 정보</a>
-            <a href="#" onclick="loadPage('petInfo')">반려동물 정보</a>
-            <a href="#" onclick="loadPage('myPosts')">내가 쓴 글</a>
+            <a href="/petInfo/${principal.userSeq}" onclick="loadPage('petInfo')">반려동물 정보</a>
+            <a href="/mywritten/${principal.userSeq }" onclick="loadPage('myPosts')">내가 쓴 글</a>
             <a href="/orderHistory" onclick="loadPage('myPosts')">주문내역</a>
             <a href="#" onclick="loadPage('exchangeRefund')">교환 및 환불</a>
         </div>
@@ -120,22 +120,62 @@
 	<div class="form-group">
 	 <table class="table">
     <tr style="text-align: center;">
-        <th style="vertical-align: middle;">주문번호</th>
-        <th style="vertical-align: middle;">주문자명</th>
-        <th style="vertical-align: middle;">주문주소</th>
-        <th style="vertical-align: middle;">주문액수</th>
-        <th style="vertical-align: middle;">주문날짜</th>
-    <c:forEach var="order" items="${orderList}">
-        <c:if test="${order.user.userSeq == principal.userSeq}">
+        <th style="vertical-align: middle;">게시판명</th>
+        <th style="vertical-align: middle;">글제목</th>
+        <th style="vertical-align: middle;">조회수</th>
+        <th style="vertical-align: middle;">날짜</th>
+        </tr>
+        <c:forEach var="freeBoard" items="${freeBoard}">
             <tr>	
-                <td style="vertical-align: middle; text-align: center;">${order.orderSeq }</td>
-                <td style="vertical-align: middle; text-align: center;">${order.orderName}</td>
-                <td style="vertical-align: middle; text-align: center;">${order.orderAddress}</td>
-                <td style="vertical-align: middle; text-align: center;">${order.orderPrice}원</td>	
-                <td style="vertical-align: middle; text-align: center;">${order.orderDate}</td>
+                <td style="vertical-align: middle; text-align: center;">자유게시판</td>
+                <td style="vertical-align: middle; text-align: center;"><a href="/getfreeboard/${freeBoard.frboSeq }">${freeBoard.frboTitle }</a></td>
+                <td style="vertical-align: middle; text-align: center;">${freeBoard.frboCnt}</td>
+                <td style="vertical-align: middle; text-align: center;">${freeBoard.frboDate}</td>	  
             </tr>
-        </c:if>
     </c:forEach>
+            <c:forEach var="usedBoard" items="${usedBoard}">
+            <tr>	
+                <td style="vertical-align: middle; text-align: center;">중고거래게시판</td>
+                <td style="vertical-align: middle; text-align: center;"><a href="/getUsedBoard/${usedBoard.usboSeq }">${usedBoard.usboTitle}</a></td>
+                <td style="vertical-align: middle; text-align: center;">${usedBoard.usboCnt}</td>
+                <td style="vertical-align: middle; text-align: center;">${usedBoard.usboDate}</td>	  
+            </tr>
+    </c:forEach>
+                <c:forEach var="walkBoard" items="${walkBoard}">
+            <tr>	
+                <td style="vertical-align: middle; text-align: center;">산책게시판</td>
+                <td style="vertical-align: middle; text-align: center;"><a href="/getWalkBoard/${walkBoard.waboSeq }">${walkBoard.waboTitle}</a></td>
+                <td style="vertical-align: middle; text-align: center;">${walkBoard.waboCnt}</td>
+                <td style="vertical-align: middle; text-align: center;">${walkBoard.waboDate}</td>	  
+            </tr>
+    </c:forEach>
+                    <c:forEach var="walkCheckBoard" items="${walkCheckBoard}">
+            <tr>	
+                <td style="vertical-align: middle; text-align: center;">산책인증게시판</td>
+                <td style="vertical-align: middle; text-align: center;"><a href="/getWach/${walkCheckBoard.wachboSeq}">${walkCheckBoard.wachboTitle}</a></td>
+                <td style="vertical-align: middle; text-align: center;">${walkCheckBoard.wachboCnt}</td>	  
+                <td style="vertical-align: middle; text-align: center;">${walkCheckBoard.wachboDate}</td>	  
+            </tr>
+    </c:forEach>
+                       <c:forEach var="inquiry" items="${inquiry}">
+            <tr>	
+                <td style="vertical-align: middle; text-align: center;">1:1문의게시판</td>
+                <td style="vertical-align: middle; text-align: center;"><a href="/getInquiry/${inquiry.inquirySeq }">${inquiry.inquiryTitle }</a></td>
+                <td style="vertical-align: middle; text-align: center;">${inquiry.inquiryCnt}</td>	  
+                <td style="vertical-align: middle; text-align: center;">${inquiry.inquiryDate}</td>	  
+            </tr>
+    </c:forEach>
+    <!-- 
+                           <c:forEach var="findPetBoard" items="${findPetBoard}">
+            <tr>	
+                <td style="vertical-align: middle; text-align: center;">동물찾기게시판</td>
+                <td style="vertical-align: middle; text-align: center;"><a href="/getFindPetBoard/${findPetBoard.fPSeq }">${findPetBoard.fPTitle }</a></td>
+                <td style="vertical-align: middle; text-align: center;">${findPetBoard.fPCnt}</td>	  
+                <td style="vertical-align: middle; text-align: center;">${findPetBoard.fPDate}</td>	  
+            </tr>
+    </c:forEach>
+     호재한테 물어보기 fP인지 fPet인지-->
+
 </table>
 <br>
 <br>

@@ -30,6 +30,11 @@ public class InquiryService {
 		return inquiryRepository.findAll(pageable);
 	}
 	
+	@Transactional(readOnly = true)
+	public List<Inquiry> inquiry(int userSeq) {
+		return inquiryRepository.findByUser_UserSeq(userSeq);
+	}
+	
 	@Transactional
 	public void insertInquiry(Inquiry inquiry) {
 		inquiryRepository.save(inquiry);
