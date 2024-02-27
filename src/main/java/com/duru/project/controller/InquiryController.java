@@ -25,7 +25,6 @@ import com.duru.project.dto.ResponseDTO;
 import com.duru.project.service.InquiryCommentService;
 import com.duru.project.service.InquiryService;
 
-
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -37,13 +36,25 @@ public class InquiryController {
 	
 	@GetMapping("/inquiry")
 	public String inquiry(HttpSession session, @PageableDefault(size=5, sort="inquirySeq", direction = Sort.Direction.DESC) Pageable pageable) {
+		User user = (User) session.getAttribute("principal");
+
+		if (user == null) {
+			// 로그인되어 있지 않으면 로그인 페이지로 리다이렉트 또는 다른 처리 수행
+			return "redirect:/login";
+		}
 		Page<Inquiry> inquiryList = inquiryService.getInquiryList(pageable);
 		session.setAttribute("inquiryList", inquiryList);
 		return "cs/inquiry/inquiry";
 	}
 	
 	@GetMapping("/inquiry/searchInquiry")
-	public String searchInquiry(String keyword, Model model, @PageableDefault(size=5, sort="inquirySeq", direction = Sort.Direction.DESC)Pageable pageable) {
+	public String searchInquiry(String keyword, Model model, @PageableDefault(size=5, sort="inquirySeq", direction = Sort.Direction.DESC)Pageable pageable, HttpSession session) {
+		User user = (User) session.getAttribute("principal");
+
+		if (user == null) {
+			// 로그인되어 있지 않으면 로그인 페이지로 리다이렉트 또는 다른 처리 수행
+			return "redirect:/login";
+		}
 		Page<Inquiry> inquirySearchList = inquiryService.searchInquiry(keyword, pageable);
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("inquirySearchList", inquirySearchList);
@@ -51,12 +62,24 @@ public class InquiryController {
 	}
 	
 	@GetMapping("/insertInquiry")
-	public String insertInquiry() {
+	public String insertInquiry(HttpSession session) {
+		User user = (User) session.getAttribute("principal");
+
+		if (user == null) {
+			// 로그인되어 있지 않으면 로그인 페이지로 리다이렉트 또는 다른 처리 수행
+			return "redirect:/login";
+		}
 		return "cs/inquiry/insertInquiry";
 	}
 	
 	@GetMapping("/getInquiry/{inquirySeq}")
-	public String getInquiry(@PathVariable int inquirySeq, Model model) {
+	public String getInquiry(@PathVariable int inquirySeq, Model model, HttpSession session) {
+		User user = (User) session.getAttribute("principal");
+
+		if (user == null) {
+			// 로그인되어 있지 않으면 로그인 페이지로 리다이렉트 또는 다른 처리 수행
+			return "redirect:/login";
+		}
 		Inquiry getInquiry = inquiryService.getInquiry(inquirySeq);
 		List<InquiryComment> inquiryCommentList = inquiryCommentService.getInquiryCommentList(inquirySeq);
 		model.addAttribute("getInquiry", getInquiry);
@@ -66,7 +89,13 @@ public class InquiryController {
 	}
 	
 	@GetMapping("/updateInquiry/{inquirySeq}")
-	public String updateInquiry(@PathVariable int inquirySeq, Model model) {
+	public String updateInquiry(@PathVariable int inquirySeq, Model model, HttpSession session) {
+		User user = (User) session.getAttribute("principal");
+
+		if (user == null) {
+			// 로그인되어 있지 않으면 로그인 페이지로 리다이렉트 또는 다른 처리 수행
+			return "redirect:/login";
+		}
 		Inquiry getInquiry = inquiryService.getInquiry(inquirySeq);
 		model.addAttribute("getInquiry",getInquiry);
 		return "cs/inquiry/updateInquiry";

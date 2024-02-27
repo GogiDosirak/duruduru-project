@@ -91,7 +91,13 @@ public class FreeBoardController {
 	
 	
 	@GetMapping("/insertfreeboard")
-	public String insertFreeBoard() {
+	public String insertFreeBoard(HttpSession session) {
+		User user = (User) session.getAttribute("principal");
+
+		if (user == null) {
+			// 로그인되어 있지 않으면 로그인 페이지로 리다이렉트 또는 다른 처리 수행
+			return "redirect:/login";
+		}
 		return "board/free/insertFreeBoard";
 	}
 	
@@ -110,7 +116,13 @@ public class FreeBoardController {
 	
 	@GetMapping("/getfreeboard/{frboSeq}")
 
-	public  String getFreeBoard(@PathVariable int frboSeq, Model model) {
+	public  String getFreeBoard(@PathVariable int frboSeq, Model model, HttpSession session) {
+		User user = (User) session.getAttribute("principal");
+
+		if (user == null) {
+			// 로그인되어 있지 않으면 로그인 페이지로 리다이렉트 또는 다른 처리 수행
+			return "redirect:/login";
+		}
 		
 		FreeBoard findFreeBoard = freeBoardService.getFreeBoard(frboSeq);
 		model.addAttribute("findFreeBoard", findFreeBoard);
@@ -130,7 +142,13 @@ public class FreeBoardController {
 	
 	
 	@GetMapping("/updateFreeBoard/{frboSeq}")
-	public String updateFreeBoard(@PathVariable int frboSeq, Model model) {
+	public String updateFreeBoard(@PathVariable int frboSeq, Model model, HttpSession session) {
+		User user = (User) session.getAttribute("principal");
+
+		if (user == null) {
+			// 로그인되어 있지 않으면 로그인 페이지로 리다이렉트 또는 다른 처리 수행
+			return "redirect:/login";
+		}
 		FreeBoard findFreeBoard =freeBoardService.getFreeBoard(frboSeq);
 		model.addAttribute("findFreeBoard", findFreeBoard);
 		

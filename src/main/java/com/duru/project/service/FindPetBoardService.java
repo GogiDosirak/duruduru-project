@@ -43,6 +43,11 @@ public class FindPetBoardService {
 
 	}
 	
+	@Transactional(readOnly = true)
+	public List<FindPetBoard> findPetBoard(int userSeq) {
+		return findPetBoardRepository.findByUser_UserSeq(userSeq);
+	}
+	
 	
 	@Transactional(readOnly = true)
 	public FindPetBoard getFindPetBoard(int fpSeq) {

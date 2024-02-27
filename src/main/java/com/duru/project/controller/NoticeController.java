@@ -1,7 +1,5 @@
 package com.duru.project.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -32,13 +30,25 @@ public class NoticeController {
 	
 	@GetMapping("/notice")
 	public String notice(HttpSession session, @PageableDefault(size = 5, sort = "noticeSeq", direction = Sort.Direction.DESC) Pageable pageable) {
+		User user = (User) session.getAttribute("principal");
+
+		if (user == null) {
+			// 로그인되어 있지 않으면 로그인 페이지로 리다이렉트 또는 다른 처리 수행
+			return "redirect:/login";
+		}
 		Page<Notice> noticeList = noticeService.getNoticeList(pageable);
 		session.setAttribute("noticeList", noticeList);
 		return "cs/notice/notice";
 	}
 	
 	@GetMapping("/notice/searchNotice")
-	public String searchNotice(String keyword, Model model, @PageableDefault(size=5, sort="noticeSeq",direction = Sort.Direction.DESC)Pageable pageable) {
+	public String searchNotice(String keyword, Model model, @PageableDefault(size=5, sort="noticeSeq",direction = Sort.Direction.DESC)Pageable pageable, HttpSession session) {
+		User user = (User) session.getAttribute("principal");
+
+		if (user == null) {
+			// 로그인되어 있지 않으면 로그인 페이지로 리다이렉트 또는 다른 처리 수행
+			return "redirect:/login";
+		}
 		Page<Notice> noticeSearchList = noticeService.searchNotice(keyword, pageable);
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("noticeSearchList", noticeSearchList);
@@ -46,7 +56,13 @@ public class NoticeController {
 	}
 	
 	@GetMapping("/insertNotice")
-	public String insertNotice() {
+	public String insertNotice(HttpSession session) {
+		User user = (User) session.getAttribute("principal");
+
+		if (user == null) {
+			// 로그인되어 있지 않으면 로그인 페이지로 리다이렉트 또는 다른 처리 수행
+			return "redirect:/login";
+		}
 		return "cs/notice/insertNotice";
 	}
 	
@@ -60,7 +76,13 @@ public class NoticeController {
 	}
 	
 	@GetMapping("/getNotice/{noticeSeq}")
-	public String getNotice(@PathVariable int noticeSeq, Model model) {
+	public String getNotice(@PathVariable int noticeSeq, Model model, HttpSession session) {
+		User user = (User) session.getAttribute("principal");
+
+		if (user == null) {
+			// 로그인되어 있지 않으면 로그인 페이지로 리다이렉트 또는 다른 처리 수행
+			return "redirect:/login";
+		}
 		Notice getNotice = noticeService.getNotice(noticeSeq);
 		model.addAttribute("getNotice", getNotice);
 		return "cs/notice/getNotice";

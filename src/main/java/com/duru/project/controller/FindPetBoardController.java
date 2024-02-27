@@ -41,7 +41,13 @@ public class FindPetBoardController {
 	
 
 	@GetMapping("/insertFindPet")
-	public String insertFindPet() {
+	public String insertFindPet(HttpSession session) {
+		User user = (User) session.getAttribute("principal");
+
+		if (user == null) {
+			// 로그인되어 있지 않으면 로그인 페이지로 리다이렉트 또는 다른 처리 수행
+			return "redirect:/login";
+		}
 		return "board/findPet/insertFindPet";
 	}
 	
@@ -68,7 +74,14 @@ public class FindPetBoardController {
 
 	
 	@GetMapping("/getFindPetBoard/{fpSeq}")
-	public String getFPetBoard(@PathVariable int fpSeq, Model model) {
+	public String getFPetBoard(@PathVariable int fpSeq, Model model, HttpSession session) {
+		User user = (User) session.getAttribute("principal");
+
+		if (user == null) {
+			// 로그인되어 있지 않으면 로그인 페이지로 리다이렉트 또는 다른 처리 수행
+			return "redirect:/login";
+		}
+		
 		FindPetBoard findFindPetBoard = findPetBoardService.getFindPetBoard(fpSeq);
 		model.addAttribute("findFindPetBoard", findFindPetBoard);
 		
@@ -84,7 +97,13 @@ public class FindPetBoardController {
 	
 	
 	@GetMapping("/updateFindPetBoard")
-	public String updateFindPetBoard(@RequestParam("fpSeq") int fpSeq, Model model) {
+	public String updateFindPetBoard(@RequestParam("fpSeq") int fpSeq, Model model, HttpSession session) {
+		User user = (User) session.getAttribute("principal");
+
+		if (user == null) {
+			// 로그인되어 있지 않으면 로그인 페이지로 리다이렉트 또는 다른 처리 수행
+			return "redirect:/login";
+		}
 		FindPetBoard findFPetBoard = findPetBoardService.getFindPetBoard(fpSeq);
 		model.addAttribute("findFPetBoard", findFPetBoard);
 		return "board/findPet/updateFindPet";

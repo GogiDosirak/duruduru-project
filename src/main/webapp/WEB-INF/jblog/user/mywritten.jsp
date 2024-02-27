@@ -165,16 +165,16 @@
                 <td style="vertical-align: middle; text-align: center;">${inquiry.inquiryDate}</td>	  
             </tr>
     </c:forEach>
-    <!-- 
+
                            <c:forEach var="findPetBoard" items="${findPetBoard}">
             <tr>	
                 <td style="vertical-align: middle; text-align: center;">동물찾기게시판</td>
-                <td style="vertical-align: middle; text-align: center;"><a href="/getFindPetBoard/${findPetBoard.fPSeq }">${findPetBoard.fPTitle }</a></td>
-                <td style="vertical-align: middle; text-align: center;">${findPetBoard.fPCnt}</td>	  
-                <td style="vertical-align: middle; text-align: center;">${findPetBoard.fPDate}</td>	  
+                <td style="vertical-align: middle; text-align: center;"><a href="/getFindPetBoard/${findPetBoard.fpSeq }">${findPetBoard.fpTitle }</a></td>
+                <td style="vertical-align: middle; text-align: center;">${findPetBoard.fpCnt}</td>	  
+                <td style="vertical-align: middle; text-align: center;">${findPetBoard.fpDate}</td>	  
             </tr>
     </c:forEach>
-     호재한테 물어보기 fP인지 fPet인지-->
+
 
 </table>
 <br>

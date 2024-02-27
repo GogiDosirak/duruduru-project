@@ -44,6 +44,12 @@ public class OrderController {
 	
 	@GetMapping("/order/{userSeq}")
 	public String order(@PathVariable int userSeq, HttpSession session) { //jsp에서 "order/${principal.userSeq}"로 받아옴
+		User user = (User) session.getAttribute("principal");
+
+		if (user == null) {
+			// 로그인되어 있지 않으면 로그인 페이지로 리다이렉트 또는 다른 처리 수행
+			return "redirect:/login";
+		}
 		session.getAttribute("basketList"); //session에서 장바구니 물품 불러와야 물품이 뜸
 		return "shop/order/order";
 	}
@@ -61,7 +67,13 @@ public class OrderController {
 	
 	
 	@GetMapping("/goPay")
-	public String pay(Model model) {
+	public String pay(Model model, HttpSession session) {
+		User user = (User) session.getAttribute("principal");
+
+		if (user == null) {
+			// 로그인되어 있지 않으면 로그인 페이지로 리다이렉트 또는 다른 처리 수행
+			return "redirect:/login";
+		}
 		return "/shop/order/goPay";
 	}
 	
@@ -76,6 +88,10 @@ public class OrderController {
 		// 결제가 완료되면 userpay 테이블에 데이터 삽입
 		UserOrder userOrder = (UserOrder)session.getAttribute("userOrder");
 		User user = (User)session.getAttribute("principal");
+		if (user == null) {
+			// 로그인되어 있지 않으면 로그인 페이지로 리다이렉트 또는 다른 처리 수행
+			return "redirect:/login";
+		}
 		UserPay userPay = new UserPay();
 		userPay.setUser(user);
 		userPay.setPayAddress(userOrder.getOrderAddress());
@@ -117,6 +133,12 @@ public class OrderController {
 	
 	@GetMapping("/usePoint/{userSeq}")
 	public String usePoint(@PathVariable int userSeq,int point, HttpSession session) {
+		User user = (User) session.getAttribute("principal");
+
+		if (user == null) {
+			// 로그인되어 있지 않으면 로그인 페이지로 리다이렉트 또는 다른 처리 수행
+			return "redirect:/login";
+		}
 		session.setAttribute("point", point);
 		return "shop/order/usePoint";
 	}

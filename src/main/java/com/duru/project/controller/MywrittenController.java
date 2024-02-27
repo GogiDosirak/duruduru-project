@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import com.duru.project.domain.FindPetBoard;
 import com.duru.project.domain.FreeBoard;
@@ -48,6 +47,11 @@ public class MywrittenController {
 	@GetMapping("/mywritten/{userSeq}")
 	public String mywritten(@PathVariable int userSeq, Model model,HttpSession session) {
 		User user = (User)session.getAttribute("principal");
+
+		if (user == null) {
+			// 로그인되어 있지 않으면 로그인 페이지로 리다이렉트 또는 다른 처리 수행
+			return "redirect:/login";
+		}
 		userSeq = user.getUserSeq();
 		
 		List<FindPetBoard> findPetBoard = findPetBoardService.findPetBoard(userSeq);

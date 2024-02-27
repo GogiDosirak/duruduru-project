@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
@@ -48,10 +47,6 @@ public class UsedBoardController {
 
 	
 	
-	@GetMapping("/wichi")
-	   public String getwichi() {
-	      return "wichi";
-	   }
 	
 	
 	//검색 + 페이징
@@ -75,7 +70,13 @@ public class UsedBoardController {
 	
 
 	@GetMapping("/insertUsedBoard")
-	public String insertUsedBoard() {
+	public String insertUsedBoard(HttpSession session) {
+		User user = (User) session.getAttribute("principal");
+
+		if (user == null) {
+			// 로그인되어 있지 않으면 로그인 페이지로 리다이렉트 또는 다른 처리 수행
+			return "redirect:/login";
+		}
 		return "board/used/insertUsedBoard";
 	}
 	
@@ -101,7 +102,13 @@ public class UsedBoardController {
 
 	
 	@GetMapping("/getUsedBoard/{usboSeq}")
-	public String getUsedBoard(@PathVariable int usboSeq, Model model) {
+	public String getUsedBoard(@PathVariable int usboSeq, Model model, HttpSession session) {
+		User user = (User) session.getAttribute("principal");
+
+		if (user == null) {
+			// 로그인되어 있지 않으면 로그인 페이지로 리다이렉트 또는 다른 처리 수행
+			return "redirect:/login";
+		}
 		UsedBoard findUsedBoard = usedBoardService.getUsedBoard(usboSeq);
 		model.addAttribute("findUsedBoard", findUsedBoard);
 		
@@ -117,7 +124,13 @@ public class UsedBoardController {
 	
 	
 	@GetMapping("/updateUsedBoard")
-	public String updateUsedBoard(@RequestParam("usboSeq") int usboSeq, Model model) {
+	public String updateUsedBoard(@RequestParam("usboSeq") int usboSeq, Model model, HttpSession session) {
+		User user = (User) session.getAttribute("principal");
+
+		if (user == null) {
+			// 로그인되어 있지 않으면 로그인 페이지로 리다이렉트 또는 다른 처리 수행
+			return "redirect:/login";
+		}
 		UsedBoard findUsedBoard = usedBoardService.getUsedBoard(usboSeq);
 		model.addAttribute("findUsedBoard", findUsedBoard);
 		return "board/used/updateUsedBoard";

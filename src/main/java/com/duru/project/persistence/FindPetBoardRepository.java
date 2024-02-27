@@ -1,15 +1,15 @@
 package com.duru.project.persistence;
 
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.duru.project.domain.FindPetBoard;
-import com.duru.project.domain.UsedBoard;
 
 public interface FindPetBoardRepository extends JpaRepository<FindPetBoard, Integer>{
 	
@@ -19,8 +19,9 @@ public interface FindPetBoardRepository extends JpaRepository<FindPetBoard, Inte
 
 	//검색 null일 때ㅔ 나머지 리스트 다 나오게(관리자인 경우 모두 볼 수 있게)
 	Page<FindPetBoard> findAll(Pageable pageable);
-
 	
+	List<FindPetBoard> findByUser_UserSeq(int userSeq);
+
 	
 	//5km이내 거리 가까운 순, 거리 똑같으면 seq순으로 
 		@Query(value = "SELECT fb FROM FindPetBoard fb ORDER BY ST_DISTANCE_SPHERE(POINT(:userLongitude, :userLatitude), POINT(fb.user.longitude, fb.user.latitude)) ASC, fb.fpSeq DESC")

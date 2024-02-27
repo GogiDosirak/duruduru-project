@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.duru.project.domain.Product;
+import com.duru.project.domain.User;
 import com.duru.project.dto.ResponseDTO;
 import com.duru.project.service.ProductService;
 
@@ -29,6 +30,13 @@ public class ShopController {
 	@GetMapping("/mall")
 	public String getProductList(HttpSession session, 
 			@PageableDefault(size=8, sort="productSeq", direction = org.springframework.data.domain.Sort.Direction.DESC) Pageable pageable) {
+		User user = (User) session.getAttribute("principal");
+
+		if (user == null) {
+			// 로그인되어 있지 않으면 로그인 페이지로 리다이렉트 또는 다른 처리 수행
+			return "redirect:/login";
+		}
+		
 		Page<Product> productList = productService.getProductList(pageable);
 		session.setAttribute("productList", productList);
 		return "shop/mall/mall";
@@ -47,7 +55,13 @@ public class ShopController {
 
 
 	@GetMapping("/insertProduct")
-	public String insertProduct() {
+	public String insertProduct(HttpSession session) {
+		User user = (User) session.getAttribute("principal");
+
+		if (user == null) {
+			// 로그인되어 있지 않으면 로그인 페이지로 리다이렉트 또는 다른 처리 수행
+			return "redirect:/login";
+		}
 		return "shop/mall/insertProduct";
 	}
 
@@ -60,7 +74,13 @@ public class ShopController {
 	}
 	
 	@GetMapping("/getProduct/{productSeq}")
-	public String getProduct(@PathVariable int productSeq, Model model) {
+	public String getProduct(@PathVariable int productSeq, Model model, HttpSession session) {
+		User user = (User) session.getAttribute("principal");
+
+		if (user == null) {
+			// 로그인되어 있지 않으면 로그인 페이지로 리다이렉트 또는 다른 처리 수행
+			return "redirect:/login";
+		}
 		Product getProduct = productService.getProduct(productSeq);
 		model.addAttribute("getProduct", getProduct);
 		return "shop/mall/getProduct";

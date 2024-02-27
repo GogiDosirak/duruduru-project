@@ -164,7 +164,13 @@ public class UserController {
 	}
 
 	@GetMapping("/mypage")
-	public String mypage() {
+	public String mypage(HttpSession session) {
+		User user = (User) session.getAttribute("principal");
+
+		if (user == null) {
+			// 로그인되어 있지 않으면 로그인 페이지로 리다이렉트 또는 다른 처리 수행
+			return "redirect:/login";
+		}
 		return "user/mypage";
 	}
 
