@@ -26,14 +26,24 @@ public class PetController {
 	PetService petService;
 	
 	@GetMapping("/petInfo/{userSeq}")
-	public String petInfo(Model model, @PathVariable int userSeq){
+	public String petInfo(Model model, @PathVariable int userSeq, HttpSession session){
+        User user = (User) session.getAttribute("principal");
+        if (user == null) {
+            // 로그인되어 있지 않으면 로그인 페이지로 리다이렉트 또는 다른 처리 수행
+            return "redirect:/login";
+        }
 		model.addAttribute("myPetList", petService.myPetList(userSeq));
 		return "/pet/petInfo";
 	}
 
 	//insert11
 	@GetMapping("/insertPet")
-	public String insertPet() {
+	public String insertPet(HttpSession session) {
+        User user = (User) session.getAttribute("principal");
+        if (user == null) {
+            // 로그인되어 있지 않으면 로그인 페이지로 리다이렉트 또는 다른 처리 수행
+            return "redirect:/login";
+        }
 		return "/pet/insertPet";
 	}
 
@@ -49,7 +59,12 @@ public class PetController {
 	
 	//getPet
 	@GetMapping("/getPet/{petSeq}")
-	public String getPet(@PathVariable int petSeq, Model model) {
+	public String getPet(@PathVariable int petSeq, Model model, HttpSession session) {
+        User user = (User) session.getAttribute("principal");
+        if (user == null) {
+            // 로그인되어 있지 않으면 로그인 페이지로 리다이렉트 또는 다른 처리 수행
+            return "redirect:/login";
+        }
 		Pet findPet = petService.getPet(petSeq);
 		model.addAttribute("pet", findPet);
 		return "/pet/petInfo";
@@ -57,7 +72,12 @@ public class PetController {
 	
 	//updatePet11
 	@GetMapping("/updatePet/{petSeq}")
-	public String updatePet(@PathVariable int petSeq, Model model) {
+	public String updatePet(@PathVariable int petSeq, Model model, HttpSession session) {
+        User user = (User) session.getAttribute("principal");
+        if (user == null) {
+            // 로그인되어 있지 않으면 로그인 페이지로 리다이렉트 또는 다른 처리 수행
+            return "redirect:/login";
+        }
 		model.addAttribute("pet", petService.getPet(petSeq));
 		return "/pet/updatePet";
 	}

@@ -1,6 +1,8 @@
 
 package com.duru.project.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,11 +19,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.duru.project.domain.Pet;
 import com.duru.project.domain.RoleType;
 import com.duru.project.domain.User;
 import com.duru.project.domain.WalkBoard;
 import com.duru.project.domain.WalkBoardComment;
 import com.duru.project.dto.ResponseDTO;
+import com.duru.project.service.PetService;
 import com.duru.project.service.WalkBoardCommentService;
 import com.duru.project.service.WalkBoardService;
 
@@ -35,6 +39,9 @@ public class WalkBoardController {
 
 	@Autowired
 	private WalkBoardCommentService walkBoardCommentService;
+	
+	@Autowired
+	private PetService petService;
 
 	// walkBoardPage // walkBoardSearchPage
 	@GetMapping("/walk")
@@ -42,6 +49,18 @@ public class WalkBoardController {
 			@RequestParam(required = false) String searchKeyword, HttpSession session) {
 
 		User findUser = (User) session.getAttribute("principal");
+		
+        if (findUser == null) {
+            // 로그인되어 있지 않으면 로그인 페이지로 리다이렉트 또는 다른 처리 수행
+            return "redirect:/login";
+        }
+        
+        List<Pet> findPetList = petService.myPetList(findUser.getUserSeq());
+        
+		if (findPetList.size() == 0 && findUser.getRole() != RoleType.ADMIN) {
+		    return "redirect:/insertPet";
+		}
+		
 		double userLatitude = findUser.getLatitude();
 		double userLongitude = findUser.getLongitude();
 
@@ -49,16 +68,10 @@ public class WalkBoardController {
 		
 		   // 관리자 여부에 따라 페이지 조회를 다르게 처리
 	    if (findUser.getRole().equals(RoleType.ADMIN)) {
-	        walkboardpage = walkBoardService.getWalkBoardListPage(pageable);
+	    		walkboardpage = walkBoardService.getWalkBoardTitleSearchList(searchKeyword, pageable) ;   		
 	    } else {
-	        // 유저일 때 검색어 존재 확인
-	        if (searchKeyword == null) {
 	            walkboardpage = walkBoardService.getWalkBoardsOrderByDistanceAndRecentWithPaging(userLatitude,
 	                    userLongitude, searchKeyword, pageable);
-	        } else {
-	            walkboardpage = walkBoardService.getWalkBoardsOrderByDistanceAndRecentWithPaging(userLatitude,
-	                    userLongitude, searchKeyword, pageable);
-	        }
 	    }
 
 		model.addAttribute("searchKeyword", searchKeyword);
@@ -69,7 +82,12 @@ public class WalkBoardController {
 
 	// insert11
 	@GetMapping("/insertWalkBoard")
-	public String insertWalkBoard() {
+	public String insertWalkBoard(HttpSession session) {
+        User user = (User) session.getAttribute("principal");
+        if (user == null) {
+            // 로그인되어 있지 않으면 로그인 페이지로 리다이렉트 또는 다른 처리 수행
+            return "redirect:/login";
+        }
 		return "board/walk/insertwalkboard";
 	}
 
@@ -84,7 +102,12 @@ public class WalkBoardController {
 
 	// getBoard
 	@GetMapping("/getWalkBoard/{waboSeq}")
-	public String getWalkBoard(@PathVariable int waboSeq, Model model) {
+	public String getWalkBoard(@PathVariable int waboSeq, Model model,HttpSession session) {
+        User user = (User) session.getAttribute("principal");
+        if (user == null) {
+            // 로그인되어 있지 않으면 로그인 페이지로 리다이렉트 또는 다른 처리 수행
+            return "redirect:/login";
+        }
 		WalkBoard findWalkBoard = walkBoardService.getWalkBoard(waboSeq);
 		walkBoardService.increaseCnt(findWalkBoard);
 		model.addAttribute("walkBoard", findWalkBoard);
@@ -94,7 +117,12 @@ public class WalkBoardController {
 
 	// updateBoard11
 	@GetMapping("/updateWalkBoard/{waboSeq}")
-	public String updatePost(@PathVariable int waboSeq, Model model) {
+	public String updatePost(@PathVariable int waboSeq, Model model,HttpSession session) {
+        User user = (User) session.getAttribute("principal");
+        if (user == null) {
+            // 로그인되어 있지 않으면 로그인 페이지로 리다이렉트 또는 다른 처리 수행
+            return "redirect:/login";
+        }
 		WalkBoard findWalkBoard = walkBoardService.getWalkBoard(waboSeq);
 		model.addAttribute("walkBoard", findWalkBoard);
 		return "board/walk/updatewalkboard";

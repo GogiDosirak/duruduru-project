@@ -64,6 +64,7 @@
 
 	</table>
 
+
 	<ul class="pagination">
 		<li
 			class="page-item <c:if test="${walkboardpage.first }">disabled</c:if>">
