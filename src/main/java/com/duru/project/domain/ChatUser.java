@@ -43,8 +43,9 @@ public class ChatUser {
     @Column(name = "cuDate")
     private Date cuDate;
     
+    @Enumerated(EnumType.STRING)
     @Column(name = "cuCheck")
-    private boolean cuCheck;
+    private CheckType cuCheck;
     
     @Enumerated(EnumType.STRING)
     @Column(name = "cuRole")
@@ -53,16 +54,9 @@ public class ChatUser {
     @ManyToOne
     @JoinColumns({
     	 @JoinColumn(name = "crSeq"),
-        @JoinColumn(name = "crSeq2")
+        @JoinColumn(name = "userSeq")
     })
-    private ChatJoin crSeq3;
+    private ChatJoin chatJoin;
     
-    @ManyToOne
-    @JoinColumns({
-    	 @JoinColumn(name = "userSeq"),
-        @JoinColumn(name = "userSeq2")
-    })
-    private ChatJoin userSeq3;
-
     // 생성자, 게터 및 세터 등 필요한 메서드들을 추가할 수 있습니다.
 }

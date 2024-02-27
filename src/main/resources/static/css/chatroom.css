@@ -5,6 +5,11 @@
     box-sizing: border-box;
 }
 
+:root {
+  --body-font: "Jua", sans-serif;
+  --heading-font: "Jua", sans-serif;
+}
+
 html,body {
     height: 100%;
     overflow: hidden;
@@ -28,7 +33,7 @@ body:before {
     position: absolute;
     top: 0;
     left: 0;
-    background: #128ff2;
+    background: rgb(255, 217, 167) ;   
     content: "";
     z-index: 0;
 }
@@ -94,9 +99,9 @@ button.default {
 }
 
 button.primary {
-    background-color: #128ff2;
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12);
-    color: #fff;
+    background-color:  rgb(255, 217, 167) ; 
+    
+    color:  rgb(0, 0, 0);;
 }
 
 button.accent {
@@ -233,6 +238,9 @@ button.accent {
 }
 
 .chat-header {
+    display: flex; /* 요소들을 가로로 배열합니다. */
+    justify-content: space-between; /* 요소들을 간격을 최대로 벌리고 시작과 끝에 배치합니다. */
+    align-items: center; /* 요소들을 세로로 가운데 정렬합니다. */
     text-align: center;
     padding: 15px;
     border-bottom: 1px solid #ececec;
@@ -241,6 +249,7 @@ button.accent {
 .chat-header h2 {
     margin: 0;
     font-weight: 500;
+    
 }
 
 .connecting {
@@ -297,4 +306,5 @@ button.accent {
     .chat-header h2 {
         font-size: 1.1em;
     }
+
 }

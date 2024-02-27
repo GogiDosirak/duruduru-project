@@ -80,7 +80,7 @@
     <input type="hidden" id="eventSeq" value="${findEventBoard.eventSeq }">
         <h2 id="title" align="center">${findEventBoard.eventTitle}</h2>
         <h3 align="left">${findEventBoard.user.nickname}</h3>   
-        <h6 align="left">날짜 : ${findEventBoard.eventDate}　　 조회수 : ${findEventBoard.eventCnt}</h6>
+        <h6 align="left">날짜 : ${findEventBoard.eventDate}&nbsp;&nbsp;&nbsp;&nbsp;조회수 : ${findEventBoard.eventCnt}</h6>
         <hr>
         
         <div class="details" >

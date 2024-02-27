@@ -1,7 +1,8 @@
 package com.duru.project.domain;
 
 import java.sql.Date;
-import java.sql.Timestamp;
+
+
 import java.time.LocalDate;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -66,9 +67,6 @@ public class WalkCheckBoard {
     
     @Column
     private String wachFilepath;
-
-    @Column(name = "wachboCnt")
-    private int wachboCnt;
     
     @Column(name = "lastPointDate")
     private LocalDate lastPointDate;

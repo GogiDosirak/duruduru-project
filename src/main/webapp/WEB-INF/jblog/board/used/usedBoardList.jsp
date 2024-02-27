@@ -71,7 +71,7 @@ function showPosition(position) {
 
 <div id="searchForm">
     <form action="/usedboard" method="GET" class="form-inline">
-        <input type="text" name="searchKeyword" class="form-control-sm" id="searchKeyword" placeholder="제목으로 검색하기">
+        <input type="text" name="searchKeyword" class="form-control-sm" id="search" placeholder="제목으로 검색하기">
         <button class="btn btn-warning bi bi-search" id="searchButton">검색</button>
     </form>
 </div>

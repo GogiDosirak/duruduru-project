@@ -68,7 +68,7 @@
         
     </style>
 </head>
-<body>
+
     <div class="logo center-align">
         <a href="/">
             <img src="/images/duruduru.png" alt="로고 이미지">
@@ -79,8 +79,47 @@
     <div class="container">
     <input type="hidden" id="usboSeq" value="${findUsedBoard.usboSeq }">
         <h2 id="title" align="center">${findUsedBoard.usboTitle}</h2>
+        
+        <!-- 1대1 채팅 시작 -->
         <h3 align="left">${findUsedBoard.user.nickname}</h3>   
-        <h6 align="left">　　 조회수 : ${findUsedBoard.usboCnt}  날짜 : ${findUsedBoard.usboDate}</h6>
+
+	<input type="hidden" name="userSeq" id="userSeq"
+		value="${findUsedBoard.user.userSeq}">
+	<button type="button" class="btn btn-outline-dark"
+		onclick="doSomething()" style="float: right;">1:1대화하기</button>
+
+	<script>
+		function openNewWindow(crSeq) {
+			var newWindowUrl = "/chat/room/" + crSeq;
+			window.open(newWindowUrl, '_blank', 'width=1100,height=700');
+		}
+
+		function doSomething() {
+			let userSeq = $("#userSeq").val();
+			console.log("userSeq 값: ", userSeq);
+			$.ajax({
+				type : "post",
+				url : "/chat/onebyone/" + userSeq,
+				success : function(result) {
+					console.log("동작완료")
+
+					let crSeq = result;
+					console.log("crSeq 값:", crSeq);
+					openNewWindow(crSeq);
+
+				}
+			})
+		}
+	</script>
+	<!-- 1대1 채팅 끝 -->
+        
+        
+        
+        
+        
+        
+        
+        <h6 align="left">날짜 : ${findUsedBoard.usboDate} &nbsp;&nbsp; 조회수 : ${findUsedBoard.usboCnt}</h6>
         <hr>
         
         <div class="details" >
@@ -173,7 +212,7 @@
     
     
    <script src="/js/usedBoard.js"></script>
-</body>
+
 </html>
 
 <%@include file = "/WEB-INF/jblog/layout/footer.jsp"%>

@@ -14,6 +14,7 @@
 	<table class="table">
 		<thead>
 			<tr>
+			<th>번호</th>
 				<th>제목</th>
 				<th>작성자</th>
 				<th>작성일</th>
@@ -22,6 +23,7 @@
 		</thead>
 		<c:forEach var="inquiry" items="${inquirySearchList.content }">
 			<tr>
+			<td>${inquiry.user.nickname }</td>
 				<td><a href="/getInquiry/${inquiry.inquirySeq }">${inquiry.inquiryTitle }</a>
 				</td>
 				<td>${inquiry.user.nickname }</td>

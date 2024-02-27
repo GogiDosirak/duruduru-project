@@ -24,6 +24,6 @@ public class ChatJoinId implements Serializable{
 
 	
     @Column(name = "userSeq2")
-    private int userSeq;
+    private Integer userSeq;
 
 }

@@ -1,5 +1,6 @@
 package com.duru.project.domain;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -21,6 +22,9 @@ public class ChatJoin {
 	
     @EmbeddedId
     private ChatJoinId id;
+    
+    @Column
+    private String cjStatus;
 
     @ManyToOne
     @MapsId("crSeq")
