@@ -92,7 +92,7 @@ public class BasketController {
 		}
 	}
 	
-	@PostMapping("/insertOneBasket")
+	@PostMapping("/insertOneBasket") //구매하기를 바로 눌렀을 때 
 	public @ResponseBody ResponseDTO<?> insertOneBasket(int userSeq,int productSeq, int productAmount, HttpSession session) {
 		basketService.deleteUserBasket(userSeq);
 		Product product = productService.getProduct(productSeq); //jsp와 js를 통해 받은 productSeq로 상품 찾아서 세팅해주기

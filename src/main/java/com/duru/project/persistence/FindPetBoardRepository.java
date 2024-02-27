@@ -1,7 +1,9 @@
 package com.duru.project.persistence;
 
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -11,6 +13,7 @@ import com.duru.project.domain.UsedBoard;
 
 public interface FindPetBoardRepository extends JpaRepository<FindPetBoard, Integer>{
 	
+
 	//관리자인 경우 모두 볼 수 있게
 	Page<FindPetBoard> findByFpTitleContaining(String searchKeyword, Pageable pageable);
 
@@ -33,5 +36,7 @@ public interface FindPetBoardRepository extends JpaRepository<FindPetBoard, Inte
 		Page<FindPetBoard> searchFindPetBoardByKeywordAndOrderByDistance(@Param("searchKeyword") String searchKeyword,
 				@Param("userLatitude") double userLatitude, @Param("userLongitude") double userLongitude,
 				Pageable pageable);
+
+
 
 }

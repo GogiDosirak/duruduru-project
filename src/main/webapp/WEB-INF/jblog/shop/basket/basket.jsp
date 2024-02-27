@@ -32,7 +32,9 @@
 </div>
 <center>
 <input type="hidden" id="userSeq" name="userSeq" value=${principal.userSeq }>
+<c:if test="${totalPrice != 0 }">
 <button onclick="location.href='/order/${principal.userSeq}'" class="btn btn-danger">주문하기</button>
+</c:if>
 </center>
  <script src="/js/basket.js"></script>
 <%@include file = "/WEB-INF/jblog/layout/footer.jsp"%>

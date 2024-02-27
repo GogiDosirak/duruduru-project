@@ -1,7 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/jblog/layout/header.jsp" %>
-
+	<style>
+.product-image2 {
+	width: 400px;
+	height: 600px;
+	object-fit: cover;
+}
+.post-image {
+    width: 400px;
+    height: 600px;
+    object-fit: cover;
+}
+</style>
 	<section id="billboard" class="overflow-hidden">
 		<div class="swiper main-swiper">
 			<div class="swiper-wrapper">
@@ -36,7 +47,6 @@
                           <use xlink:href="/logout"></use>
                         </svg>
 										</a>
-										
 										</c:if>
 									</div>
 								</div>
@@ -59,13 +69,24 @@
 				<div
 					class="display-header pb-3 d-flex justify-content-between flex-wrap col-md-12">
 					<h2 class="display-2 text-dark text-uppercase">두루두루 쇼핑몰</h2>
-					<a href="shop.html"
+					<c:if test="${principal != null }">
+					<a href="/mall"
 						class="btn btn-medium btn-arrow btn-normal position-relative">
 						<span class="text-uppercase">쇼핑하러가기</span> <svg
 							class="arrow-right position-absolute" width="18" height="20">
                 <use xlink:href="#arrow-right"></use>
               </svg>
 					</a>
+					</c:if>
+										<c:if test="${principal == null }">
+											<a href="/login"
+						class="btn btn-medium btn-arrow btn-normal position-relative">
+						<span class="text-uppercase">쇼핑하러가기</span> <svg
+							class="arrow-right position-absolute" width="18" height="20">
+                <use xlink:href="#arrow-right"></use>
+              </svg>
+              </a>
+								</c:if>
 				</div>
 			</div>
 			<div class="row">
@@ -186,7 +207,13 @@
 										</div>
 									</div>
 								</div>
+
 							</div>
+						</div>
+					</div>
+				</div>
+			</c:forEach>
+	
 						</div>
 					</div>
 					<div class="swiper-pagination text-center mt-5"></div>
@@ -226,219 +253,56 @@
 		<div class="swiper-pagination text-center position-absolute"></div>
 	</section>
 
-	<section id="collections" class="position-relative padding-large">
-		<div class="container-fluid">
-			<div class="row">
-				<div class="swiper collection-swiper">
-					<div class="swiper-wrapper">
-						<div class="swiper-slide overflow-hidden">
-							<div class="product-card">
-								<div
-									class="card-detail d-flex justify-content-between align-items-baseline pt-3">
-									<h3 class="card-title text-uppercase">
-										<a href="shop.html">김포 애견동반카페</a>
-									</h3>
-								</div>
-								<div class="image-overlay position-relative">
-									<div class="product-image">
-										<img src="images/product-item5.jpg" alt="product-item"
-											class="product-image img-fluid">
-										<div class="text-box box-slide position-absolute">
-											<div class="text-content p-5 bg-light">
-												<h3>In the valley　　　　　　　　</h3>
-												<p>480평의 넓은 공간, 
-												<br>
-												맛있는 디저트와 음료수,
-												<br>
-												애견 동반이 가능한 카페입니다.</p>
-												<ul>
-													<li>넓은 주차공간</li>
-													<li>강아지들이 뛰놀 수 있는 마당</li>
-													<li>안락한 좌석</li>
-												</ul>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="swiper-slide overflow-hidden">
-							<div class="product-card">
-								<div
-									class="card-detail d-flex justify-content-between align-items-baseline pt-3">
-									<h3 class="card-title text-uppercase">
-										<a href="shop.html">수제간식 체험</a>
-									</h3>
-								</div>
-								<div class="image-overlay position-relative">
-									<div class="product-image">
-										<img src="images/product-item7.jpg" alt="product-item"
-											class="product-image img-fluid">
-
-										<div class="text-box box-slide position-absolute">
-											<div class="text-content p-5 bg-light">
-												<h3>About Room</h3>
-												<p>Assumenda temporibus quidem ipsam. fuga corporis
-													iusto similique voluptates sint quibusdam.</p>
-												<ul>
-													<li>Various Types of Bedroom</li>
-													<li>Different Size of Bed</li>
-													<li>Comfortable and Clean Room</li>
-												</ul>
-												<a href="#" class="btn btn-normal mt-3">Learn More</a>
-											</div>
-										</div>
-									</div>
-									<!-- product-image -->
-								</div>
-							</div>
-						</div>
-						<div class="swiper-slide overflow-hidden">
-							<div class="product-card">
-								<div
-									class="card-detail d-flex justify-content-between align-items-baseline pt-3">
-									<h3 class="card-title text-uppercase">
-										<a href="shop.html">장기동 동물병원</a>
-									</h3>
-								</div>
-								<div class="image-overlay position-relative">
-									<div class="product-image">
-										<img src="images/product-item6.jpg" alt="product-item"
-											class="product-image img-fluid">
-
-										<div class="text-box box-slide position-absolute">
-											<div class="text-content p-5 bg-light">
-												<h3>About Kitchen</h3>
-												<p>Assumenda temporibus quidem ipsam. fuga corporis
-													iusto similique voluptates sint quibusdam.</p>
-												<ul>
-													<li>Various Types of Bedroom</li>
-													<li>Different Size of Bed</li>
-													<li>Comfortable and Clean Room</li>
-												</ul>
-												<a href="#" class="btn btn-normal mt-3">Learn More</a>
-											</div>
-										</div>
-									</div>
-									<!-- product-image -->
-								</div>
-							</div>
-						</div>
-						<div class="swiper-slide overflow-hidden">
-							<div class="product-card">
-								<div
-									class="card-detail d-flex justify-content-between align-items-baseline pt-3">
-									<h3 class="card-title text-uppercase">
-										<a href="shop.html">Guest Rooms</a>
-									</h3>
-								</div>
-								<div class="image-overlay position-relative">
-									<div class="product-image">
-										<img src="images/product-item8.jpg" alt="product-item"
-											class="product-image img-fluid">
-
-										<div class="text-box box-slide position-absolute">
-											<div class="text-content p-5 bg-light">
-												<h3>About Kitchen</h3>
-												<p>Assumenda temporibus quidem ipsam. fuga corporis
-													iusto similique voluptates sint quibusdam.</p>
-												<ul>
-													<li>Various Types of Bedroom</li>
-													<li>Different Size of Bed</li>
-													<li>Comfortable and Clean Room</li>
-												</ul>
-												<a href="#" class="btn btn-normal mt-3">Learn More</a>
-											</div>
-										</div>
-									</div>
-									<!-- product-image -->
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="swiper-pagination position-absolute text-center"></div>
-	</section>
 	<br>
 	<br>
 	<br>
 	<br>
-	<section id="latest-blog">
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-md-12">
-					<div
-						class="display-header d-flex flex-wrap justify-content-between pb-3">
-						<h2 class="display-2 text-dark text-uppercase">우리동네 HOT 반려동물</h2>
-						<a href="blog.html"
-							class="btn btn-medium btn-arrow btn-normal position-relative">
-							<span class="text-uppercase">SNS</span> <svg
-								class="arrow-right position-absolute" width="18" height="20">
-                  <use xlink:href="#arrow-right"></use>
-                </svg>
-						</a>
-					</div>
-				</div>
-			</div>
-			<div class="row g-3 post-grid">
-				<div class="col-lg-4 col-md-6 col-sm-12 mb-5">
-					<div class="card-item">
-						<div class="card border-0 bg-transparent">
-							<div class="card-image">
-								<img src="images/post-item1.jpg" alt=""
-									class="post-image img-fluid">
-							</div>
-						</div>
-						<div class="card-body p-0 mt-4">
-							<h3 class="card-title text-uppercase">
-								<a href="single-post.html">우리 코코</a>
-							</h3>
-							<p>봉투에 들어가있는 우리 코코 너무 귀엽죠?</p>
-							#봉투 #말티즈 #강아지
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 col-sm-12 mb-5">
-					<div class="card-item">
-						<div class="card border-0">
-							<div class="card-image">
-								<img src="images/post-item2.jpg" alt=""
-									class="post-image img-fluid">
-							</div>
-						</div>
-						<div class="card-body p-0 mt-4">
-							<h3 class="card-title text-uppercase">
-								<a href="single-post.html">코가 핑크라 핑크</a>
-							</h3>
-							<p>뚱냥이 핑크</p>
-							#야옹 #뚱냥이 #고양이 #오레오
-			
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 col-sm-12 mb-5">
-					<div class="card-item">
-						<div class="card border-0">
-							<div class="card-image">
-								<img src="images/post-item3.jpg" alt=""
-									class="post-image img-fluid">
-							</div>
-						</div>
-						<div class="card-body p-0 mt-4">
-							<h3 class="card-title text-uppercase">
-								<a href="single-post.html">비글 코코</a>
-							</h3>
-							<p>코코가 손을 가지런히 하고 자는 모습
-							<br>
-							겨우겨우 찍었당</p>
-							#비글 #가지런히 #코코
-						
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+	<br>
+	<br>
+	<br>
+<section id="latest-blog">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="display-header d-flex flex-wrap justify-content-between pb-3">
+                    <h2 class="display-2 text-dark text-uppercase">우리동네 HOT 반려동물</h2>
+                    <c:if test="${principal != null }">
+                    <a href="/sns" class="btn btn-medium btn-arrow btn-normal position-relative">
+                        <span class="text-uppercase">SNS</span> 
+                        <svg class="arrow-right position-absolute" width="18" height="20">
+                            <use xlink:href="#arrow-right"></use>
+                        </svg>
+                        </c:if>
+                                            <c:if test="${principal == null }">
+                    <a href="/login" class="btn btn-medium btn-arrow btn-normal position-relative">
+                        <span class="text-uppercase">SNS</span> 
+                        <svg class="arrow-right position-absolute" width="18" height="20">
+                            <use xlink:href="#arrow-right"></use>
+                        </svg>
+                        </c:if>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row g-3 post-grid">
+            <c:forEach var="sns" items="${snsList}">
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-5">
+                    <div class="card-item">
+                        <div class="card border-0 bg-transparent">
+                            <div class="card-image">
+                                <img src="${sns.filepath}" alt="" class="post-image img-fluid">
+                            </div>
+                        </div>
+                        <div class="card-body p-0 mt-4">
+                            <h3 class="card-title text-uppercase">
+                                <p>${sns.snsboContent}</p>
+                            </h3>
+                            <p>${sns.user.nickname}</p>
+                        </div>
+                    </div>
+                </div>
+            </c:forEach>
+        </div>
+    </div>
+</section>
 	<%@ include file = "./layout/footer.jsp" %>

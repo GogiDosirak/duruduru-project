@@ -32,6 +32,12 @@ public class WalkBoardService {
 	}
 	
 	@Transactional(readOnly = true)
+	public List<WalkBoard> walkBoard(int userSeq) {
+		return walkBoardRepository.findByUser_UserSeq(userSeq);
+	}
+	
+	
+	@Transactional(readOnly = true)
 	public WalkBoard getWalkBoard(int waboSeq) {
 		WalkBoard findWalkBoard = walkBoardRepository.findById(waboSeq).orElseGet(()->{
 			return new WalkBoard();

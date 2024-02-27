@@ -24,6 +24,11 @@ public class WalkCheckBoardService {
 		return walkCheckBoardRepository.findAll();
 	}
 	
+	@Transactional(readOnly = true)
+	public List<WalkCheckBoard> walkCheckBoard(int userSeq) {
+		return walkCheckBoardRepository.findByUser_UserSeq(userSeq);
+	}
+	
 	@Transactional
 	public void insertwach(WalkCheckBoard walkCheckBoard, MultipartFile file) throws Exception { // 파일을 매개변수로 받기
 		String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files"; // 저장할 경로를 지정
